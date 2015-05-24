@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Portal", "2.Portal", "{38CB9CB8-4566-4C2D-AB1E-402AF4DF0352}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Infrastructure", "0.Infrastructure", "{89889EB0-00AF-4112-AF4B-EE649F3B88B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FADD69C5-6309-4A3E-9F38-9A073EFC2BD4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Cienet\OTBS\OTBSurvey\OTBS_Service\WebServices\Dev\Source\.nuget\packages.config = ..\Cienet\OTBS\OTBSurvey\OTBS_Service\WebServices\Dev\Source\.nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.DAL", "Market.DAL\Market.DAL.csproj", "{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Common", "Market.Common\Market.Common.csproj", "{1B5B874D-D4B3-42E3-805F-CFD61A3A8AA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Domain", "1.Domain", "{1A8494C2-D878-4334-9160-76BDB7A6ACEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal", "Portal\Portal.csproj", "{6974AA6F-C2DC-403C-A0CF-B822A8BDA8DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B5B874D-D4B3-42E3-805F-CFD61A3A8AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B5B874D-D4B3-42E3-805F-CFD61A3A8AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B5B874D-D4B3-42E3-805F-CFD61A3A8AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B5B874D-D4B3-42E3-805F-CFD61A3A8AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6974AA6F-C2DC-403C-A0CF-B822A8BDA8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6974AA6F-C2DC-403C-A0CF-B822A8BDA8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6974AA6F-C2DC-403C-A0CF-B822A8BDA8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6974AA6F-C2DC-403C-A0CF-B822A8BDA8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8} = {89889EB0-00AF-4112-AF4B-EE649F3B88B1}
+		{1B5B874D-D4B3-42E3-805F-CFD61A3A8AA1} = {89889EB0-00AF-4112-AF4B-EE649F3B88B1}
+		{6974AA6F-C2DC-403C-A0CF-B822A8BDA8DF} = {38CB9CB8-4566-4C2D-AB1E-402AF4DF0352}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MarketModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MarketModelStoreContainer">
+    <EntitySet Name="UserProfiles" EntityType="MarketModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Commodities" EntityType="MarketModel.Store.Commodities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ParentCategories" EntityType="MarketModel.Store.ParentCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="MarketModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="MarketModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShoppingTrolleys" EntityType="MarketModel.Store.ShoppingTrolleys" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubCategories" EntityType="MarketModel.Store.SubCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Announcements" EntityType="MarketModel.Store.Announcements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Favorites" EntityType="MarketModel.Store.Favorites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RequiredCommodities" EntityType="MarketModel.Store.RequiredCommodities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Manufacturers" EntityType="MarketModel.Store.Manufacturers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SiteFeedbacks" EntityType="MarketModel.Store.SiteFeedbacks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Feedbacks" EntityType="MarketModel.Store.Feedbacks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommodityInOrders" EntityType="MarketModel.Store.CommodityInOrders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProfileCommodities" EntityType="MarketModel.Store.UserProfileCommodities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommodityInShoppingTrolleys" EntityType="MarketModel.Store.CommodityInShoppingTrolleys" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommodityInFavorites" EntityType="MarketModel.Store.CommodityInFavorites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommodityInfoes" EntityType="MarketModel.Store.CommodityInfoes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserProfileRole" Association="MarketModel.Store.UserProfileRole">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="SubCategoryParentCategory" Association="MarketModel.Store.SubCategoryParentCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="ParentCategory" EntitySet="ParentCategories" />
+    </AssociationSet>
+    <AssociationSet Name="CommoditySubCategory" Association="MarketModel.Store.CommoditySubCategory">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityManufacturer" Association="MarketModel.Store.CommodityManufacturer">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="Manufacturer" EntitySet="Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FeedbackCommodity" Association="MarketModel.Store.FeedbackCommodity">
+      <End Role="Feedback" EntitySet="Feedbacks" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="FeedbackUserProfile" Association="MarketModel.Store.FeedbackUserProfile">
+      <End Role="Feedback" EntitySet="Feedbacks" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="SiteFeedbackUserProfile" Association="MarketModel.Store.SiteFeedbackUserProfile">
+      <End Role="SiteFeedback" EntitySet="SiteFeedbacks" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="RequiredCommodityUserProfile" Association="MarketModel.Store.RequiredCommodityUserProfile">
+      <End Role="RequiredCommodity" EntitySet="RequiredCommodities" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileUserProfileCommodity" Association="MarketModel.Store.UserProfileUserProfileCommodity">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="UserProfileCommodity" EntitySet="UserProfileCommodities" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityUserProfileCommodity" Association="MarketModel.Store.CommodityUserProfileCommodity">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="UserProfileCommodity" EntitySet="UserProfileCommodities" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityCommodityInShoppingTrolley" Association="MarketModel.Store.CommodityCommodityInShoppingTrolley">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="CommodityInShoppingTrolley" EntitySet="CommodityInShoppingTrolleys" />
+    </AssociationSet>
+    <AssociationSet Name="ShoppingTrolleyCommodityInShoppingTrolley" Association="MarketModel.Store.ShoppingTrolleyCommodityInShoppingTrolley">
+      <End Role="ShoppingTrolley" EntitySet="ShoppingTrolleys" />
+      <End Role="CommodityInShoppingTrolley" EntitySet="CommodityInShoppingTrolleys" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileShoppingTrolley" Association="MarketModel.Store.UserProfileShoppingTrolley">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="ShoppingTrolley" EntitySet="ShoppingTrolleys" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityCommodityInFavorite" Association="MarketModel.Store.CommodityCommodityInFavorite">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="CommodityInFavorite" EntitySet="CommodityInFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="FavoriteCommodityInFavorite" Association="MarketModel.Store.FavoriteCommodityInFavorite">
+      <End Role="Favorite" EntitySet="Favorites" />
+      <End Role="CommodityInFavorite" EntitySet="CommodityInFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileFavorite" Association="MarketModel.Store.UserProfileFavorite">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Favorite" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityInfoCommodity" Association="MarketModel.Store.CommodityInfoCommodity">
+      <End Role="CommodityInfo" EntitySet="CommodityInfoes" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileOrder" Association="MarketModel.Store.UserProfileOrder">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityInOrderCommodity" Association="MarketModel.Store.CommodityInOrderCommodity">
+      <End Role="CommodityInOrder" EntitySet="CommodityInOrders" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="OrderCommodityInOrder" Association="MarketModel.Store.OrderCommodityInOrder">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="CommodityInOrder" EntitySet="CommodityInOrders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserProfiles">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="true" MaxLength="12" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Nickname" Type="varchar" Nullable="true" MaxLength="12" />
+    <Property Name="Sex" Type="varchar" Nullable="true" MaxLength="6" />
+    <Property Name="Email" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="12" />
+    <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
+    <Property Name="Address" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ImageType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Commodities">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+    </Key>
+    <Property Name="CommodityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommodityName" Type="varchar" Nullable="true" MaxLength="30" />
+    <Property Name="SubCategoryId" Type="int" Nullable="false" />
+    <Property Name="ManufacturerId" Type="int" Nullable="false" />
+    <Property Name="UnitPrice" Type="float" Nullable="true" />
+    <Property Name="SubPrice" Type="float" Nullable="true" />
+    <Property Name="DiscountPrice" Type="float" Nullable="true" />
+    <Property Name="MakeCompany" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Degree" Type="char" Nullable="true" MaxLength="6" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+    <Property Name="Brand" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="IsRecommended" Type="bit" Nullable="true" />
+    <Property Name="ManufacturerDate" Type="datetime" Nullable="true" />
+    <Property Name="PromotionStartOn" Type="datetime" Nullable="true" />
+    <Property Name="PromotionEndOn" Type="datetime" Nullable="true" />
+    <Property Name="Weight" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Component" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ImageType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ParentCategories">
+    <Key>
+      <PropertyRef Name="ParentCategoryId" />
+    </Key>
+    <Property Name="ParentCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" Nullable="true" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="SellerId" Type="int" Nullable="true" />
+    <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
+    <Property Name="TotalCost" Type="float" Nullable="true" />
+    <Property Name="Address" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ShoppingTrolleys">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SubCategories">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="ParentCategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Announcements">
+    <Key>
+      <PropertyRef Name="AnnouncementId" />
+    </Key>
+    <Property Name="AnnouncementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Content" Type="varchar" Nullable="true" MaxLength="4000" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Favorites">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RequiredCommodities">
+    <Key>
+      <PropertyRef Name="RequiredCommodityId" />
+    </Key>
+    <Property Name="RequiredCommodityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Content" Type="varchar" Nullable="true" MaxLength="4000" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+    <Property Name="CommodityName" Type="varchar" Nullable="true" MaxLength="30" />
+    <Property Name="Price" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Manufacturers">
+    <Key>
+      <PropertyRef Name="ManufacturerId" />
+    </Key>
+    <Property Name="ManufacturerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ManufacturerName" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SiteFeedbacks">
+    <Key>
+      <PropertyRef Name="SiteFeedbackId" />
+    </Key>
+    <Property Name="SiteFeedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Content" Type="varchar" Nullable="true" MaxLength="4000" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Feedbacks">
+    <Key>
+      <PropertyRef Name="FeedbackId" />
+    </Key>
+    <Property Name="FeedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Content" Type="varchar" Nullable="true" MaxLength="4000" />
+    <Property Name="Reply" Type="varchar" Nullable="true" MaxLength="4000" />
+    <Property Name="CreationDate" Type="datetime" Nullable="true" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CommodityInOrders">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="UnitPrice" Type="float" Nullable="true" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+    <Property Name="Color" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Size" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="Capacity" Type="varchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="UserProfileCommodities">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="CommodityId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommodityInShoppingTrolleys">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+    <Property Name="UnitPrice" Type="float" Nullable="true" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+    <Property Name="Color" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Size" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Capacity" Type="varchar" Nullable="true" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CommodityInFavorites">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommodityInfoes">
+    <Key>
+      <PropertyRef Name="CommodityInfoId" />
+    </Key>
+    <Property Name="CommodityInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+    <Property Name="Color" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Size" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+    <Property Name="Capacity" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="ImageType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <Association Name="UserProfileRole">
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="*" />
+    <End Role="Role" Type="MarketModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubCategoryParentCategory">
+    <End Role="SubCategory" Type="MarketModel.Store.SubCategories" Multiplicity="*" />
+    <End Role="ParentCategory" Type="MarketModel.Store.ParentCategories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ParentCategory">
+        <PropertyRef Name="ParentCategoryId" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="ParentCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommoditySubCategory">
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="*" />
+    <End Role="SubCategory" Type="MarketModel.Store.SubCategories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Commodity">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityManufacturer">
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="*" />
+    <End Role="Manufacturer" Type="MarketModel.Store.Manufacturers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="ManufacturerId" />
+      </Principal>
+      <Dependent Role="Commodity">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FeedbackCommodity">
+    <End Role="Feedback" Type="MarketModel.Store.Feedbacks" Multiplicity="*" />
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FeedbackUserProfile">
+    <End Role="Feedback" Type="MarketModel.Store.Feedbacks" Multiplicity="*" />
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SiteFeedbackUserProfile">
+    <End Role="SiteFeedback" Type="MarketModel.Store.SiteFeedbacks" Multiplicity="*" />
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SiteFeedback">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RequiredCommodityUserProfile">
+    <End Role="RequiredCommodity" Type="MarketModel.Store.RequiredCommodities" Multiplicity="*" />
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RequiredCommodity">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileUserProfileCommodity">
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <End Role="UserProfileCommodity" Type="MarketModel.Store.UserProfileCommodities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserProfileCommodity">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityUserProfileCommodity">
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="1" />
+    <End Role="UserProfileCommodity" Type="MarketModel.Store.UserProfileCommodities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="UserProfileCommodity">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityCommodityInShoppingTrolley">
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="1" />
+    <End Role="CommodityInShoppingTrolley" Type="MarketModel.Store.CommodityInShoppingTrolleys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInShoppingTrolley">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ShoppingTrolleyCommodityInShoppingTrolley">
+    <End Role="ShoppingTrolley" Type="MarketModel.Store.ShoppingTrolleys" Multiplicity="1" />
+    <End Role="CommodityInShoppingTrolley" Type="MarketModel.Store.CommodityInShoppingTrolleys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingTrolley">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CommodityInShoppingTrolley">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileShoppingTrolley">
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <End Role="ShoppingTrolley" Type="MarketModel.Store.ShoppingTrolleys" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ShoppingTrolley">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityCommodityInFavorite">
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="1" />
+    <End Role="CommodityInFavorite" Type="MarketModel.Store.CommodityInFavorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInFavorite">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FavoriteCommodityInFavorite">
+    <End Role="Favorite" Type="MarketModel.Store.Favorites" Multiplicity="1" />
+    <End Role="CommodityInFavorite" Type="MarketModel.Store.CommodityInFavorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Favorite">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CommodityInFavorite">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileFavorite">
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <End Role="Favorite" Type="MarketModel.Store.Favorites" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityInfoCommodity">
+    <End Role="CommodityInfo" Type="MarketModel.Store.CommodityInfoes" Multiplicity="*" />
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInfo">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileOrder">
+    <End Role="UserProfile" Type="MarketModel.Store.UserProfiles" Multiplicity="1" />
+    <End Role="Order" Type="MarketModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityInOrderCommodity">
+    <End Role="CommodityInOrder" Type="MarketModel.Store.CommodityInOrders" Multiplicity="*" />
+    <End Role="Commodity" Type="MarketModel.Store.Commodities" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInOrder">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderCommodityInOrder">
+    <End Role="Order" Type="MarketModel.Store.Orders" Multiplicity="1" />
+    <End Role="CommodityInOrder" Type="MarketModel.Store.CommodityInOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="CommodityInOrder">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,462 @@
+﻿@model Portal.ViewModels.CommodityViewModel
+
+@{
+    ViewBag.Title = "SingleDetails";
+    Layout = "~/Views/Shared/LayoutForSingleCommodity.cshtml";
+    var feedbacks = ViewBag.Feedbacks;
+}
+<script src="~/Scripts/jquery.etalage.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+               menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+    });
+
+    jQuery(document).ready(function ($) {
+        $('#etalage').etalage({
+            thumb_image_width: 300,
+            thumb_image_height: 400,
+            source_image_width: 900,
+            source_image_height: 1200,
+            show_hint: true,
+            click_callback: function (image_anchor, instance_id) {
+                alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+            }
+        });
+
+    });
+
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true   // 100% fit in a container
+        });
+    });
+
+    $(function () {
+        var sizechecked = $("input[type='checkbox'][name='sizecheckbox']");
+        $(sizechecked).click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#CheckedSize")[0].value = $(this).parent().children().eq(1).val();
+            }
+            else {
+                $("#CheckedSize")[0].value = "";
+            }
+        });
+    });
+
+    $(function () {
+        var colorchecked = $("input[type='checkbox'][name='colorcheckbox']");
+        $(colorchecked).click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#CheckedColor")[0].value = $(this).parent().children().eq(1).val();
+            }
+            else {
+                $("#CheckedColor")[0].value = "";
+            }
+        });
+    });
+
+
+    $(function () {
+        $("#Select")[0].value = $(".quantity").val();
+        $(".product-qty").on('change', '.quantity', function () {
+            var value = $(this).val();
+            $("#Select")[0].value = value;
+        })
+    });
+
+    $(function () {
+        if ($("#size").children.length == 1) {
+            $("#size").remove();
+        }
+    });
+
+    $(function () {
+        if ($("#color").children().length == 1) {
+            $("#color").remove();
+        }
+    });
+
+    $(function () {
+        $("#submit").click(function () {
+            if ($(".quantity").val() == 0) {
+                alert("您还没有选择任何商品哦!");
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        if(@Model.Quantity == 0 || @Model.Quantity == null || @Model.Quantity == "")
+        {
+            $("#submit").attr('disabled',true);
+            $("#submit").attr('readonly', true);
+            $("#submit").attr('value','亲，无货啦 ！');
+        }
+    });
+
+    $(function(){
+        var sizechecked = $("input[type='checkbox'][name='sizecheckbox']");
+        $(sizechecked).click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#CheckedSize")[0].value = $(this).parent().children().eq(1).val();
+            }
+            else {
+                $("#CheckedSize")[0].value = "";
+            }
+        });
+        var colorchecked = $("input[type='checkbox'][name='colorcheckbox']");
+        $(colorchecked).click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#CheckedColor")[0].value = $(this).parent().children().eq(1).val();
+            }
+            else {
+                $("#CheckedColor")[0].value = "";
+            }
+        });
+        var size = $("#CheckedSize").val();
+        var color = $("#CheckedColor").val();
+        var model = {
+            Size : size,
+            Color : color
+        };
+        $.ajax({
+            url: "/GetQuantity",
+            type : "POST",
+            data : model,
+            dataType: "json",
+            success: function(req){
+                var p = req;
+            }
+        });
+    })
+</script>
+<style type="text/css">
+    .commodity input[type="submit"] {
+        display: inline-block;
+        padding: 13px 25px;
+        background: #df1f26;
+        color: #FFF;
+        font-size: 1em;
+        line-height: 18px;
+        text-transform: uppercase;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        -webkit-transition: 0.2s;
+        -moz-transition: 0.2s;
+        -o-transition: 0.2s;
+    }
+
+        .commodity input[type="submit"]:hover {
+            -webkit-transform: rotateY(15deg);
+            -moz-transform: rotateY(15deg);
+            -ms-transform: rotateY(15deg);
+            transform: rotateY(15deg);
+            text-decoration: none;
+            background: #000;
+        }
+</style>
+
+<div class="header">
+    <div class="header_top">
+        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+            <ul class="shopping_grid">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                    if (ViewBag.ShoppingTrolleysCount > 0)
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="h_menu4">
+        <div class="container">
+            <a class="toggleMenu" href="#">Menu</a>
+            <ul class="nav">
+                <li>@Html.ActionLink("Home", "Index", "Home") </li>
+                <li>@Html.ActionLink("About", "Index", "About") </li>
+                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
+                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="column_center">
+    <div class="container">
+        <div class="search">
+            <div class="stay">搜索商品</div>
+            <div class="stay_right">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
+                    <input type="submit" value="" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="content_top">
+        <div class="container">
+            <div class="col-md-3 sidebar_box">
+                <div class="sidebar">
+                    <div class="menu_box">
+                        <h3 class="menu_head">Menu</h3>
+                        <ul class="menu">
+                            @foreach (var p in ViewBag.CategoryList)
+                            {
+                                <li id="Category">
+                                    <a style="cursor:pointer;"> <img src="~/images/f_menu.png" alt="" />@p.ParentCategory</a>
+                                    <ul>
+                                        @foreach (var t in p.SubCategory)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Home", new { subCategory = t })">@t</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="twitter">
+                    <h3>联系方式</h3>
+                    <ul class="twt1">联系人<li><input type="text" readonly value="Xu xiaoqin" style="border:none;" /></li></ul>
+                    <ul class="twt1">电话<li><input type="text" readonly style="border:none;" value="18652936326" /></li></ul>
+                    <ul class="twt1">邮箱<li><input type="text" readonly style="border:none;" value="xxq260310x@163.com" /></li></ul>
+                </div>
+                <div class="clients">
+                    <h3>友情提示</h3>
+                    <h4>本网站是二手商品交易网，请有需要同志大力购买，保证低价，正品，物流快。</h4>
+                </div>
+            </div>
+
+            <div class="col-md-9 single_right">
+                <div class="single_top">
+                    <div class="single_grid">
+                        <div class="grid images_3_of_2">
+                            <ul id="etalage">
+                                @foreach (var p in Model.CommodityInfos)
+                                {
+                                    <li>
+                                        <img class="etalage_thumb_image" src="@Url.Action("GetImageByCommodityInfoId", "Commodities", new { id = p.CommodityInfoId })" class="img-responsive" />
+                                        <img class="etalage_source_image" src="@Url.Action("GetImageByCommodityInfoId", "Commodities", new { id = p.CommodityInfoId })" class="img-responsive" />
+                                    </li>
+                                }
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        @using (Html.BeginForm("SingleCommodity", "Commodities", FormMethod.Post))
+                        {
+                            <div class="desc1 span_3_of_2">
+                                <h3>商品属性</h3>
+                                @if (Model.Quantity > 0)
+                                {
+                                    <p class="availability">库存:<em><span> 有货</span></em></p>
+                                }
+                                else
+                                {
+                                    <p class="availability">库存:<em><span style="color:red;"> 无货</span></em></p>
+                                }
+                                @if (Model.Quantity > 0)
+                                {
+                                     if (Model.SubPrice != null)
+                                     {
+                                         if (Model.PromotionStartOn != null && Model.PromotionEndOn != null)
+                                         {
+                                             if (DateTime.Compare(System.DateTime.Now, Model.PromotionEndOn.Value) <= 0 && DateTime.Compare(System.DateTime.Now, Model.PromotionStartOn.Value) >= 0)
+                                             {
+                                                <div class="price_single" id="price">
+                                                    <span class="reducedfrom">原价:￥@Model.UnitPrice</span>
+                                                    <span class="actual">特价:￥ @Model.SubPrice</span>
+                                                </div>
+                                             }
+                                         }
+
+                                     }
+                                     else if (Model.DiscountPrice != null)
+                                     {
+                                         if (Model.PromotionStartOn != null && Model.PromotionEndOn != null)
+                                         {
+                                             if (DateTime.Compare(System.DateTime.Now, Model.PromotionEndOn.Value) <= 0 && DateTime.Compare(System.DateTime.Now, Model.PromotionStartOn.Value) >= 0)
+                                             {
+                                                <div class="price_single" id="price">
+                                                    <span class="reducedfrom">原价:￥@Model.UnitPrice</span>
+                                                    <span class="actual">优惠价:￥ @Model.SubPrice</span>
+                                                </div>
+                                             }
+                                         }
+                                     }
+                                     else
+                                     {
+                                        <div class="price_single" id="price">
+                                            <span>价格:￥@Model.UnitPrice</span>
+                                        </div>
+                                     }
+                                }
+                                
+                                <ul class="size" id="size">
+                                    <h3>尺寸</h3>
+                                    @foreach (var p in Model.CommodityInfos)
+                                    {
+                                        if (p.Size != null && p.Quantity > 0)
+                                        {
+                                            <li><input type="checkbox" name="sizecheckbox" class="sizecheckbox" /><input type="hidden" value="@p.Size" />@p.Size</li>
+                                        }
+                                    }
+                                </ul>
+
+                                <ul class="size" id="color">
+                                    <h3>颜色</h3>
+                                    @foreach (var p in Model.CommodityInfos)
+                                    {
+                                        if (p.Color != null && p.Quantity > 0)
+                                        {
+                                            <li><input type="checkbox" name="colorcheckbox" class="colorcheckbox" /><input type="hidden" value="@p.Color" />@p.Color</li>
+                                        }
+                                    }
+                                </ul>
+
+                                <div class="quantity_box">
+                                    <ul class="product-qty">
+                                        <span>数量:</span>
+                                        <select class="quantity" id="quantity">
+                                           
+                                        </select>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <input type="hidden" name="CheckedSize" id="CheckedSize" />
+                                <input type="hidden" name="CheckedColor" id="CheckedColor" />
+                                <input type="hidden" name="Select" id="Select" />
+                                <div class="wish-list">
+                                    <ul>
+                                        <li class="wish"><a href="@Url.Action("AddCommodityInFavorite", "Favorites", new { id = Model.CommodityId })">加入收藏夹</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="commodity">
+                                    <input type="submit" value="加入购物车" id="submit" name="submit"/> <a href="@Url.Action("SingleCommodity", "Commodities", new { id = Model.CommodityId })"></a>
+                                </div>
+
+                            </div>
+                        }
+
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="sap_tabs">
+                    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                        <ul class="resp-tabs-list">
+                            <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>商品描述</span></li>
+                            <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>其他信息</span></li>
+                            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>反馈</span></li>
+                            <div class="clear"></div>
+                        </ul>
+                        <div class="resp-tabs-container">
+                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                <div class="facts">
+                                    <ul class="tab_list">
+                                        <li>品牌:@Model.Brand</li>
+                                        <li>是否推荐:@Model.IsRecommended</li>
+                                        <li>制造公司:@Model.MakeCompany</li>
+                                        <li>生产日期:@Model.ManufacturerDate</li>
+                                        <li>生产商:@Model.ManufacturerName</li>
+                                        <li>新旧程度:@Model.Degree</li>
+                                        <li>商品描述:@Model.Description</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+                                <div class="facts">
+                                    <ul class="tab_list">
+                                        <div class="container">
+                                            <h3><em>承诺以下服务</em></h3>
+                                            <div class="content">
+                                                <dl>
+                                                    <dt class="icon"><img src="http://gtms04.alicdn.com/tps/i4/T1K2EBFIhXXXceU5Yh-48-48.png"></dt>
+                                                    <dd class="name">72小时发货</dd>
+                                                    <dd class="detail">
+                                                        付款后72小时内发货
+                                                    </dd>
+                                                </dl>
+
+                                                <dl class="seven-days">
+                                                    <dt class="icon"><img src="//img.alicdn.com/tps/i2/T1wMaGFLBfXXceU5Yh-48-48.png"></dt>
+                                                    <dd class="name">7天无理由退货</dd>
+                                                    <dd class="detail">
+                                                        <p>该商品支持7天无理由退货，自商品签收之日起7天内:</p>
+                                                        <p>1、商品外包装未拆封，相关附（配）件齐全；</p><p>2、商品表面无划痕、无破损、无使用等痕迹；</p><p>3、（若有）防伪标识码未刮开或撕损；</p><p>可申请无理由退货，包邮商品需要买家承担退货邮费，非包邮商品需要买家承担发货和退货邮费。</p>
+                                                    </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt class="icon"><img src="//img.alicdn.com/tps/i2/T1in3MFMNcXXceU5Yh-48-48.png"></dt>
+                                                    <dd class="name">消费者保障服务</dd>
+                                                    <dd class="detail">
+                                                        <p>该卖家已缴纳50000.0元保证金。</p>
+                                                        <p>在确认收货15天内，如有商品质量问题、描述不符或未收到货等，您有权申请退款或退货，来回邮费由二手商品交易市场承担。</p>
+                                                    </dd>
+                                                </dl>
+
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                                <ul class="tab_list">
+                                    <table class="table" style="border:none;outline:none;">
+                                        @foreach (var p in feedbacks)
+                                        {
+                                            <tr>
+                                                <td>用户:@p.NickName</td>
+                                                <td>评论:@p.Content</td>
+                                                <td>回复:<a href="@Url.Action("Home", "Feedbacks", new { id = p.FeedbackId })"></a></td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer_bg"></div>

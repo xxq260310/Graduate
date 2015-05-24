@@ -1,0 +1,105 @@
+﻿@model Portal.ViewModels.UserProfileViewModel
+@using Portal.Authentication;
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="header">
+    <div class="header_top">
+        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+            <ul class="shopping_grid">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                    if (ViewBag.ShoppingTrolleysCount > 0)
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="h_menu4">
+        <div class="container">
+            <a class="toggleMenu" href="#">Menu</a>
+            <ul class="nav">
+                <li>@Html.ActionLink("Home", "Index", "Home") </li>
+                <li>@Html.ActionLink("About", "Index", "About") </li>
+                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
+                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<h2>Details</h2>
+
+<div>
+    <h4>UserProfile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nickname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nickname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "SingleEdit", new { id = Model.UserId }, false) &nbsp;
+    @Html.ActionLink("Cancel and Back to Home", "Index", "Home")
+</p>

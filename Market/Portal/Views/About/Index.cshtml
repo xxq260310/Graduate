@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutForAbout.cshtml";
+}
+
+
+<div class="header">
+    <div class="header_top">
+        <div class="container" style="margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+            <ul class="shopping_grid">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                    if (ViewBag.ShoppingTrolleysCount > 0)
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="h_menu4">
+        <div class="container">
+            <a class="toggleMenu" href="#">Menu</a>
+            <ul class="nav">
+                <li>@Html.ActionLink("Home", "Index", "Home") </li>
+                <li class="active">@Html.ActionLink("About", "Index", "About") </li>
+                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+                <li>@Html.ActionLink("Announcement", "Home", "Announcements") </li>
+                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="about">
+    <div class="container">
+        <div class="about_top">
+            <div class="col-md-4 span1">
+                <h3>我们是谁?</h3>
+                <img src="~/images/p2.jpg" class="img-responsive" alt="" />
+                <p>本网站一贯坚持诚信为本，低价为主的理念，为广大二手商品需求者提供一个可供交流，购买，参考的购物天堂。</p>
+            </div>
+            <div class="col-md-4 span1 span_2">
+                <h3>需求</h3>
+                <img src="~/images/p14.jpg" class="img-responsive" alt=""/>
+                <p>还有啥想要的商品吗？点击<a href="~/RequiredCommodities/Home" target="_self">这里</a></p>
+            </div>
+            <div class="col-md-4 span1">
+                <h3>机会</h3>
+                <img src="~/images/p1.jpg" class="img-responsive" alt=""/>
+                <p>想发家致富吗？想脱离贫困吗？现在起，只要点击<a href="~/Feedbacks/Home" target="_self">这里</a></p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</div>
+</div>
+<div class="footer_bg"></div>

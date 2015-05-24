@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Portal.Models.Announcement>
+@using Portal.Authentication;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
+}
+<br /><br />
+<h2>Announcement</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.AnnouncementId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.AnnouncementId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.AnnouncementId }, false)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+    </tr>
+}
+
+</table>

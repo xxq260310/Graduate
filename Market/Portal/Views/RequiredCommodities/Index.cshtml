@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Portal.Models.RequiredCommodity>
+@using Portal.Authentication;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
+}
+<br /><br />
+<h2>Required Commodity</h2>
+
+<p>
+    @Html.ActionLinkAuthorized("Create New", "Create", false)
+</p>
+
+<table class="table-layout-auto">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommodityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.RequiredCommodityId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.RequiredCommodityId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.RequiredCommodityId }, false)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommodityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+    </tr>
+}
+
+</table>
+<br /><br />
+<p>@Html.ActionLinkAuthorized("Back to List","Index", false)</p>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Market Portal</title>
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/Content.css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("UserProfiles", "Index", "UserProfiles")</li>
+                    <li>@Html.ActionLink("Commodities", "Index", "Commodities")</li>
+                    <li>@Html.ActionLink("ShoppingTrolleys","Index","ShoppingTrolleys")</li>
+                    <li>@Html.ActionLink("Announcements","Index","Announcements")</li>
+                    <li>@Html.ActionLink("Favorites","Index","Favorites")</li>
+                    <li>@Html.ActionLink("Orders","Index","Orders")</li>
+                    <li>@Html.ActionLink("Feedbacks","Index","Feedbacks")</li>
+                    <li>@Html.ActionLink("SiteFeedbacks","Index","SiteFeedbacks")</li>
+                    <li>@Html.ActionLink("RequiredCommodities", "Index", "RequiredCommodities")</li>
+                    <li style="position:absolute;right:80px; padding-top:0px;padding-bottom:10px;font-size:14px;color:gray;"><a href="@Url.Action("Index", "Home")">Hello&nbsp;@User.Identity.Name</a> </li>
+                    <li style="position:absolute;right:0; font-size:larger;">@Html.ActionLink("Log Off", "Index", "Logoff")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Market Portal</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

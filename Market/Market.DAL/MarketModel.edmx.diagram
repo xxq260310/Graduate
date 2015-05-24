@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37531302441344759869cec18ab64db4" Name="Diagram1" ZoomLevel="101" DisplayType="false" >
+        <EntityTypeShape EntityType="MarketModel.UserProfile" Width="1.5" PointX="2.875" PointY="0.5" />
+        <EntityTypeShape EntityType="MarketModel.Commodity" Width="1.75" PointX="7.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketModel.ParentCategory" Width="1.625" PointX="12.25" PointY="0.5" />
+        <EntityTypeShape EntityType="MarketModel.Role" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="MarketModel.Order" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="MarketModel.ShoppingTrolley" Width="1.75" PointX="12.375" PointY="4.875" />
+        <EntityTypeShape EntityType="MarketModel.SubCategory" Width="1.625" PointX="10" PointY="0.5" />
+        <EntityTypeShape EntityType="MarketModel.Announcement" Width="1.625" PointX="0.625" PointY="7.875" />
+        <EntityTypeShape EntityType="MarketModel.Favorite" Width="1.75" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="MarketModel.RequiredCommodity" Width="1.875" PointX="2.875" PointY="7.875" />
+        <EntityTypeShape EntityType="MarketModel.Manufacturer" Width="1.5" PointX="12.375" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketModel.SiteFeedback" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="MarketModel.Feedback" Width="1.5" PointX="5" PointY="3" />
+        <AssociationConnector Association="MarketModel.UserProfileRole" />
+        <AssociationConnector Association="MarketModel.SubCategoryParentCategory" />
+        <AssociationConnector Association="MarketModel.CommoditySubCategory" />
+        <AssociationConnector Association="MarketModel.CommodityManufacturer" />
+        <AssociationConnector Association="MarketModel.FeedbackCommodity" />
+        <AssociationConnector Association="MarketModel.FeedbackUserProfile" />
+        <AssociationConnector Association="MarketModel.SiteFeedbackUserProfile" />
+        <AssociationConnector Association="MarketModel.RequiredCommodityUserProfile" />
+        <EntityTypeShape EntityType="MarketModel.CommodityInOrder" Width="1.625" PointX="9.625" PointY="8.75" />
+        <EntityTypeShape EntityType="MarketModel.UserProfileCommodity" Width="1.5" PointX="5.125" PointY="0.5" />
+        <AssociationConnector Association="MarketModel.UserProfileUserProfileCommodity" />
+        <AssociationConnector Association="MarketModel.CommodityUserProfileCommodity" />
+        <EntityTypeShape EntityType="MarketModel.CommodityInShoppingTrolley" Width="1.5" PointX="10" PointY="3" />
+        <AssociationConnector Association="MarketModel.CommodityCommodityInShoppingTrolley" />
+        <AssociationConnector Association="MarketModel.ShoppingTrolleyCommodityInShoppingTrolley" />
+        <AssociationConnector Association="MarketModel.UserProfileShoppingTrolley" />
+        <EntityTypeShape EntityType="MarketModel.CommodityInFavorite" Width="1.5" PointX="10.25" PointY="6.125" />
+        <AssociationConnector Association="MarketModel.CommodityCommodityInFavorite" />
+        <AssociationConnector Association="MarketModel.FavoriteCommodityInFavorite" />
+        <AssociationConnector Association="MarketModel.UserProfileFavorite" />
+        <EntityTypeShape EntityType="MarketModel.CommodityInfo" Width="1.5" PointX="15.25" PointY="2.125" />
+        <AssociationConnector Association="MarketModel.CommodityInfoCommodity" />
+        <AssociationConnector Association="MarketModel.UserProfileOrder" />
+        <AssociationConnector Association="MarketModel.CommodityInOrderCommodity" />
+        <AssociationConnector Association="MarketModel.OrderCommodityInOrder" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

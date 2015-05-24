@@ -1,0 +1,149 @@
+﻿@using Portal.Authentication;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutForTemporaryAdmin.cshtml";
+}
+
+<br />
+<br />
+<h2>Commodity</h2>
+
+<style type="text/css">
+    .table-layout-auto {
+        border-collapse: collapse;
+        table-layout: auto;
+        width: 100%;
+    }
+
+        .table-layout-auto thead > tr > th,
+        .table-layout-auto tbody > tr > th,
+        .table-layout-auto tfoot > tr > th,
+        .table-layout-auto thead > tr > td,
+        .table-layout-auto tbody > tr > td,
+        .table-layout-auto tfoot > tr > td {
+            padding: 10px;
+            line-height: 1.428571429;
+            vertical-align: top;
+            border-top: 1px solid #dddddd;
+            white-space: nowrap;
+            border-bottom: 1px solid #dddddd;
+        }
+</style>
+
+<p>
+    @Html.ActionLinkAuthorized("Create New", "TemporaryAdminCreate", false)
+</p>
+<table class="table-layout-auto">
+    <tr>
+        <th></th>
+        <th>
+            ManufacturerName
+        </th>
+        <th>
+            SubCategoryName
+        </th>
+        <th>
+            CommodityName
+        </th>
+        <th>
+           UnitPrice
+        </th>
+        <th>
+            SubPrice
+        </th>
+        <th>
+           DiscountPrice
+        </th>
+        <th>
+            MakeCompany
+        </th>
+        <th>
+            Degree
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            IsRecommended
+        </th>
+        <th>
+            ManufacturerDate
+        </th>
+        <th>
+            CreationDate
+        </th>
+        <th>
+            UpdateDate
+        </th>
+    </tr>
+
+    @foreach (var item in ViewBag.UserProfileCommodityList)
+    {
+        <tr>
+            <td>
+                @Html.ActionLinkAuthorized("Edit", "TemporaryAdminEdit", new { id = item.CommodityId }, false) &nbsp;
+                @Html.ActionLinkAuthorized("Details", "TemporaryAdminDetails", new { id = item.CommodityId }, false) &nbsp;
+                @Html.ActionLinkAuthorized("Delete", "TemporaryAdminDelete", new { id = item.CommodityId }, false)
+            </td>
+            <td>
+                @item.ManufacturerName
+            </td>
+            <td>
+                @item.SubCategoryName
+            </td>
+            <td>
+                @item.CommodityName
+            </td>
+            <td>
+                @item.UnitPrice
+            </td>
+            <td>
+                @item.SubPrice
+            </td>
+            <td>
+                @item.DiscountPrice
+            </td>
+            <td>
+                @item.MakeCompany
+            </td>
+            <td>
+                @item.Degree
+            </td>
+            <td>
+               @item.Quantity
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @Html.ActionLinkAuthorized("Image", "TemporaryAdminImage", new { id = item.CommodityId }, false)
+            </td>
+
+            <td>
+                @item.Brand
+            </td>
+            <td>
+                @item.IsRecommended
+            </td>
+            <td>
+                @item.ManufacturerDate
+            </td>
+            <td>
+                @item.CreationDate
+            </td>
+            <td>
+                @item.UpdateDate
+            </td>
+        </tr>
+    }
+
+</table>

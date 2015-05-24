@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "SingleRequiredCommodity";
+}
+
+<script type="text/javascript">
+    if(@ViewBag.Count == 0)
+    {
+        alert("空空如也！");
+        window.location.href="Home";
+    }
+</script>
+
+<div class="header">
+    <div class="header_top">
+        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+            <ul class="shopping_grid">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                    if (ViewBag.ShoppingTrolleysCount > 0)
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="h_menu4" style="height:50px;">
+        <div class="container">
+        <a class="toggleMenu" href="#">Menu</a>
+        <ul class="nav">
+            <li>@Html.ActionLink("Home", "Index", "Home") </li>
+            <li>@Html.ActionLink("About", "Index", "About") </li>
+            <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+            <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
+            <li class="active">@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+        </ul>
+    </div>
+    </div>
+</div>
+
+<br />
+
+<h2>您所需求的信息如下，请确认是否需要修改？</h2>
+<table class="table-layout-auto">
+    <tr>
+        <th></th>
+        <th>
+            CommodityName
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Content
+        </th>
+    </tr>
+
+    @foreach (var item in ViewBag.RequiredCommodityList)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "SingleEdit", new {id = item.Id}) &nbsp;
+                @Html.ActionLink("Delete", "SingleDelete", new {id = item.Id})
+            </td>
+            <td>
+                @item.CommodityName
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.Content
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<br />
+<div>
+    <a href="@Url.Action("Index" ,"Home" )"> Cancel</a>
+</div>

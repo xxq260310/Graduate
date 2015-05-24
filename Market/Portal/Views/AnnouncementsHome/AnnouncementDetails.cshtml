@@ -1,0 +1,110 @@
+﻿@model Portal.Models.Announcement
+@using Portal.Authentication;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/LayoutForAnnouncement.cshtml";
+}
+
+<div class="header">
+    <div class="header_top">
+        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+            <ul class="shopping_grid">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                    if (ViewBag.ShoppingTrolleysCount > 0)
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="h_menu4">
+        <div class="container">
+            <a class="toggleMenu" href="#">Menu</a>
+            <ul class="nav">
+                <li>@Html.ActionLink("Home", "Index", "Home") </li>
+                <li>@Html.ActionLink("About", "Index", "About") </li>
+                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+                <li class="active">@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
+                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="about">
+    <div class="container">
+        <div class="singel_right">
+            <div class="col-md-8">
+                    <style type="text/css">
+                        .hd {
+                            line-height: 25px;
+                            height: 25px;
+                            margin: 0 auto;
+                            position: relative;
+                            overflow: hidden;
+                            width: 788px;
+                            padding-top: 5px;
+                            background-position: 0 -82px;
+                            background-repeat: repeat-x;
+                        }
+                    </style>
+                <div class="hd">
+                    <span class="time-author">发表于 @Model.CreationDate</span>
+                </div>
+                <br/>
+                <div class="contact-form">
+                    <h3 style="text-align: center;">@Model.Title</h3>
+                    <pre><p>@Model.Content</p></pre>
+                </div>
+                <br />
+                <div>
+                    @Html.ActionLink("Back to List", "Home")
+                </div>
+            </div>
+
+            <div class="col-md-4 contact_right">
+                <h3>地址:</h3>
+                <div class="address">
+                    <div class="contact_address">
+                        江苏省南京市雨花台区铁心桥龙西路十号三江学院
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="address">
+                    <h3>电话:</h3>
+                    <div class="contact_address">
+                        18652936326
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="address">
+                    <h3>邮箱:</h3>
+                    <div class="contact_email">
+                        <a href="http://email.163.com/" target="_blank">xxq260310x@163.com</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_bg">
+</div>
+

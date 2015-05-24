@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{984C5A2F-433D-46D7-B5DA-5DB819D9B1B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Market.DAL</RootNamespace>
+    <AssemblyName>Market.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="MarketModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MarketModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MarketModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MarketModel.Context.cs</LastGenOutput>
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+    </None>
+    <None Include="MarketModel.edmx.diagram">
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MarketModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MarketModel.cs</LastGenOutput>
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Announcement.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Commodity.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommodityInFavorite.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommodityInfo.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommodityInOrder.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommodityInShoppingTrolley.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbFactoryConfiguration.cs" />
+    <Compile Include="DefaultDbFactory.cs" />
+    <Compile Include="Favorite.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDBFactory.cs" />
+    <Compile Include="Manufacturer.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MarketDB.cs" />
+    <Compile Include="MarketModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarketModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MarketModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MarketModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarketModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParentCategory.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AnnouncementRepository.cs" />
+    <Compile Include="Repositories\CommodityRepository.cs" />
+    <Compile Include="Repositories\FavoriteRepository.cs" />
+    <Compile Include="Repositories\FeedbackRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\RequiredCommodityRepository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\ShoppingTrolleyRepository.cs" />
+    <Compile Include="Repositories\SiteFeedbackRepository.cs" />
+    <Compile Include="Repositories\UserProfileRepository.cs" />
+    <Compile Include="RequiredCommodity.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingTrolley.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SiteFeedback.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubCategory.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitWork\TransactionAttribute.cs" />
+    <Compile Include="UnitWork\UnitOfWork.cs" />
+    <Compile Include="UserProfile.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfileCommodity.cs">
+      <DependentUpon>MarketModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data.sql" />
+    <Content Include="MarketModel.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

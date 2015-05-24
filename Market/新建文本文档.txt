@@ -1,0 +1,10 @@
+var commodity = (from commodityInShoppingTrolleyModel in this.db.CommodityInShoppingTrolleys
+                                             from shoppingTrolley in this.db.ShoppingTrolleys
+                                             where commodityInShoppingTrolleyModel.UserId == shoppingTrolley.UserId 
+                                             && shoppingTrolley.UserProfile.UserName == User.Identity.Name 
+                                             && commodityInShoppingTrolleyModel.CommodityId == commodityId
+                                             select commodityInShoppingTrolleyModel).SingleOrDefault();
+                 this.db.CommodityInShoppingTrolleys.Remove(commodity);
+
+                 var shoppingTrolleyItem = this.db.ShoppingTrolleys.SingleOrDefault(x => x.UserId == userId);
+                 shoppingTrolleyItem.UpdateDate = DateTime.Now;

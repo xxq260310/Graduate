@@ -1,0 +1,302 @@
+D:\CommodityMarket\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+D:\CommodityMarket\Portal\bin\Portal.dll.config
+D:\CommodityMarket\Portal\bin\Portal.dll
+D:\CommodityMarket\Portal\bin\Portal.pdb
+D:\CommodityMarket\Portal\bin\Antlr3.Runtime.dll
+D:\CommodityMarket\Portal\bin\EntityFramework.dll
+D:\CommodityMarket\Portal\bin\EntityFramework.SqlServer.dll
+D:\CommodityMarket\Portal\bin\Microsoft.Web.Infrastructure.dll
+D:\CommodityMarket\Portal\bin\Newtonsoft.Json.dll
+D:\CommodityMarket\Portal\bin\System.Web.Helpers.dll
+D:\CommodityMarket\Portal\bin\System.Web.Mvc.dll
+D:\CommodityMarket\Portal\bin\System.Web.Optimization.dll
+D:\CommodityMarket\Portal\bin\System.Web.Razor.dll
+D:\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.dll
+D:\CommodityMarket\Portal\bin\System.Web.WebPages.dll
+D:\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.dll
+D:\CommodityMarket\Portal\bin\WebGrease.dll
+D:\CommodityMarket\Portal\bin\EntityFramework.xml
+D:\CommodityMarket\Portal\bin\EntityFramework.SqlServer.xml
+D:\CommodityMarket\Portal\bin\System.Web.Helpers.xml
+D:\CommodityMarket\Portal\bin\System.Web.Mvc.xml
+D:\CommodityMarket\Portal\bin\System.Web.Optimization.xml
+D:\CommodityMarket\Portal\bin\System.Web.Razor.xml
+D:\CommodityMarket\Portal\bin\System.Web.WebPages.xml
+D:\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.xml
+D:\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.xml
+D:\CommodityMarket\Portal\bin\Antlr3.Runtime.pdb
+D:\CommodityMarket\Portal\bin\Newtonsoft.Json.xml
+D:\CommodityMarket\Portal\obj\Debug\Portal.dll
+D:\CommodityMarket\Portal\obj\Debug\Portal.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Portal.dll.config
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Portal.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Portal.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\EntityFramework.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Microsoft.Web.Infrastructure.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\WebGrease.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\EntityFramework.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+D:\毕业设计\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\PagedList.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.dll
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\PagedList.xml
+D:\毕业设计\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.xml
+D:\毕业设计\CommodityMarket\Portal\bin\Portal.dll.config
+D:\毕业设计\CommodityMarket\Portal\bin\Portal.dll
+D:\毕业设计\CommodityMarket\Portal\bin\Portal.pdb
+D:\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.dll
+D:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.dll
+D:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.dll
+D:\毕业设计\CommodityMarket\Portal\bin\Microsoft.Web.Infrastructure.dll
+D:\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.dll
+D:\毕业设计\CommodityMarket\Portal\bin\PagedList.dll
+D:\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.dll
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.dll
+D:\毕业设计\CommodityMarket\Portal\bin\WebGrease.dll
+D:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.xml
+D:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.xml
+D:\毕业设计\CommodityMarket\Portal\bin\PagedList.xml
+D:\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.xml
+D:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.xml
+D:\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.pdb
+D:\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.xml
+D:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+D:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.dll
+D:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.pdb
+G:\毕业设计\CommodityMarket\Portal\bin\Portal.dll.config
+G:\毕业设计\CommodityMarket\Portal\bin\Portal.dll
+G:\毕业设计\CommodityMarket\Portal\bin\Portal.pdb
+G:\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.dll
+G:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.dll
+G:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.dll
+G:\毕业设计\CommodityMarket\Portal\bin\Microsoft.Web.Infrastructure.dll
+G:\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.dll
+G:\毕业设计\CommodityMarket\Portal\bin\PagedList.dll
+G:\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.dll
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.dll
+G:\毕业设计\CommodityMarket\Portal\bin\WebGrease.dll
+G:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.xml
+G:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.xml
+G:\毕业设计\CommodityMarket\Portal\bin\PagedList.xml
+G:\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.xml
+G:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.xml
+G:\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.pdb
+G:\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.xml
+G:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+G:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.dll
+G:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.pdb
+F:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+F:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.dll
+F:\毕业设计\CommodityMarket\Portal\obj\Debug\Portal.pdb
+F:\毕业设计\CommodityMarket\Portal\bin\Portal.dll.config
+F:\毕业设计\CommodityMarket\Portal\bin\Portal.dll
+F:\毕业设计\CommodityMarket\Portal\bin\Portal.pdb
+F:\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.dll
+F:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.dll
+F:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.dll
+F:\毕业设计\CommodityMarket\Portal\bin\Microsoft.Web.Infrastructure.dll
+F:\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.dll
+F:\毕业设计\CommodityMarket\Portal\bin\PagedList.dll
+F:\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.dll
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.dll
+F:\毕业设计\CommodityMarket\Portal\bin\WebGrease.dll
+F:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.xml
+F:\毕业设计\CommodityMarket\Portal\bin\EntityFramework.SqlServer.xml
+F:\毕业设计\CommodityMarket\Portal\bin\PagedList.xml
+F:\毕业设计\CommodityMarket\Portal\bin\PagedList.Mvc.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Helpers.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Mvc.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Optimization.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.Razor.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Deployment.xml
+F:\毕业设计\CommodityMarket\Portal\bin\System.Web.WebPages.Razor.xml
+F:\毕业设计\CommodityMarket\Portal\bin\Antlr3.Runtime.pdb
+F:\毕业设计\CommodityMarket\Portal\bin\Newtonsoft.Json.xml
+G:\毕业设计\Market\Portal\bin\Portal.dll.config
+G:\毕业设计\Market\Portal\bin\Portal.dll
+G:\毕业设计\Market\Portal\bin\Portal.pdb
+G:\毕业设计\Market\Portal\bin\Antlr3.Runtime.dll
+G:\毕业设计\Market\Portal\bin\EntityFramework.dll
+G:\毕业设计\Market\Portal\bin\EntityFramework.SqlServer.dll
+G:\毕业设计\Market\Portal\bin\Microsoft.Web.Infrastructure.dll
+G:\毕业设计\Market\Portal\bin\Newtonsoft.Json.dll
+G:\毕业设计\Market\Portal\bin\PagedList.dll
+G:\毕业设计\Market\Portal\bin\PagedList.Mvc.dll
+G:\毕业设计\Market\Portal\bin\System.Web.Helpers.dll
+G:\毕业设计\Market\Portal\bin\System.Web.Mvc.dll
+G:\毕业设计\Market\Portal\bin\System.Web.Optimization.dll
+G:\毕业设计\Market\Portal\bin\System.Web.Razor.dll
+G:\毕业设计\Market\Portal\bin\System.Web.WebPages.Deployment.dll
+G:\毕业设计\Market\Portal\bin\System.Web.WebPages.dll
+G:\毕业设计\Market\Portal\bin\System.Web.WebPages.Razor.dll
+G:\毕业设计\Market\Portal\bin\WebGrease.dll
+G:\毕业设计\Market\Portal\bin\EntityFramework.xml
+G:\毕业设计\Market\Portal\bin\EntityFramework.SqlServer.xml
+G:\毕业设计\Market\Portal\bin\PagedList.xml
+G:\毕业设计\Market\Portal\bin\PagedList.Mvc.xml
+G:\毕业设计\Market\Portal\bin\System.Web.Helpers.xml
+G:\毕业设计\Market\Portal\bin\System.Web.Mvc.xml
+G:\毕业设计\Market\Portal\bin\System.Web.Optimization.xml
+G:\毕业设计\Market\Portal\bin\System.Web.Razor.xml
+G:\毕业设计\Market\Portal\bin\System.Web.WebPages.xml
+G:\毕业设计\Market\Portal\bin\System.Web.WebPages.Deployment.xml
+G:\毕业设计\Market\Portal\bin\System.Web.WebPages.Razor.xml
+G:\毕业设计\Market\Portal\bin\Antlr3.Runtime.pdb
+G:\毕业设计\Market\Portal\bin\Newtonsoft.Json.xml
+G:\毕业设计\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+G:\毕业设计\Market\Portal\obj\Debug\Portal.dll
+G:\毕业设计\Market\Portal\obj\Debug\Portal.pdb
+F:\毕业设计\Market\Portal\bin\Portal.dll.config
+F:\毕业设计\Market\Portal\bin\Portal.dll
+F:\毕业设计\Market\Portal\bin\Portal.pdb
+F:\毕业设计\Market\Portal\bin\Antlr3.Runtime.dll
+F:\毕业设计\Market\Portal\bin\EntityFramework.dll
+F:\毕业设计\Market\Portal\bin\EntityFramework.SqlServer.dll
+F:\毕业设计\Market\Portal\bin\Microsoft.Web.Infrastructure.dll
+F:\毕业设计\Market\Portal\bin\Newtonsoft.Json.dll
+F:\毕业设计\Market\Portal\bin\PagedList.dll
+F:\毕业设计\Market\Portal\bin\PagedList.Mvc.dll
+F:\毕业设计\Market\Portal\bin\System.Web.Helpers.dll
+F:\毕业设计\Market\Portal\bin\System.Web.Mvc.dll
+F:\毕业设计\Market\Portal\bin\System.Web.Optimization.dll
+F:\毕业设计\Market\Portal\bin\System.Web.Razor.dll
+F:\毕业设计\Market\Portal\bin\System.Web.WebPages.Deployment.dll
+F:\毕业设计\Market\Portal\bin\System.Web.WebPages.dll
+F:\毕业设计\Market\Portal\bin\System.Web.WebPages.Razor.dll
+F:\毕业设计\Market\Portal\bin\WebGrease.dll
+F:\毕业设计\Market\Portal\bin\EntityFramework.xml
+F:\毕业设计\Market\Portal\bin\EntityFramework.SqlServer.xml
+F:\毕业设计\Market\Portal\bin\PagedList.xml
+F:\毕业设计\Market\Portal\bin\PagedList.Mvc.xml
+F:\毕业设计\Market\Portal\bin\System.Web.Helpers.xml
+F:\毕业设计\Market\Portal\bin\System.Web.Mvc.xml
+F:\毕业设计\Market\Portal\bin\System.Web.Optimization.xml
+F:\毕业设计\Market\Portal\bin\System.Web.Razor.xml
+F:\毕业设计\Market\Portal\bin\System.Web.WebPages.xml
+F:\毕业设计\Market\Portal\bin\System.Web.WebPages.Deployment.xml
+F:\毕业设计\Market\Portal\bin\System.Web.WebPages.Razor.xml
+F:\毕业设计\Market\Portal\bin\Antlr3.Runtime.pdb
+F:\毕业设计\Market\Portal\bin\Newtonsoft.Json.xml
+F:\毕业设计\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+F:\毕业设计\Market\Portal\obj\Debug\Portal.dll
+F:\毕业设计\Market\Portal\obj\Debug\Portal.pdb
+G:\Graduate Project\Market\Portal\bin\Portal.dll.config
+G:\Graduate Project\Market\Portal\bin\Portal.dll
+G:\Graduate Project\Market\Portal\bin\Portal.pdb
+G:\Graduate Project\Market\Portal\bin\Antlr3.Runtime.dll
+G:\Graduate Project\Market\Portal\bin\EntityFramework.dll
+G:\Graduate Project\Market\Portal\bin\EntityFramework.SqlServer.dll
+G:\Graduate Project\Market\Portal\bin\Microsoft.Web.Infrastructure.dll
+G:\Graduate Project\Market\Portal\bin\Newtonsoft.Json.dll
+G:\Graduate Project\Market\Portal\bin\PagedList.dll
+G:\Graduate Project\Market\Portal\bin\PagedList.Mvc.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.Helpers.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.Mvc.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.Optimization.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.Razor.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.WebPages.Deployment.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.WebPages.dll
+G:\Graduate Project\Market\Portal\bin\System.Web.WebPages.Razor.dll
+G:\Graduate Project\Market\Portal\bin\WebGrease.dll
+G:\Graduate Project\Market\Portal\bin\EntityFramework.xml
+G:\Graduate Project\Market\Portal\bin\EntityFramework.SqlServer.xml
+G:\Graduate Project\Market\Portal\bin\PagedList.xml
+G:\Graduate Project\Market\Portal\bin\PagedList.Mvc.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.Helpers.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.Mvc.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.Optimization.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.Razor.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.WebPages.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.WebPages.Deployment.xml
+G:\Graduate Project\Market\Portal\bin\System.Web.WebPages.Razor.xml
+G:\Graduate Project\Market\Portal\bin\Antlr3.Runtime.pdb
+G:\Graduate Project\Market\Portal\bin\Newtonsoft.Json.xml
+G:\Graduate Project\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+G:\Graduate Project\Market\Portal\obj\Debug\Portal.dll
+G:\Graduate Project\Market\Portal\obj\Debug\Portal.pdb
+F:\Graduate\Market\Market\Portal\bin\Portal.dll.config
+F:\Graduate\Market\Market\Portal\bin\Portal.dll
+F:\Graduate\Market\Market\Portal\bin\Portal.pdb
+F:\Graduate\Market\Market\Portal\bin\Antlr3.Runtime.dll
+F:\Graduate\Market\Market\Portal\bin\EntityFramework.dll
+F:\Graduate\Market\Market\Portal\bin\EntityFramework.SqlServer.dll
+F:\Graduate\Market\Market\Portal\bin\Microsoft.Web.Infrastructure.dll
+F:\Graduate\Market\Market\Portal\bin\Newtonsoft.Json.dll
+F:\Graduate\Market\Market\Portal\bin\PagedList.dll
+F:\Graduate\Market\Market\Portal\bin\PagedList.Mvc.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.Helpers.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.Mvc.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.Optimization.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.Razor.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.WebPages.Deployment.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.WebPages.dll
+F:\Graduate\Market\Market\Portal\bin\System.Web.WebPages.Razor.dll
+F:\Graduate\Market\Market\Portal\bin\WebGrease.dll
+F:\Graduate\Market\Market\Portal\bin\EntityFramework.xml
+F:\Graduate\Market\Market\Portal\bin\EntityFramework.SqlServer.xml
+F:\Graduate\Market\Market\Portal\bin\PagedList.xml
+F:\Graduate\Market\Market\Portal\bin\PagedList.Mvc.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.Helpers.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.Mvc.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.Optimization.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.Razor.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.WebPages.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.WebPages.Deployment.xml
+F:\Graduate\Market\Market\Portal\bin\System.Web.WebPages.Razor.xml
+F:\Graduate\Market\Market\Portal\bin\Antlr3.Runtime.pdb
+F:\Graduate\Market\Market\Portal\bin\Newtonsoft.Json.xml
+F:\Graduate\Market\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
+F:\Graduate\Market\Market\Portal\obj\Debug\Portal.dll
+F:\Graduate\Market\Market\Portal\obj\Debug\Portal.pdb

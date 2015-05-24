@@ -1,0 +1,34 @@
+D:\毕业设计\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache
+D:\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache
+D:\CommodityMarket\Market.DAL\bin\Debug\Market.DAL.dll.config
+D:\CommodityMarket\Market.DAL\bin\Debug\Market.DAL.dll
+D:\CommodityMarket\Market.DAL\bin\Debug\Market.DAL.pdb
+D:\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.dll
+D:\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.xml
+D:\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.dll
+D:\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.dll
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\obj\Debug\Market.DAL.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\Market.DAL.dll.config
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\Market.DAL.dll
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\Market.DAL.pdb
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.dll
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.xml
+D:\毕业设计\毕业设计\CommodityMarket\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\毕业设计\Market\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache
+G:\毕业设计\Market\Market.DAL\obj\Debug\Market.DAL.dll
+G:\毕业设计\Market\Market.DAL\obj\Debug\Market.DAL.pdb
+G:\毕业设计\Market\Market.DAL\bin\Debug\Market.DAL.dll.config
+G:\毕业设计\Market\Market.DAL\bin\Debug\Market.DAL.dll
+G:\毕业设计\Market\Market.DAL\bin\Debug\Market.DAL.pdb
+G:\毕业设计\Market\Market.DAL\bin\Debug\EntityFramework.dll
+G:\毕业设计\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\毕业设计\Market\Market.DAL\bin\Debug\EntityFramework.xml
+G:\毕业设计\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\Graduate Project\Market\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache
+G:\Graduate Project\Market\Market.DAL\obj\Debug\Market.DAL.dll
+G:\Graduate Project\Market\Market.DAL\obj\Debug\Market.DAL.pdb

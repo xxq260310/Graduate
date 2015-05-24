@@ -1,0 +1,5 @@
+D:\CommodityMarket\Market.Common\bin\Debug\Market.Common.dll
+D:\CommodityMarket\Market.Common\bin\Debug\Market.Common.pdb
+D:\CommodityMarket\Market.Common\obj\Debug\Market.Common.csprojResolveAssemblyReference.cache
+D:\CommodityMarket\Market.Common\obj\Debug\Market.Common.dll
+D:\CommodityMarket\Market.Common\obj\Debug\Market.Common.pdb

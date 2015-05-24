@@ -1,0 +1,82 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+ Set padding to keep content from hitting the edges 
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/*set table layout fixed*/
+.table-layout-fixed {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 1200px;
+}
+
+    .table-layout-fixed thead > tr > th,
+    .table-layout-fixed tbody > tr > th,
+    .table-layout-fixed tfoot > tr > th,
+    .table-layout-fixed thead > tr > td,
+    .table-layout-fixed tbody > tr > td,
+    .table-layout-fixed tfoot > tr > td {
+        padding: 10px;
+        line-height: 1.428571429;
+        vertical-align: top;
+        border-top: 1px solid #dddddd;
+        border-bottom: 1px solid #dddddd;
+        text-align: center;
+        width: 130px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+
+/*set table layout auto*/
+.table-layout-auto {
+    border-collapse: collapse;
+    table-layout: auto;
+    width: 1100px;
+}
+
+    .table-layout-auto thead > tr > th,
+    .table-layout-auto tbody > tr > th,
+    .table-layout-auto tfoot > tr > th,
+    .table-layout-auto thead > tr > td,
+    .table-layout-auto tbody > tr > td,
+    .table-layout-auto tfoot > tr > td {
+        padding: 10px;
+        line-height: 1.428571429;
+        vertical-align: top;
+        border-top: 1px solid #dddddd;
+        white-space: nowrap;
+        border-bottom: 1px solid #dddddd;
+    }
+
+.flowxml {
+      width: 960px;       
+      height: 540px;
+}
+
+.dd, dt {
+    line-height:2;
+}
+

@@ -1,0 +1,14 @@
+﻿@model Portal.Models.Commodity
+@{
+    ViewBag.Title = "Image";
+    Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
+}
+
+
+<h2>您选择的商品图片信息如下：</h2>
+
+<img width="200" height="200" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = Model.CommodityId })" />
+
+<br />
+<br />
+<p>@Html.ActionLink("Back to List", "TemporaryAdminIndex")</p>

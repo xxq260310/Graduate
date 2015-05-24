@@ -1,0 +1,308 @@
+﻿@{
+    ViewBag.Title = "我的购物车";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+               menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+    });
+
+    $(function () {
+        var length = $("table").find("tr").length - 1;
+        var checked = $("input[type='checkbox'][name='singlecommodity']");
+        $(checked).click(function () {
+            if ($(this).prop("checked") == true) {
+                var price = $(this).parent().parent().children().eq(4).children().val();
+                var checkedPrice = {
+                    LastPrice : $("#TotalCost")[0].value,
+                    CurrentPrice : price
+                };
+
+                $.ajax({
+                    url: '@Url.Action("GetCheckedTotalCost", "ShoppingTrolleys")',
+                    type: "POST",
+                    data: checkedPrice,
+                    dataType: "json",
+                    success: function (req) {
+                        $("#TotalCost")[0].value = req;
+                        $(checked).parent().parent().parent().children().eq(length).children().eq(4).children().eq(1).children().eq(0).html("￥" + req + ".00");
+                    }
+                });
+            }
+            else {
+                var price = $(this).parent().parent().children().eq(4).children().val();
+                var notCheckedPrice = {
+                    LastPrice: $("#TotalCost")[0].value,
+                    CurrentPrice: price
+                };
+
+                $.ajax({
+                    url: '@Url.Action("GetNotCheckedTotalCost", "ShoppingTrolleys")',
+                        type: "POST",
+                        data: notCheckedPrice,
+                        dataType: "json",
+                        success: function (req) {
+                            $("#TotalCost")[0].value = req;
+                            $(checked).parent().parent().parent().children().eq(length).children().eq(4).children().eq(1).children().eq(0).html("￥" + req + ".00");
+                        }
+                    });
+                }
+            });
+    })
+
+    $(function () {
+        $("#AllChecked").click(function () {
+            var checked = $("input[type='checkbox'][name='singlecommodity']");
+            $(checked).each(function () {
+                $(this).prop("checked", !($(this).prop("checked")));
+            })
+        });
+    });
+
+    $(function () {
+        var length = $("table").find("tr").length - 1;
+        var checked = $("input[type='checkbox'][name='AllChecked']");
+        $(checked).click(function () {
+            if ($(this).prop("checked") == true) {
+                $.getJSON("/ShoppingTrolleys/GetAllShoppingTrolleysCost", { id: 1 }, function (data) {
+                    $("#TotalCost")[0].value = data;
+                    $(checked).parent().parent().parent().children().eq(length).children().eq(4).children().eq(1).children().eq(0).html("￥" + data + ".00");
+                })
+            }
+            else {
+                $("#TotalCost")[0].value = 0;
+                $(checked).parent().parent().parent().children().eq(length).children().eq(4).children().eq(1).children().eq(0).html("￥0.00");
+            }
+        })
+    });
+
+    $(function () {
+        $("#commodityTable").on("click", ".favorite", function () {
+            $.getJSON("/Favorites/AddCommodityInFavorite", { id: $("#favorite").parent().children().eq(3).val() }, function (data) {
+                if (data == 0) {
+                    alert("您已经收藏过此商品啦！");
+                }
+                else {
+                    alert("收藏成功!");
+                }
+            });
+        });
+    });
+
+    $(function () {
+        $("#checkout").click(function () {
+            if ($("#TotalCost")[0].value == "" || $("#TotalCost")[0].value == 0) {
+                alert("请至少选择一件商品！");
+                return false;
+            }
+
+            var checked = $("input[type='checkbox'][name='singlecommodity']");
+            $(checked).each(function () {
+                if ($(this).prop("checked") == true) {
+                    $("#OrderCommodityId")[0].value += $(this).parent().parent().children().eq(5).children().eq(3).val() + ",";
+                }
+            })
+
+            var data = {
+                Cost : $("#TotalCost")[0].value,
+                CommodityIdList: $("#OrderCommodityId")[0].value
+            };
+            $.ajax({
+                url: '@Url.Action("Home", "ShoppingTrolleys")',
+                type: "POST",
+                data: data
+            });
+        });
+    });
+
+</script>
+
+<input type="hidden" name="TotalCost" id="TotalCost" />
+<input type="hidden" name="OrderCommodityId" id="OrderCommodityId" />
+
+    <div class="header">
+        <div class="header_top">
+            <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+                <ul class="shopping_grid">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                        <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                        if (ViewBag.ShoppingTrolleysCount > 0)
+                        {
+                            <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="h_menu4">
+            <div class="container">
+                <a class="toggleMenu" href="#">Menu</a>
+                <ul class="nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home") </li>
+                    <li>@Html.ActionLink("About", "Index", "About") </li>
+                    <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+                    <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
+                    <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    @*<style type="text/css">
+        .search input[type="button"] {
+	background: url('../images/search.png') no-repeat 6px 5px black;
+	padding: 4px 17px;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	outline: none;
+}
+    </style>*@
+    
+    <div class="column_center">
+        <div class="container">
+            <div class="search">
+                <div class="stay">搜索商品</div>
+                <div class="stay_right">
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                    {
+                        @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
+                        <input type="submit" value="" onclick="searchCommodity()" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <div class="content_top">
+            <div class="container">
+                <div class="col-md-3 sidebar_box">
+                    <div class="sidebar">
+                        <div class="menu_box">
+                            <h3 class="menu_head">Menu</h3>
+                            <ul class="menu">
+                                @foreach (var p in ViewBag.CategoryList)
+                                {
+                                    <li>
+                                        <a style="cursor:pointer;"> <img src="~/images/f_menu.png" alt="" />@p.ParentCategory</a>
+                                        <ul>
+                                            @foreach (var t in p.SubCategory)
+                                            {
+                                                <li><a href="@Url.Action("Index", "Home", new { subCategory = t })">@t</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="twitter">
+                        <h3>联系方式</h3>
+                        <ul class="twt1">联系人<li><input type="text" readonly value="Xu xiaoqin" style="border:none;" /></li></ul>
+                        <ul class="twt1">电话<li><input type="text" readonly style="border:none;" value="18652936326" /></li></ul>
+                        <ul class="twt1">邮箱<li><input type="text" readonly style="border:none;" value="xxq260310x@163.com" /></li></ul>
+                    </div>
+                    <div class="clients">
+                        <h3>友情提示</h3>
+                        <h4>本网站是二手商品交易网，请有需要同志大力购买，保证低价，正品，物流快。</h4>
+                        <ul class="user"></ul>
+                    </div>
+                </div>
+                <div class="col-md-9 content_right">
+                    <div class="top_grid2">
+                        <span>亲，您的购物车信息如下:</span>
+                    </div>
+                    <div class="top_grid2">
+                        <table class="table" id="commodityTable">
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="AllChecked" name="AllChecked" />
+                                </th>
+                                <th>
+                                    商品信息:
+                                </th>
+                                <th>
+                                    数量:
+                                </th>
+                                <th>
+                                    单价:
+                                </th>
+                                <th>
+                                    小计:
+                                </th>
+                                <th>
+                                    操作:
+                                </th>
+                            </tr>
+                            @foreach (var p in ViewBag.CommodityInShoppingTrolleys)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name='singlecommodity' />
+                                    </td>
+                                    <td width="300px;">
+                                        <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
+                                        <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity</a>
+                                    </td>
+                                    <td>
+                                        @p.Quantity
+                                    </td>
+                                    <td>
+                                        @p.UnitPrice
+                                    </td>
+                                    <td>
+                                        @p.Price <input type="hidden" value="@p.Price" />
+                                    </td>
+                                    <td>
+                                        <a id="delete" href="@Url.Action("SingleDelete", "ShoppingTrolleys", new { id = p.CommodityId })">删除</a><br />
+                                        <a id="favorite" style="cursor:pointer;" class="favorite" name="favorite">加入收藏夹</a> <input type="hidden" id="CommodityId" name="CommodityId" value="@p.CommodityId" />
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span>总价（不含运费）：</span> <span><em style="color:red;">￥0.00</em></span>
+                                </td>
+                                <td>
+                                    <a id="checkout" style="cursor:pointer;">去结算</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_bg"></div>
+
+

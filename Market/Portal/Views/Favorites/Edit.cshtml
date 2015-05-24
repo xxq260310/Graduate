@@ -1,0 +1,92 @@
+﻿@model Portal.Models.Favorite
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
+    var index = 0;
+}
+<br /><br />
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Favorite</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.CreationDate)
+        <div id="hiddenHtml" style="display:none;">
+            <div>
+                CommodityId:
+                @Html.DropDownList("CommodityId", null, "", htmlAttributes: new { Style = "width:100px; margin-right:20px;" })
+                <a id="deleterow" class="deleterow" style="cursor:pointer">Delete</a>
+                <br />
+                <br />
+            </div>
+        </div>
+
+        <h4>Commodity:</h4>
+
+        <div id="commoditytable">
+            @foreach (var item in ViewBag.SelectedCommodities)
+            {
+                <div>
+                    CommodityId:
+                    @Html.DropDownList("[" + index + "].CommodityId", item.CommodityId as SelectList, "", htmlAttributes: new { Style = "width:100px; margin-right:20px;" })
+                    <a id="deleterow" class="deleterow" style="cursor:pointer">Delete</a>
+                    <br />
+                    <br />
+                </div>
+                index++;
+            }
+        </div>
+        <br />
+        <a id="addrow" name="addrow" style="cursor:pointer">Add Commodity Info:</a>
+        <br />
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    $("#addrow").click(function(){
+        add();
+    });
+
+    function add() {
+        var index = $("#commoditytable").children().length;
+        var html = $("#hiddenHtml").html().replace('name="CommodityId"', 'name="[' + index + '].CommodityId"');
+        $("#commoditytable").append(html);
+    }
+
+
+
+    function replace() {
+        var index = 0;
+        var divLength = $("#commoditytable").children().length;
+        for (var i = 0; i < divLength; i++) {
+            var childTable = $("#commoditytable").children().eq(i).children();
+            childTable.eq(0).attr('name', '[' + index + '].CommodityId');
+            index++;
+        }
+
+    }
+
+    $("#commoditytable").on("click", ".deleterow", function () {
+        $(this).parent().remove();
+        replace();
+    });
+
+</script>

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<Portal.Models.Order>
+@{
+    ViewBag.Title = "订单结算";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+               menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+    });
+</script>
+
+
+<div class="header">
+    <div class="header_top">
+        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
+            <ul class="shopping_grid">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("Home","Orders")">订单</a></li>
+                    if (ViewBag.ShoppingTrolleysCount > 0)
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="h_menu4">
+        <div class="container">
+            <a class="toggleMenu" href="#">Menu</a>
+            <ul class="nav">
+                <li>@Html.ActionLink("Home", "Index", "Home") </li>
+                <li>@Html.ActionLink("About", "Index", "About") </li>
+                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
+                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
+                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="column_center">
+    <div class="container">
+        <div class="search">
+            <div class="stay">搜索商品</div>
+            <div class="stay_right">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
+                    <input type="submit" value="" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="main">
+    <div class="content_top">
+        <div class="container">
+            <div class="col-md-3 sidebar_box">
+                <div class="sidebar">
+                    <div class="menu_box">
+                        <h3 class="menu_head">Menu</h3>
+                        <ul class="menu">
+                            @foreach (var p in ViewBag.CategoryList)
+                            {
+                                <li>
+                                    <a style="cursor:pointer;"> <img src="~/images/f_menu.png" alt="" />@p.ParentCategory</a>
+                                    <ul>
+                                        @foreach (var t in p.SubCategory)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Home", new { subCategory = t })">@t</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="twitter">
+                    <h3>联系方式</h3>
+                    <ul class="twt1">联系人<li><input type="text" readonly value="Xu xiaoqin" style="border:none;" /></li></ul>
+                    <ul class="twt1">电话<li><input type="text" readonly style="border:none;" value="18652936326" /></li></ul>
+                    <ul class="twt1">邮箱<li><input type="text" readonly style="border:none;" value="xxq260310x@163.com" /></li></ul>
+                </div>
+                <div class="clients">
+                    <h3>友情提示</h3>
+                    <h4>本网站是二手商品交易网，请有需要同志大力购买，保证低价，正品，物流快。</h4>
+                    <ul class="user"></ul>
+                </div>
+            </div>
+            <div class="col-md-9 content_right">
+                <div class="top_grid2">
+                    <span>填写并核对订单信息:</span>
+                </div>
+                <div class="container">
+                    <div class="top_grid2">
+                        <table class="table" id="commodityTable">
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="AllChecked" name="AllChecked" />
+                                </th>
+                                <th>
+                                    商品信息:
+                                </th>
+                                <th>
+                                    数量:
+                                </th>
+                                <th>
+                                    单价:
+                                </th>
+                                <th>
+                                    小计:
+                                </th>
+                                <th>
+                                    操作:
+                                </th>
+                            </tr>
+                            @foreach (var p in ViewBag.CommodityInShoppingTrolleys)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name='singlecommodity' />
+                                    </td>
+                                    <td width="300px;">
+                                        <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
+                                        <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity</a>
+                                    </td>
+                                    <td>
+                                        @p.Quantity
+                                    </td>
+                                    <td>
+                                        @p.UnitPrice
+                                    </td>
+                                    <td>
+                                        @p.Price <input type="hidden" value="@p.Price" />
+                                    </td>
+                                    <td>
+                                        <a id="delete" href="@Url.Action("SingleDelete", "ShoppingTrolleys", new { id = p.CommodityId })">删除</a><br />
+                                        <a id="favorite" style="cursor:pointer;" class="favorite" name="favorite">加入收藏夹</a> <input type="hidden" id="CommodityId" name="CommodityId" value="@p.CommodityId" />
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <span>总价（不含运费）：</span> <span><em style="color:red;">￥0.00</em></span>
+                                </td>
+                                <td>
+                                    <a id="checkout">去结算</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer_bg"></div>

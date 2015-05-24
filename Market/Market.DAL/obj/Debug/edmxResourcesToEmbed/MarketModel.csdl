@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MarketModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="MarketModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserProfiles" EntityType="MarketModel.UserProfile" />
+    <EntitySet Name="Commodities" EntityType="MarketModel.Commodity" />
+    <EntitySet Name="ParentCategories" EntityType="MarketModel.ParentCategory" />
+    <EntitySet Name="Roles" EntityType="MarketModel.Role" />
+    <EntitySet Name="Orders" EntityType="MarketModel.Order" />
+    <EntitySet Name="ShoppingTrolleys" EntityType="MarketModel.ShoppingTrolley" />
+    <EntitySet Name="SubCategories" EntityType="MarketModel.SubCategory" />
+    <EntitySet Name="Announcements" EntityType="MarketModel.Announcement" />
+    <EntitySet Name="Favorites" EntityType="MarketModel.Favorite" />
+    <EntitySet Name="RequiredCommodities" EntityType="MarketModel.RequiredCommodity" />
+    <EntitySet Name="Manufacturers" EntityType="MarketModel.Manufacturer" />
+    <EntitySet Name="SiteFeedbacks" EntityType="MarketModel.SiteFeedback" />
+    <EntitySet Name="Feedbacks" EntityType="MarketModel.Feedback" />
+    <AssociationSet Name="UserProfileRole" Association="MarketModel.UserProfileRole">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="SubCategoryParentCategory" Association="MarketModel.SubCategoryParentCategory">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="ParentCategory" EntitySet="ParentCategories" />
+    </AssociationSet>
+    <AssociationSet Name="CommoditySubCategory" Association="MarketModel.CommoditySubCategory">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityManufacturer" Association="MarketModel.CommodityManufacturer">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="Manufacturer" EntitySet="Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FeedbackCommodity" Association="MarketModel.FeedbackCommodity">
+      <End Role="Feedback" EntitySet="Feedbacks" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="FeedbackUserProfile" Association="MarketModel.FeedbackUserProfile">
+      <End Role="Feedback" EntitySet="Feedbacks" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="SiteFeedbackUserProfile" Association="MarketModel.SiteFeedbackUserProfile">
+      <End Role="SiteFeedback" EntitySet="SiteFeedbacks" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="RequiredCommodityUserProfile" Association="MarketModel.RequiredCommodityUserProfile">
+      <End Role="RequiredCommodity" EntitySet="RequiredCommodities" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <EntitySet Name="CommodityInOrders" EntityType="MarketModel.CommodityInOrder" />
+    <EntitySet Name="UserProfileCommodities" EntityType="MarketModel.UserProfileCommodity" />
+    <AssociationSet Name="UserProfileUserProfileCommodity" Association="MarketModel.UserProfileUserProfileCommodity">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="UserProfileCommodity" EntitySet="UserProfileCommodities" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityUserProfileCommodity" Association="MarketModel.CommodityUserProfileCommodity">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="UserProfileCommodity" EntitySet="UserProfileCommodities" />
+    </AssociationSet>
+    <EntitySet Name="CommodityInShoppingTrolleys" EntityType="MarketModel.CommodityInShoppingTrolley" />
+    <AssociationSet Name="CommodityCommodityInShoppingTrolley" Association="MarketModel.CommodityCommodityInShoppingTrolley">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="CommodityInShoppingTrolley" EntitySet="CommodityInShoppingTrolleys" />
+    </AssociationSet>
+    <AssociationSet Name="ShoppingTrolleyCommodityInShoppingTrolley" Association="MarketModel.ShoppingTrolleyCommodityInShoppingTrolley">
+      <End Role="ShoppingTrolley" EntitySet="ShoppingTrolleys" />
+      <End Role="CommodityInShoppingTrolley" EntitySet="CommodityInShoppingTrolleys" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileShoppingTrolley" Association="MarketModel.UserProfileShoppingTrolley">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="ShoppingTrolley" EntitySet="ShoppingTrolleys" />
+    </AssociationSet>
+    <EntitySet Name="CommodityInFavorites" EntityType="MarketModel.CommodityInFavorite" />
+    <AssociationSet Name="CommodityCommodityInFavorite" Association="MarketModel.CommodityCommodityInFavorite">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="CommodityInFavorite" EntitySet="CommodityInFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="FavoriteCommodityInFavorite" Association="MarketModel.FavoriteCommodityInFavorite">
+      <End Role="Favorite" EntitySet="Favorites" />
+      <End Role="CommodityInFavorite" EntitySet="CommodityInFavorites" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileFavorite" Association="MarketModel.UserProfileFavorite">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Favorite" EntitySet="Favorites" />
+    </AssociationSet>
+    <EntitySet Name="CommodityInfoes" EntityType="MarketModel.CommodityInfo" />
+    <AssociationSet Name="CommodityInfoCommodity" Association="MarketModel.CommodityInfoCommodity">
+      <End Role="CommodityInfo" EntitySet="CommodityInfoes" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="UserProfileOrder" Association="MarketModel.UserProfileOrder">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="CommodityInOrderCommodity" Association="MarketModel.CommodityInOrderCommodity">
+      <End Role="CommodityInOrder" EntitySet="CommodityInOrders" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="OrderCommodityInOrder" Association="MarketModel.OrderCommodityInOrder">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="CommodityInOrder" EntitySet="CommodityInOrders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="Nickname" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Role" Relationship="MarketModel.UserProfileRole" FromRole="UserProfile" ToRole="Role" />
+    <NavigationProperty Name="Feedbacks" Relationship="MarketModel.FeedbackUserProfile" FromRole="UserProfile" ToRole="Feedback" />
+    <NavigationProperty Name="SiteFeedbacks" Relationship="MarketModel.SiteFeedbackUserProfile" FromRole="UserProfile" ToRole="SiteFeedback" />
+    <NavigationProperty Name="RequiredCommoditys" Relationship="MarketModel.RequiredCommodityUserProfile" FromRole="UserProfile" ToRole="RequiredCommodity" />
+    <NavigationProperty Name="UserProfileCommoditys" Relationship="MarketModel.UserProfileUserProfileCommodity" FromRole="UserProfile" ToRole="UserProfileCommodity" />
+    <NavigationProperty Name="ShoppingTrolley" Relationship="MarketModel.UserProfileShoppingTrolley" FromRole="UserProfile" ToRole="ShoppingTrolley" />
+    <NavigationProperty Name="Favorite" Relationship="MarketModel.UserProfileFavorite" FromRole="UserProfile" ToRole="Favorite" />
+    <Property Name="ImageData" Type="Binary" />
+    <Property Name="ImageType" Type="String" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Orders" Relationship="MarketModel.UserProfileOrder" FromRole="UserProfile" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Commodity">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+    </Key>
+    <Property Name="CommodityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommodityName" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" />
+    <Property Name="SubPrice" Type="Double" />
+    <Property Name="DiscountPrice" Type="Double" />
+    <Property Name="MakeCompany" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Degree" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Brand" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="IsRecommended" Type="Boolean" />
+    <Property Name="ManufacturerDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SubCategory" Relationship="MarketModel.CommoditySubCategory" FromRole="Commodity" ToRole="SubCategory" />
+    <NavigationProperty Name="Manufacturer" Relationship="MarketModel.CommodityManufacturer" FromRole="Commodity" ToRole="Manufacturer" />
+    <NavigationProperty Name="Feedbacks" Relationship="MarketModel.FeedbackCommodity" FromRole="Commodity" ToRole="Feedback" />
+    <NavigationProperty Name="UserProfileCommoditys" Relationship="MarketModel.CommodityUserProfileCommodity" FromRole="Commodity" ToRole="UserProfileCommodity" />
+    <NavigationProperty Name="CommodityInShoppingTrolleys" Relationship="MarketModel.CommodityCommodityInShoppingTrolley" FromRole="Commodity" ToRole="CommodityInShoppingTrolley" />
+    <NavigationProperty Name="CommodityInFavorites" Relationship="MarketModel.CommodityCommodityInFavorite" FromRole="Commodity" ToRole="CommodityInFavorite" />
+    <NavigationProperty Name="CommodityInfos" Relationship="MarketModel.CommodityInfoCommodity" FromRole="Commodity" ToRole="CommodityInfo" />
+    <Property Name="PromotionStartOn" Type="DateTime" Precision="3" />
+    <Property Name="PromotionEndOn" Type="DateTime" Precision="3" />
+    <Property Name="Weight" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Component" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="ImageData" Type="Binary" />
+    <Property Name="ImageType" Type="String" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.CommodityInOrderCommodity" FromRole="Commodity" ToRole="CommodityInOrder" />
+  </EntityType>
+  <EntityType Name="ParentCategory">
+    <Key>
+      <PropertyRef Name="ParentCategoryId" />
+    </Key>
+    <Property Name="ParentCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SubCategorys" Relationship="MarketModel.SubCategoryParentCategory" FromRole="ParentCategory" ToRole="SubCategory" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserProfiles" Relationship="MarketModel.UserProfileRole" FromRole="Role" ToRole="UserProfile" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="SellerId" Type="Int32" />
+    <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="TotalCost" Type="Double" />
+    <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Delivery" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="ConsigneeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileOrder" FromRole="Order" ToRole="UserProfile" />
+    <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.OrderCommodityInOrder" FromRole="Order" ToRole="CommodityInOrder" />
+  </EntityType>
+  <EntityType Name="ShoppingTrolley">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CommodityInShoppingTrolleys" Relationship="MarketModel.ShoppingTrolleyCommodityInShoppingTrolley" FromRole="ShoppingTrolley" ToRole="CommodityInShoppingTrolley" />
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileShoppingTrolley" FromRole="ShoppingTrolley" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ParentCategory" Relationship="MarketModel.SubCategoryParentCategory" FromRole="SubCategory" ToRole="ParentCategory" />
+    <Property Name="ParentCategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Commoditys" Relationship="MarketModel.CommoditySubCategory" FromRole="SubCategory" ToRole="Commodity" />
+  </EntityType>
+  <EntityType Name="Announcement">
+    <Key>
+      <PropertyRef Name="AnnouncementId" />
+    </Key>
+    <Property Name="AnnouncementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Favorite">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CommodityInFavorites" Relationship="MarketModel.FavoriteCommodityInFavorite" FromRole="Favorite" ToRole="CommodityInFavorite" />
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileFavorite" FromRole="Favorite" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="RequiredCommodity">
+    <Key>
+      <PropertyRef Name="RequiredCommodityId" />
+    </Key>
+    <Property Name="RequiredCommodityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.RequiredCommodityUserProfile" FromRole="RequiredCommodity" ToRole="UserProfile" />
+    <Property Name="CommodityName" Type="String" FixedLength="false" MaxLength="30" Unicode="false" />
+    <Property Name="Price" Type="Double" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="ManufacturerId" />
+    </Key>
+    <Property Name="ManufacturerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManufacturerName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityManufacturer" FromRole="Manufacturer" ToRole="Commodity" />
+  </EntityType>
+  <EntityType Name="SiteFeedback">
+    <Key>
+      <PropertyRef Name="SiteFeedbackId" />
+    </Key>
+    <Property Name="SiteFeedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.SiteFeedbackUserProfile" FromRole="SiteFeedback" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="FeedbackId" />
+    </Key>
+    <Property Name="FeedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="Reply" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.FeedbackCommodity" FromRole="Feedback" ToRole="Commodity" />
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.FeedbackUserProfile" FromRole="Feedback" ToRole="UserProfile" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="UserProfileRole">
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <End Type="MarketModel.Role" Role="Role" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SubCategoryParentCategory">
+    <End Type="MarketModel.SubCategory" Role="SubCategory" Multiplicity="*" />
+    <End Type="MarketModel.ParentCategory" Role="ParentCategory" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ParentCategory">
+        <PropertyRef Name="ParentCategoryId" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="ParentCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommoditySubCategory">
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="*" />
+    <End Type="MarketModel.SubCategory" Role="SubCategory" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Commodity">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityManufacturer">
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="*" />
+    <End Type="MarketModel.Manufacturer" Role="Manufacturer" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="ManufacturerId" />
+      </Principal>
+      <Dependent Role="Commodity">
+        <PropertyRef Name="ManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FeedbackCommodity">
+    <End Type="MarketModel.Feedback" Role="Feedback" Multiplicity="*" />
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FeedbackUserProfile">
+    <End Type="MarketModel.Feedback" Role="Feedback" Multiplicity="*" />
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SiteFeedbackUserProfile">
+    <End Type="MarketModel.SiteFeedback" Role="SiteFeedback" Multiplicity="*" />
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SiteFeedback">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RequiredCommodityUserProfile">
+    <End Type="MarketModel.RequiredCommodity" Role="RequiredCommodity" Multiplicity="*" />
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RequiredCommodity">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CommodityInOrder">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Color" Type="String" FixedLength="false" Unicode="false" MaxLength="10" />
+    <Property Name="Size" Type="String" Nullable="false" FixedLength="false" Unicode="false" MaxLength="10" />
+    <Property Name="Capacity" Type="String" Nullable="false" FixedLength="false" Unicode="false" MaxLength="10" />
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityInOrderCommodity" FromRole="CommodityInOrder" ToRole="Commodity" />
+    <NavigationProperty Name="Order" Relationship="MarketModel.OrderCommodityInOrder" FromRole="CommodityInOrder" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="UserProfileCommodity">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="CommodityId" />
+    </Key>
+    <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileUserProfileCommodity" FromRole="UserProfileCommodity" ToRole="UserProfile" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityUserProfileCommodity" FromRole="UserProfileCommodity" ToRole="Commodity" />
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="UserProfileUserProfileCommodity">
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <End Type="MarketModel.UserProfileCommodity" Role="UserProfileCommodity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserProfileCommodity">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityUserProfileCommodity">
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="1" />
+    <End Type="MarketModel.UserProfileCommodity" Role="UserProfileCommodity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="UserProfileCommodity">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CommodityInShoppingTrolley">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityCommodityInShoppingTrolley" FromRole="CommodityInShoppingTrolley" ToRole="Commodity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ShoppingTrolley" Relationship="MarketModel.ShoppingTrolleyCommodityInShoppingTrolley" FromRole="CommodityInShoppingTrolley" ToRole="ShoppingTrolley" />
+    <Property Name="UnitPrice" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Capacity" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <Association Name="CommodityCommodityInShoppingTrolley">
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="1" />
+    <End Type="MarketModel.CommodityInShoppingTrolley" Role="CommodityInShoppingTrolley" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInShoppingTrolley">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ShoppingTrolleyCommodityInShoppingTrolley">
+    <End Type="MarketModel.ShoppingTrolley" Role="ShoppingTrolley" Multiplicity="1" />
+    <End Type="MarketModel.CommodityInShoppingTrolley" Role="CommodityInShoppingTrolley" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShoppingTrolley">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CommodityInShoppingTrolley">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileShoppingTrolley">
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <End Type="MarketModel.ShoppingTrolley" Role="ShoppingTrolley" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ShoppingTrolley">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CommodityInFavorite">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityCommodityInFavorite" FromRole="CommodityInFavorite" ToRole="Commodity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Favorite" Relationship="MarketModel.FavoriteCommodityInFavorite" FromRole="CommodityInFavorite" ToRole="Favorite" />
+  </EntityType>
+  <Association Name="CommodityCommodityInFavorite">
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="1" />
+    <End Type="MarketModel.CommodityInFavorite" Role="CommodityInFavorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInFavorite">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FavoriteCommodityInFavorite">
+    <End Type="MarketModel.Favorite" Role="Favorite" Multiplicity="1" />
+    <End Type="MarketModel.CommodityInFavorite" Role="CommodityInFavorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Favorite">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="CommodityInFavorite">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileFavorite">
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <End Type="MarketModel.Favorite" Role="Favorite" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Favorite">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CommodityInfo">
+    <Key>
+      <PropertyRef Name="CommodityInfoId" />
+    </Key>
+    <Property Name="CommodityInfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Size" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityInfoCommodity" FromRole="CommodityInfo" ToRole="Commodity" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Capacity" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ImageType" Type="String" />
+    <Property Name="ImageData" Type="Binary" />
+  </EntityType>
+  <Association Name="CommodityInfoCommodity">
+    <End Type="MarketModel.CommodityInfo" Role="CommodityInfo" Multiplicity="*" />
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInfo">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProfileOrder">
+    <End Type="MarketModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+    <End Type="MarketModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommodityInOrderCommodity">
+    <End Type="MarketModel.CommodityInOrder" Role="CommodityInOrder" Multiplicity="*" />
+    <End Type="MarketModel.Commodity" Role="Commodity" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityInOrder">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderCommodityInOrder">
+    <End Type="MarketModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="MarketModel.CommodityInOrder" Role="CommodityInOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="CommodityInOrder">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

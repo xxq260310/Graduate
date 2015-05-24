@@ -114,72 +114,46 @@
                 </div>
             </div>
             <div class="col-md-9 content_right">
-                <div class="top_grid2">
-                    <span>填写并核对订单信息:</span>
-                </div>
                 <div class="container">
+                    <h2 style="font-weight:bold;">填写并核对订单信息:</h2>
                     <div class="top_grid2">
-                        <table class="table" id="commodityTable">
-                            <tr>
-                                <th>
-                                    <input type="checkbox" id="AllChecked" name="AllChecked" />
-                                </th>
-                                <th>
-                                    商品信息:
-                                </th>
-                                <th>
-                                    数量:
-                                </th>
-                                <th>
-                                    单价:
-                                </th>
-                                <th>
-                                    小计:
-                                </th>
-                                <th>
-                                    操作:
-                                </th>
-                            </tr>
-                            @foreach (var p in ViewBag.CommodityInShoppingTrolleys)
-                            {
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name='singlecommodity' />
-                                    </td>
-                                    <td width="300px;">
-                                        <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
-                                        <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity</a>
-                                    </td>
-                                    <td>
-                                        @p.Quantity
-                                    </td>
-                                    <td>
-                                        @p.UnitPrice
-                                    </td>
-                                    <td>
-                                        @p.Price <input type="hidden" value="@p.Price" />
-                                    </td>
-                                    <td>
-                                        <a id="delete" href="@Url.Action("SingleDelete", "ShoppingTrolleys", new { id = p.CommodityId })">删除</a><br />
-                                        <a id="favorite" style="cursor:pointer;" class="favorite" name="favorite">加入收藏夹</a> <input type="hidden" id="CommodityId" name="CommodityId" value="@p.CommodityId" />
-                                    </td>
-                                </tr>
-                            }
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <span>总价（不含运费）：</span> <span><em style="color:red;">￥0.00</em></span>
-                                </td>
-                                <td>
-                                    <a id="checkout">去结算</a>
-                                </td>
-                            </tr>
-                        </table>
+                        <h3>收货人信息：</h3>
+                        <div>
+                            @Html.DropDownList("ConsigneeName", null, new { })
+                        </div>
                     </div>
-                </div>
+                    <div class="top_grid2">
+                        <h3>支付方式：</h3>
+                        <input type="checkbox" /> 货到付款
+                    </div>
+                    <div class="top_grid2">
+                       <h3>送货清单：</h3>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4 right">
+                            <table class="table" id="commodityTable">
+                                <h3>商品详情：</h3>
+                                @foreach (var p in ViewBag.CommodityInShoppingTrolleys)
+                                {
+                                    <tr>
+                                        <td width="300px;">
+                                            <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
+                                            <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity</a>
+                                        </td>
+                                        <td>
+                                            @p.Quantity
+                                        </td>
+                                        <td>
+                                            @p.UnitPrice
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
                 
             </div>
         </div>

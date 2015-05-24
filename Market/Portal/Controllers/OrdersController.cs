@@ -54,6 +54,15 @@ namespace Portal.Controllers
                                                   && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
                                                   select commodityInShoppingTrolleyItem).ToList();
             ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
+
+            var addressList = from orderItem in this.db.Orders
+                              where orderItem.UserProfile.UserName == User.Identity.Name
+                              select new { 
+                                  ConsigneeName = orderItem.ConsigneeName,
+                                  Address = orderItem.Address,
+                                  Contact = orderItem.Contact,
+                                  Email = orderItem.Email
+                              };
             return View();
         }
 

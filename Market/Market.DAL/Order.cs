@@ -29,6 +29,7 @@ namespace Market.DAL
         public string ConsigneeName { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string Email { get; set; }
     
         public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<CommodityInOrder> CommodityInOrders { get; set; }

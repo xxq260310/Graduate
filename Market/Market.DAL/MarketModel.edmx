@@ -179,6 +179,7 @@
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ShoppingTrolleys">
     <Key>
@@ -752,6 +753,7 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileOrder" FromRole="Order" ToRole="UserProfile" />
           <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.OrderCommodityInOrder" FromRole="Order" ToRole="CommodityInOrder" />
+          <Property Name="Email" Type="String" />
         </EntityType>
         <EntityType Name="ShoppingTrolley">
           <Key>
@@ -1230,6 +1232,7 @@
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

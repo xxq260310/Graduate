@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/23/2015 11:33:03
--- Generated from EDMX file: F:\Graduate\Market\Market\Market.DAL\MarketModel.edmx
+-- Date Created: 05/24/2015 16:11:04
+-- Generated from EDMX file: G:\Graduate\Market\Market.DAL\MarketModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -212,7 +212,8 @@ CREATE TABLE [dbo].[Orders] (
     [Delivery] varchar(20)  NULL,
     [ConsigneeName] varchar(10)  NULL,
     [CreationDate] datetime  NULL,
-    [UpdateDate] datetime  NULL
+    [UpdateDate] datetime  NULL,
+    [Email] nvarchar(max)  NULL
 );
 GO
 

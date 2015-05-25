@@ -139,7 +139,7 @@ namespace Portal.Controllers
             }
 
             this.db.SaveChanges();
-            return RedirectToAction("Home", "Orders", new { id = order.OrderId});
+            return RedirectToAction("SingleOrder", "Orders", new { id = order.OrderId});
         }
 
         [HttpPost]

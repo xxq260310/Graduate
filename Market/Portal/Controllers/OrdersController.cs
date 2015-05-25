@@ -18,14 +18,27 @@ namespace Portal.Controllers
     {
         private MarketContext db = new MarketContext();
 
-        public ActionResult Home(int? id)
+        [Authorize(Roles = "Administrator")]
+        // GET: Orders
+        public ActionResult Index()
         {
-            if (id == null)
+            var orders = db.Orders;
+            return View(orders.ToList());
+        }
+
+        public ActionResult SingleOrder(int? id)
+        {
+            return RedirectToAction("Home", new { orderId = id });
+        }
+
+        public ActionResult Home(int? orderId)
+        {
+            if (orderId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Order order = this.db.Orders.Find(id);
+            Order order = this.db.Orders.Find(orderId);
             if (order == null)
             {
                 return HttpNotFound();
@@ -55,23 +68,13 @@ namespace Portal.Controllers
                                                   select commodityInShoppingTrolleyItem).ToList();
             ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
 
-            var addressList = from orderItem in this.db.Orders
+            var consigneeInfoList = from orderItem in this.db.Orders
                               where orderItem.UserProfile.UserName == User.Identity.Name
                               select new { 
-                                  ConsigneeName = orderItem.ConsigneeName,
-                                  Address = orderItem.Address,
-                                  Contact = orderItem.Contact,
+                                  ConsigneeInfo = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
                                   Email = orderItem.Email
                               };
-            return View();
-        }
-
-        [Authorize(Roles = "Administrator")]
-        // GET: Orders
-        public ActionResult Index()
-        {
-            var orders = db.Orders;
-            return View(orders.ToList());
+            return this.View(order);
         }
 
         [Authorize(Roles="Administrator")]

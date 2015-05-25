@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Portal.Models.Order>
-@{
+﻿@{
     ViewBag.Title = "订单结算";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script type="text/javascript">
@@ -21,7 +21,6 @@
         });
     });
 </script>
-
 
 <div class="header">
     <div class="header_top">
@@ -119,7 +118,7 @@
                     <div class="top_grid2">
                         <h3>收货人信息：</h3>
                         <div>
-                            @Html.DropDownList("ConsigneeName", null, new { })
+
                         </div>
                     </div>
                     <div class="top_grid2">
@@ -127,34 +126,18 @@
                         <input type="checkbox" /> 货到付款
                     </div>
                     <div class="top_grid2">
-                       <h3>送货清单：</h3>
+                        <h3>送货清单：</h3>
                         <div class="col-md-4">
 
                         </div>
                         <div class="col-md-4 right">
                             <table class="table" id="commodityTable">
                                 <h3>商品详情：</h3>
-                                @foreach (var p in ViewBag.CommodityInShoppingTrolleys)
-                                {
-                                    <tr>
-                                        <td width="300px;">
-                                            <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
-                                            <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity</a>
-                                        </td>
-                                        <td>
-                                            @p.Quantity
-                                        </td>
-                                        <td>
-                                            @p.UnitPrice
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                }
+
                             </table>
                         </div>
                     </div>
-                
+                </div>
             </div>
         </div>
     </div>

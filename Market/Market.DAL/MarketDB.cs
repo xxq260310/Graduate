@@ -28,12 +28,11 @@ namespace Market.DAL
             modelBuilder.Entity<ShoppingTrolley>().HasKey(e => e.UserId).HasRequired(e => e.UserProfile);
             modelBuilder.Entity<RequiredCommodity>().HasKey(e => e.RequiredCommodityId);
             modelBuilder.Entity<Order>().HasKey(e => e.OrderId);
-            modelBuilder.Entity<OrderDetail>().HasKey(e => e.OrderId).HasRequired(e => e.Order);
             modelBuilder.Entity<Manufacturer>().HasKey(e => e.ManufacturerId);
             modelBuilder.Entity<Favorite>().HasKey(e => e.UserId).HasRequired(e => e.UserProfile);
             modelBuilder.Entity<Commodity>().HasKey(e => e.CommodityId);
             modelBuilder.Entity<CommodityInFavorite>().HasKey(e => new { e.CommodityId,e.UserId});
-            modelBuilder.Entity<CommodityInOrderDetail>().HasKey(e => new { e.OrderId,e.CommodityId});
+            modelBuilder.Entity<CommodityInOrder>().HasKey(e => new { e.OrderId,e.CommodityId});
             modelBuilder.Entity<CommodityInShoppingTrolley>().HasKey(e => new { e.CommodityId, e.UserId});
             modelBuilder.Entity<Announcement>().HasKey(e => e.AnnouncementId);
         }

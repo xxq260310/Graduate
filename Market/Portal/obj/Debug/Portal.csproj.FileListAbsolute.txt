@@ -331,7 +331,6 @@ G:\Graduate\Market\Portal\bin\System.Web.WebPages.Deployment.xml
 G:\Graduate\Market\Portal\bin\System.Web.WebPages.Razor.xml
 G:\Graduate\Market\Portal\bin\Antlr3.Runtime.pdb
 G:\Graduate\Market\Portal\bin\Newtonsoft.Json.xml
-G:\Graduate\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
 G:\Graduate\Market\Portal\obj\Debug\Portal.dll
 G:\Graduate\Market\Portal\obj\Debug\Portal.pdb
 G:\Graduate\Graduate\Market\Portal\bin\Portal.dll.config
@@ -368,3 +367,4 @@ G:\Graduate\Graduate\Market\Portal\bin\Newtonsoft.Json.xml
 G:\Graduate\Graduate\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
 G:\Graduate\Graduate\Market\Portal\obj\Debug\Portal.dll
 G:\Graduate\Graduate\Market\Portal\obj\Debug\Portal.pdb
+G:\Graduate\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache

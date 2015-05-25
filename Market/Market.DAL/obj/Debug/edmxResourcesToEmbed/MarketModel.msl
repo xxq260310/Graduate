@@ -70,7 +70,6 @@
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="SellerId" ColumnName="SellerId" />
           <ScalarProperty Name="Contact" ColumnName="Contact" />
           <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
           <ScalarProperty Name="Address" ColumnName="Address" />
@@ -79,6 +78,7 @@
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -173,6 +173,7 @@
         <MappingFragment StoreEntitySet="CommodityInOrders">
           <ScalarProperty Name="CommodityId" ColumnName="CommodityId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="SellerId" ColumnName="SellerId" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Color" ColumnName="Color" />

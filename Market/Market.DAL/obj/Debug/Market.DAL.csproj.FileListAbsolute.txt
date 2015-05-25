@@ -32,3 +32,12 @@ G:\毕业设计\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
 G:\Graduate Project\Market\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache
 G:\Graduate Project\Market\Market.DAL\obj\Debug\Market.DAL.dll
 G:\Graduate Project\Market\Market.DAL\obj\Debug\Market.DAL.pdb
+G:\Graduate\Market\Market.DAL\obj\Debug\Market.DAL.dll
+G:\Graduate\Market\Market.DAL\obj\Debug\Market.DAL.pdb
+G:\Graduate\Market\Market.DAL\bin\Debug\Market.DAL.dll.config
+G:\Graduate\Market\Market.DAL\bin\Debug\Market.DAL.dll
+G:\Graduate\Market\Market.DAL\bin\Debug\Market.DAL.pdb
+G:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.dll
+G:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.xml
+G:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml

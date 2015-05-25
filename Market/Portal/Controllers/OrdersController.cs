@@ -12,33 +12,18 @@ using Portal.ViewModels;
 
 namespace Portal.Controllers
 {
-    [Authorize]
-    [Portal.Filter.AuthorizationFilter]
     public class OrdersController : Controller
     {
         private MarketContext db = new MarketContext();
 
-        [Authorize(Roles = "Administrator")]
-        // GET: Orders
-        public ActionResult Index()
+        public ActionResult Home(int? id)
         {
-            var orders = db.Orders;
-            return View(orders.ToList());
-        }
-
-        public ActionResult SingleOrder(int? id)
-        {
-            return RedirectToAction("Home", new { orderId = id });
-        }
-
-        public ActionResult Home(int? orderId)
-        {
-            if (orderId == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Order order = this.db.Orders.Find(orderId);
+            Order order = this.db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -69,15 +54,22 @@ namespace Portal.Controllers
             ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
 
             var consigneeInfoList = from orderItem in this.db.Orders
-                              where orderItem.UserProfile.UserName == User.Identity.Name
-                              select new { 
-                                  ConsigneeInfo = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
-                                  Email = orderItem.Email
-                              };
-            return this.View(order);
+                                    where orderItem.UserProfile.UserName == User.Identity.Name
+                                    select new
+                                    {
+                                        ConsigneeInfo = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
+                                        Email = orderItem.Email
+                                    };
+            return this.View();
         }
 
-        [Authorize(Roles="Administrator")]
+        // GET: Orders
+        public ActionResult Index()
+        {
+            var orders = db.Orders.Include(o => o.UserProfile);
+            return View(orders.ToList());
+        }
+
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -93,10 +85,10 @@ namespace Portal.Controllers
             return View(order);
         }
 
-        [Authorize(Roles="Administrator")]
         // GET: Orders/Create
         public ActionResult Create()
         {
+            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName");
             return View();
         }
 
@@ -105,20 +97,19 @@ namespace Portal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderId,BuyerId,Contact,TotalCost,Address,State,Delivery,ConsigneeName,SellerId,CreationDate,UpdateDate")] Order order)
+        public ActionResult Create([Bind(Include = "OrderId,UserId,Contact,TotalCost,Address,State,Delivery,ConsigneeName,CreationDate,UpdateDate,Email")] Order order)
         {
             if (ModelState.IsValid)
             {
-                order.CreationDate = DateTime.Now;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName", order.UserId);
             return View(order);
         }
 
-        [Authorize(Roles = "Administrator")]
         // GET: Orders/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -126,13 +117,12 @@ namespace Portal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             Order order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
-
+            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName", order.UserId);
             return View(order);
         }
 
@@ -141,20 +131,18 @@ namespace Portal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderId,BuyerId,Contact,TotalCost,Address,State,Delivery,ConsigneeName,SellerId,CreationDate,UpdateDate")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderId,UserId,Contact,TotalCost,Address,State,Delivery,ConsigneeName,CreationDate,UpdateDate,Email")] Order order)
         {
             if (ModelState.IsValid)
             {
-                order.UpdateDate = DateTime.Now;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName", order.UserId);
             return View(order);
         }
 
-        [Authorize(Roles = "Administrator")]
         // GET: Orders/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -189,6 +177,5 @@ namespace Portal.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

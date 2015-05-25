@@ -184,7 +184,6 @@
     </Key>
     <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="SellerId" Type="Int32" />
     <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
     <Property Name="TotalCost" Type="Double" />
     <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
@@ -195,6 +194,7 @@
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileOrder" FromRole="Order" ToRole="UserProfile" />
     <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.OrderCommodityInOrder" FromRole="Order" ToRole="CommodityInOrder" />
+    <Property Name="Email" Type="String" />
   </EntityType>
   <EntityType Name="ShoppingTrolley">
     <Key>
@@ -386,8 +386,9 @@
       <PropertyRef Name="CommodityId" />
       <PropertyRef Name="OrderId" />
     </Key>
-    <Property Name="CommodityId" Type="Int32" Nullable="false" />
     <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="CommodityId" Type="Int32" Nullable="false" />
+    <Property Name="SellerId" Type="Int32" />
     <Property Name="UnitPrice" Type="Double" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Color" Type="String" FixedLength="false" Unicode="false" MaxLength="10" />

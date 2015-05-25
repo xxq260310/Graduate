@@ -370,11 +370,6 @@
     <Content Include="Views\ShoppingTrolleys\Details.cshtml" />
     <Content Include="Views\ShoppingTrolleys\Edit.cshtml" />
     <Content Include="Views\ShoppingTrolleys\Index.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
-    <Content Include="Views\Orders\Delete.cshtml" />
-    <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Shared\LayoutForAnnouncement.cshtml" />
     <Content Include="Views\Shared\LayoutForAdmin.cshtml" />
     <Content Include="Views\SingleUserProfiles\SingleUserProfile.cshtml" />
@@ -394,6 +389,11 @@
     <Content Include="Views\Commodities\TemporaryAdminImage.cshtml" />
     <Content Include="Views\ShoppingTrolleys\SingleDelete.cshtml" />
     <Content Include="Views\Login\AlertLogin.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>

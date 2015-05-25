@@ -166,7 +166,6 @@
     </Key>
     <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="SellerId" Type="int" Nullable="true" />
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="TotalCost" Type="float" Nullable="true" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="50" />
@@ -175,6 +174,7 @@
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ShoppingTrolleys">
     <Key>
@@ -259,8 +259,9 @@
       <PropertyRef Name="CommodityId" />
       <PropertyRef Name="OrderId" />
     </Key>
-    <Property Name="CommodityId" Type="int" Nullable="false" />
     <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="CommodityId" Type="int" Nullable="false" />
+    <Property Name="SellerId" Type="int" Nullable="true" />
     <Property Name="UnitPrice" Type="float" Nullable="true" />
     <Property Name="Quantity" Type="int" Nullable="true" />
     <Property Name="Color" Type="varchar" Nullable="true" MaxLength="10" />

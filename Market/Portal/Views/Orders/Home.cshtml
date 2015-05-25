@@ -1,6 +1,5 @@
 ﻿@{
     ViewBag.Title = "订单结算";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script type="text/javascript">
@@ -36,7 +35,12 @@
                     <li><a href="@Url.Action("Home","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
+                        <a href="@Url.Action("Home","ShoppingTrolleys")">
+                            <li>
+                                <span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount)
+                                <img src="~/images/bag.png" alt="" />
+                            </li>
+                        </a>
                     }
                     else
                     {

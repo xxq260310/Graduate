@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="MarketModel.RequiredCommodity" Width="1.875" PointX="2.875" PointY="7.875" />
         <EntityTypeShape EntityType="MarketModel.Manufacturer" Width="1.5" PointX="12.375" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketModel.SiteFeedback" Width="1.5" PointX="0.75" PointY="5.125" />
-        <EntityTypeShape EntityType="MarketModel.Feedback" Width="1.5" PointX="5" PointY="3" />
+        <EntityTypeShape EntityType="MarketModel.Feedback" Width="1.5" PointX="5.125" PointY="3" />
         <AssociationConnector Association="MarketModel.UserProfileRole" />
         <AssociationConnector Association="MarketModel.SubCategoryParentCategory" />
         <AssociationConnector Association="MarketModel.CommoditySubCategory" />

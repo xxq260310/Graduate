@@ -143,18 +143,18 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetNotCheckedTotalCost(CostDTO cost)
+        public JsonResult GetNotCheckedTotalCost(CostDTO costDto)
         {
             double a = 0;
             double b = 0;
-            if (!string.IsNullOrEmpty(cost.CurrentPrice))
+            if (!string.IsNullOrEmpty(costDto.CurrentPrice))
             {
-                a = Convert.ToDouble(cost.CurrentPrice);
+                a = Convert.ToDouble(costDto.CurrentPrice);
             }
 
-            if (!string.IsNullOrEmpty(cost.LastPrice))
+            if (!string.IsNullOrEmpty(costDto.LastPrice))
             {
-                b = Convert.ToDouble(cost.LastPrice);
+                b = Convert.ToDouble(costDto.LastPrice);
             }
 
             double Cost = b - a;
@@ -162,18 +162,18 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetCheckedTotalCost(CostDTO cost)
+        public JsonResult GetCheckedTotalCost(CostDTO costDto)
         {
             double a = 0;
             double b = 0;
-            if (!string.IsNullOrEmpty(cost.CurrentPrice))
+            if (!string.IsNullOrEmpty(costDto.CurrentPrice))
             {
-                a = Convert.ToDouble(cost.CurrentPrice);
+                a = Convert.ToDouble(costDto.CurrentPrice);
             }
 
-            if (!string.IsNullOrEmpty(cost.LastPrice))
+            if (!string.IsNullOrEmpty(costDto.LastPrice))
             {
-                b = Convert.ToDouble(cost.LastPrice);
+                b = Convert.ToDouble(costDto.LastPrice);
             }
 
             double Cost = a + b;

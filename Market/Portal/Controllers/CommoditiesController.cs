@@ -419,7 +419,7 @@ namespace Portal.Controllers
             return colorSelList;
         }
 
-        public void InitialViewbag(Commodity commodity)
+        public void InitialViewBag(Commodity commodity)
         {
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "ManufacturerId", "ManufacturerName", commodity.ManufacturerId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "CategoryName", commodity.SubCategoryId);
@@ -478,7 +478,7 @@ namespace Portal.Controllers
             }
 
 
-            InitialViewbag(commodity);
+            InitialViewBag(commodity);
 
             ViewBag.SelectedCommodity = InitialDataBeforeEdit(id);
             return View(commodity);
@@ -580,7 +580,6 @@ namespace Portal.Controllers
                 //check quantity 
                 if (commodity.Quantity != count)
                 {
-
                     this.TemporaryAdminEdit(commodity.CommodityId);
                     Response.Write("<script> alert('请确保商品总数大于各子类总数之和！')</script>");
                 }
@@ -611,7 +610,7 @@ namespace Portal.Controllers
                 return HttpNotFound();
             }
 
-            InitialViewbag(commodity);
+            InitialViewBag(commodity);
 
             ViewBag.SelectedCommodity = InitialDataBeforeEdit(id); ;
             return View(commodity);

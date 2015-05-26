@@ -12,6 +12,8 @@ using Portal.ViewModels;
 
 namespace Portal.Controllers
 {
+    [Authorize]
+    [Portal.Filter.AuthorizationFilter]
     public class OrdersController : Controller
     {
         private MarketContext db = new MarketContext();
@@ -63,7 +65,13 @@ namespace Portal.Controllers
             return this.View();
         }
 
+        public ActionResult SingleOrder()
+        {
+            return View();
+        }
+
         // GET: Orders
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.UserProfile);
@@ -71,6 +79,7 @@ namespace Portal.Controllers
         }
 
         // GET: Orders/Details/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -86,6 +95,7 @@ namespace Portal.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.UserId = new SelectList(db.UserProfiles, "UserId", "UserName");
@@ -111,6 +121,7 @@ namespace Portal.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -144,6 +155,7 @@ namespace Portal.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Portal.Models.Order>
-
+@using Portal.Authentication;
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
+<br /><br />
+<h2>Order</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -77,9 +77,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderId })
+            @Html.ActionLinkAuthorized("Edit", "Edit", new { id=item.OrderId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.OrderId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.OrderId }, false)
         </td>
     </tr>
 }

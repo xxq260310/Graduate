@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace JqueryUIDemo.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Example()
+        {
+            return View();
+        }
+
+        public ActionResult ShowLoading()
+        {
+            return View();
+        }
+
+        public ActionResult Tabs()
+        {
+            return View();
+        }
+
+        public ActionResult Dialog()
+        {
+            return View();
+        }
+
+        public ActionResult SimpleDialog()
+        {
+            return View();
+        }
+    }
+}

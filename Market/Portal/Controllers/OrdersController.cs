@@ -55,13 +55,18 @@ namespace Portal.Controllers
                                                   select commodityInShoppingTrolleyItem).ToList();
             ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
 
-            var consigneeInfoList = from orderItem in this.db.Orders
+            var consigneeInfoList = (from orderItem in this.db.Orders
                                     where orderItem.UserProfile.UserName == User.Identity.Name
-                                    select new
+                                    select new ConsigneeInfoViewModel
                                     {
-                                        ConsigneeInfo = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
-                                        Email = orderItem.Email
-                                    };
+                                        AddressDetail = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
+                                        Contact = orderItem.Contact
+                                    }).ToList();
+            List<ConsigneeInfoViewModel> list = new List<ConsigneeInfoViewModel>();
+            list.AddRange(consigneeInfoList);
+            ViewBag.ConsigneeInfoList = list;
+
+
             return this.View();
         }
 

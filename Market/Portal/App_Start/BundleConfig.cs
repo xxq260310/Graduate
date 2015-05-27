@@ -33,15 +33,17 @@
                       "~/Scripts/jquery.validate.unobtrusive.min.js",
                       "~/Scripts/nav.js",
                       "~/Scripts/hover_pack.js",
-                      "~/Scripts/jquery-1.11.1.min.js",
                       "~/Scripts/jquery.etalage.min.js",
                       "~/Scripts/easyResponsiveTabs.js",
                       "~/Scripts/responsiveslides.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/themes/base/all.css",
                       "~/Content/Site.css",
-                       "~/Content/etalage.css",
+                       "~/Content/themes/base/all.css",
+                       "~/Content/PagedList.css",
+                        "~/Content/etalage.css",
                        "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

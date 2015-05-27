@@ -185,6 +185,7 @@
     <Compile Include="ViewModels\CommodityInShoppingTrolleyViewModel.cs" />
     <Compile Include="ViewModels\CommodityPropertyViewModel.cs" />
     <Compile Include="ViewModels\CommodityViewModel.cs" />
+    <Compile Include="ViewModels\ConsigneeInfoViewModel.cs" />
     <Compile Include="ViewModels\EditUserProfileViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
@@ -232,9 +233,16 @@
     <Content Include="Content\base\tooltip.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\common.css" />
     <Content Include="Content\etalage.css" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\select2.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -268,6 +276,7 @@
     <Content Include="images\search.png" />
     <Content Include="images\tick1.png" />
     <Content Include="images\wishlist.png" />
+    <Content Include="Scripts\area.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="images\img-sprite.psd" />
@@ -280,16 +289,22 @@
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.etalage.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\location.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\nav.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\responsiveslides.min.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2_locale_zh-CN.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -395,6 +410,7 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Home.cshtml" />
     <Content Include="Views\Orders\SingleOrder.cshtml" />
+    <Content Include="Views\Shared\LayoutForOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

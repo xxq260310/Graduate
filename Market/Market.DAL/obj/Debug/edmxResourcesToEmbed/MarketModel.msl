@@ -73,12 +73,12 @@
           <ScalarProperty Name="Contact" ColumnName="Contact" />
           <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="Delivery" ColumnName="Delivery" />
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

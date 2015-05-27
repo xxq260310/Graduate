@@ -25,8 +25,8 @@ namespace Portal.Controllers
         public ActionResult Register(RegisterViewModel model, HttpPostedFileBase Image)
         {
             var userProfileCount = (from user in this.db.UserProfiles
-                              where user.UserName == model.UserName
-                              select user).Count();
+                                    where user.UserName == model.UserName
+                                    select user).Count();
             if (userProfileCount >= 1)
             {
                 ModelState.AddModelError("UserName", "The UserName has been existed!");
@@ -50,19 +50,16 @@ namespace Portal.Controllers
                     {
                         Gender = "Female";
                     }
-                    UserProfile userProfile = new UserProfile()
-                    {
-                        UserName = model.UserName,
-                        Nickname = model.NickName,
-                        Sex = Gender,
-                        Email = model.Email,
-                        Address = model.Address,
-                        Contact = model.Contact,
-                        Password = model.Password,
-                        ImageData = model.ImageData,
-                        ImageType = model.ImageType,
-                        CreationDate = System.DateTime.Now
-                    };
+                    UserProfile userProfile = new UserProfile();
+                    userProfile.UserName = model.UserName;
+                    userProfile.Nickname = model.NickName;
+                    userProfile.Sex = Gender;
+                    userProfile.Email = model.Email;
+                    userProfile.Address = model.Address;
+                    userProfile.Contact = model.Contact;
+                    userProfile.Password = SetPassword(model.Password);
+                    userProfile.CreationDate = System.DateTime.Now;
+                    userProfile.RoleId = 2;
                     this.db.UserProfiles.Add(userProfile);
                     this.db.SaveChanges();
 
@@ -80,17 +77,17 @@ namespace Portal.Controllers
                     {
                         Gender = "Female";
                     }
-                    UserProfile userProfile = new UserProfile()
-                    {
-                        UserName = model.UserName,
-                        Nickname = model.NickName,
-                        Sex = Gender,
-                        Email = model.Email,
-                        Address = model.Address,
-                        Contact = model.Contact,
-                        Password = model.Password,
-                        CreationDate = System.DateTime.Now
-                    };
+
+                    UserProfile userProfile = new UserProfile();
+                    userProfile.UserName = model.UserName;
+                    userProfile.Nickname = model.NickName;
+                    userProfile.Sex = Gender;
+                    userProfile.Email = model.Email;
+                    userProfile.Address = model.Address;
+                    userProfile.Contact = model.Contact;
+                    userProfile.Password = SetPassword(model.Password);
+                    userProfile.RoleId = 2;
+                    userProfile.CreationDate = System.DateTime.Now;
                     this.db.UserProfiles.Add(userProfile);
                     this.db.SaveChanges();
 
@@ -99,7 +96,13 @@ namespace Portal.Controllers
             }
 
             return this.View(model);
-            
+
+        }
+
+        public static string SetPassword(string password)
+        {
+            string value = Encryption.RSAEncrypt(password);
+            return value;
         }
 
         protected override void Dispose(bool disposing)

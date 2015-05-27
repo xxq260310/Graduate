@@ -7,3 +7,7 @@ G:\Graduate\Market\Market.Common\bin\Debug\Market.Common.dll
 G:\Graduate\Market\Market.Common\bin\Debug\Market.Common.pdb
 G:\Graduate\Market\Market.Common\obj\Debug\Market.Common.dll
 G:\Graduate\Market\Market.Common\obj\Debug\Market.Common.pdb
+G:\Graduate\Graduate\Market\Market.Common\bin\Debug\Market.Common.dll
+G:\Graduate\Graduate\Market\Market.Common\bin\Debug\Market.Common.pdb
+G:\Graduate\Graduate\Market\Market.Common\obj\Debug\Market.Common.dll
+G:\Graduate\Graduate\Market\Market.Common\obj\Debug\Market.Common.pdb

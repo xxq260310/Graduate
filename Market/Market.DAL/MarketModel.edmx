@@ -115,7 +115,7 @@
     <Property Name="Nickname" Type="varchar" Nullable="true" MaxLength="12" />
     <Property Name="Sex" Type="varchar" Nullable="true" MaxLength="6" />
     <Property Name="Email" Type="varchar" Nullable="true" MaxLength="20" />
-    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="12" />
+    <Property Name="Password" Type="varchar(max)" Nullable="false" />
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="100" />
     <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
@@ -174,12 +174,12 @@
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="TotalCost" Type="float" Nullable="true" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
     <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ShoppingTrolleys">
     <Key>
@@ -669,7 +669,7 @@
           <Property Name="Nickname" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Sex" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Role" Relationship="MarketModel.UserProfileRole" FromRole="UserProfile" ToRole="Role" />
@@ -1227,12 +1227,12 @@
           <ScalarProperty Name="Contact" ColumnName="Contact" />
           <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="Delivery" ColumnName="Delivery" />
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

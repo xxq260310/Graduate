@@ -110,7 +110,7 @@
     <Property Name="Nickname" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
     <Property Name="Sex" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
     <Property Name="Address" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Role" Relationship="MarketModel.UserProfileRole" FromRole="UserProfile" ToRole="Role" />
@@ -187,6 +187,7 @@
     <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
     <Property Name="TotalCost" Type="Double" />
     <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" />
     <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Delivery" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="ConsigneeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -194,7 +195,6 @@
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileOrder" FromRole="Order" ToRole="UserProfile" />
     <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.OrderCommodityInOrder" FromRole="Order" ToRole="CommodityInOrder" />
-    <Property Name="Email" Type="String" />
   </EntityType>
   <EntityType Name="ShoppingTrolley">
     <Key>

@@ -110,7 +110,7 @@
     <Property Name="Nickname" Type="varchar" Nullable="true" MaxLength="12" />
     <Property Name="Sex" Type="varchar" Nullable="true" MaxLength="6" />
     <Property Name="Email" Type="varchar" Nullable="true" MaxLength="20" />
-    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="12" />
+    <Property Name="Password" Type="varchar(max)" Nullable="false" />
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="100" />
     <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
@@ -169,12 +169,12 @@
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="TotalCost" Type="float" Nullable="true" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
     <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="ShoppingTrolleys">
     <Key>

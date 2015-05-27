@@ -1,6 +1,153 @@
 ﻿@{
     ViewBag.Title = "订单结算";
+    Layout = "~/Views/Shared/LayoutForOrder.cshtml";
 }
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+<link href="~/Content/select2.css" rel="stylesheet" />
+<script src="~/Scripts/location.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/select2_locale_zh-CN.js"></script>
+<script src="~/Scripts/area.js"></script>
+
+<style>
+    label, input {
+        display: block;
+    }
+
+        input.text {
+            margin-bottom: 12px;
+            width: 95%;
+            padding: .4em;
+        }
+
+    fieldset {
+        padding: 0;
+        border: 0;
+        margin-top: 25px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+        margin: .6em 0;
+    }
+
+    .ui-dialog .ui-state-error {
+        padding: .3em;
+    }
+
+    .validateTips {
+        border: 1px solid transparent;
+        padding: 0.3em;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $("#search").click(function () {
+            var sreachstring = $("#searchString").val();
+            $.ajax({
+                url: '@Url.Action("Index", "Home")',
+                type: "Get",
+                data: sreachstring
+            });
+        });
+    });
+
+
+    $(function () {
+        var dialog, form,
+          name = $("#name"),
+          email = $("#email"),
+          contact = $("#contact"),
+          address = $("#address"),
+         allFields = $([]).add(name).add(email).add(contact).add(address),
+         tips = $(".validateTips");
+
+       function updateTips(t) {
+           tips
+            .text(t)
+            .addClass("ui-state-highlight");
+           setTimeout(function () {
+               tips.removeClass("ui-state-highlight", 1500);
+           }, 500);
+        }
+
+       function checkLength(o, n, min, max) {
+           if (o.val().length > max || o.val().length < min) {
+             o.addClass("ui-state-error");
+                updateTips("Length of " + n + " must be between " +
+                  min + " and " + max + ".");
+               return false;
+           } else {
+               return true;
+            }
+        }
+
+        function checkRegexp(o, regexp, n) {
+           if (!(regexp.test(o.val()))) {
+                o.addClass("ui-state-error");
+                updateTips(n);
+                return false;
+           } else {
+                return true;
+           }
+        }
+
+        function addAddress() {
+            var valid = true;
+            allFields.removeClass("ui-state-error");
+
+            valid = valid && checkLength(name, "ConsigneeName", 3, 16);
+           valid = valid && checkLength(contact, "Contact", 11, 11);
+           valid = valid && checkLength(email, "Email", 6, 80);
+
+           valid = valid && checkRegexp(email,
+              /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
+           valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+            valid = valid && checkRegexp(contact, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+
+           if (valid) {
+               $("#users tbody").append("<tr>" +
+                 "<td>" + name.val() + "</td>" +
+                 "<td>" + email.val() + "</td>" +
+                "<td>" + password.val() + "</td>" +
+                "</tr>");
+               dialog.dialog("close");
+            }
+           return valid;
+        }
+
+       dialog = $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Create an address": addAddress,
+                Cancel: function () {
+                    dialog.dialog("close");
+                }
+            },
+            close: function () {
+               form[0].reset();
+                allFields.removeClass("ui-state-error");
+           }
+       });
+
+        form = dialog.find("form").on("submit", function (event) {
+           event.preventDefault();
+           addAddress();
+        });
+
+        $("#create-address").button().on("click", function () {
+            dialog.dialog("open");
+        });
+    });
+</script>
 
 <div class="header">
     <div class="header_top">
@@ -13,7 +160,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
+                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
                         <a href="@Url.Action("Home","ShoppingTrolleys")">
@@ -51,16 +198,35 @@
         <div class="search">
             <div class="stay">搜索商品</div>
             <div class="stay_right">
-                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-                {
-                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
-                    <input type="submit" value="" />
-                }
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}", id = "searchString" })
+                <input type="submit" value="" id="search" />
             </div>
         </div>
     </div>
 </div>
 
+<div id="dialog-form" title="Create new address">
+    <p class="validateTips">All form fields are required.</p>
+    <form>
+        <fieldset>
+            <label for="name">收货人:</label>
+            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+            <label for="region">所在地区:</label>
+                <select id="loc_province" style="width:120px;"></select>
+                <select id="loc_city" style="width:120px; margin-left: 10px"></select>
+                <select id="loc_town" style="width:120px;margin-left: 10px"></select>
+            <label for="address">详细地址:</label>
+            <input type="text" name="address" id="address" class="text ui-widget-content ui-corner-all" />
+            <label for="email">邮箱:</label>
+            <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
+            <label for="contact">手机号码:</label>
+            <input type="text" name="contact" id="contact" class="text ui-widget-content ui-corner-all">
+
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
 
 <div class="main">
     <div class="content_top">
@@ -97,13 +263,22 @@
                     <ul class="user"></ul>
                 </div>
             </div>
+
+
             <div class="col-md-9 content_right">
                 <div class="container">
                     <h2 style="font-weight:bold;">填写并核对订单信息:</h2>
                     <div class="top_grid2">
                         <h3>收货人信息：</h3>
-                        <div>
-
+                        <div class="navbar-left">
+                            @foreach (var p in ViewBag.ConsigneeInfoList)
+                            {
+                                
+                                <p>@p.AddressDetail</p>  <span>&nbsp;&nbsp;</span><p>@p.Contact</p>
+                            }
+                        </div>
+                        <div class="contact_right">
+                            <button id="create-address" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">新增收货地址</button>
                         </div>
                     </div>
                     <div class="top_grid2">

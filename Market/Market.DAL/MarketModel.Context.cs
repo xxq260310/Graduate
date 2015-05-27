@@ -13,17 +13,17 @@ namespace Market.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MarketModelContainer : DbContext
+    public partial class MarketDB : DbContext
     {
-        public MarketModelContainer()
-            : base("name=MarketModelContainer")
+        public MarketDB()
+            : base("name=MarketDB")
         {
         }
     
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    throw new UnintentionalCodeFirstException();
+        //}
     
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }

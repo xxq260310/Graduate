@@ -44,16 +44,6 @@ namespace Portal.Controllers
             return this.Json(quantity);
         }
 
-        //public JsonResult GetQuantity(CommodityPropertyViewModel model, int id)
-        //{
-        //    var quantity = (from commodityInfo in this.db.CommodityInfoes
-        //                    where commodityInfo.Color == model.Color
-        //                    && commodityInfo.Size == model.Size
-        //                    && commodityInfo.Capacity == model.Capacity
-        //                    select commodityInfo.Quantity).FirstOrDefault();
-        //    return this.Json(quantity, JsonRequestBehavior.AllowGet);
-        //}
-
         public FileContentResult GetImageByCommodityId(int id)
         {
             Commodity commodity = this.db.Commodities.FirstOrDefault(p => p.CommodityId == id);

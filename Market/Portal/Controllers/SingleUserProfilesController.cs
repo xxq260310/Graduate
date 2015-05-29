@@ -34,7 +34,7 @@ namespace Portal.Controllers
                 UserId = userProfileItem.UserId,
                 UserName = userProfileItem.UserName,
                 Nickname = userProfileItem.Nickname,
-                Password = userProfileItem.Password,
+                Password = Encryption.RSADecrypt(userProfileItem.Password),
                 Contact = userProfileItem.Contact,
                 Email = userProfileItem.Email,
                 Address = userProfileItem.Address
@@ -92,7 +92,7 @@ namespace Portal.Controllers
                 var user = this.db.UserProfiles.Single(x => x.UserId == model.UserId);
                 user.UserName = model.UserName;
                 user.Nickname = model.Nickname;
-                user.Password = model.Password;
+                user.Password = Encryption.RSAEncrypt(model.Password);
                 user.Address = model.Address;
                 user.Contact = model.Contact;
                 user.Email = model.Email;
@@ -119,7 +119,7 @@ namespace Portal.Controllers
                 UserId = userProfileItem.UserId,
                 UserName = userProfileItem.UserName,
                 Nickname = userProfileItem.Nickname,
-                Password = userProfileItem.Password,
+                Password = Encryption.RSADecrypt(userProfileItem.Password),
                 Contact = userProfileItem.Contact,
                 Email = userProfileItem.Email,
                 Address = userProfileItem.Address
@@ -177,7 +177,7 @@ namespace Portal.Controllers
                 var user = this.db.UserProfiles.Single(x => x.UserId == model.UserId);
                 user.UserName = model.UserName;
                 user.Nickname = model.Nickname;
-                user.Password = model.Password;
+                user.Password = Encryption.RSAEncrypt(model.Password);
                 user.Address = model.Address;
                 user.Contact = model.Contact;
                 user.Email = model.Email;

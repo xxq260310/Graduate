@@ -17,7 +17,6 @@ using System.Web;
 
         private List<User> users = new List<User>();
 
-        
         /// <summary>
         /// This method is to validate the username and password.
         /// </summary>
@@ -35,25 +34,20 @@ using System.Web;
             {
                 if (user.Role.RoleName == null || user.Role.RoleName == "Member")
                 {
-                    users.Add(new User() { Username = user.UserName, Password = GetDecryptionPassword(user.Password), Role = "Member" });
+                    users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "Member" });
                 }
 
                 else if (user.Role.RoleName == "Administrator")
                 {
-                    users.Add(new User() { Username = user.UserName, Password = GetDecryptionPassword(user.Password), Role = "Administrator" });
+                    users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "Administrator" });
                 }
 
                 else if(user.Role.RoleName == "TemporaryAdmin")
                 {
-                    users.Add(new User() { Username = user.UserName, Password = GetDecryptionPassword(user.Password), Role = "TemporaryAdmin" });
+                    users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "TemporaryAdmin" });
                 }
                 
             }
-        }
-
-        public static string GetDecryptionPassword(string password)
-        {
-            return Encryption.RSADecrypt(password);
         }
 
         public bool Validate(string userName, string password)

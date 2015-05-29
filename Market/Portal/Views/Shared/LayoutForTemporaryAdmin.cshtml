@@ -26,7 +26,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li style="padding-top:15px;">
-                            @Html.ActionLink("Hello   " + User.Identity.Name + "", "CheckAdmin", "UserProfiles")
+                            @Html.ActionLink("Hello   " + GetNickName.GetNickNameByUserName(User.Identity.Name) + "", "CheckAdmin", "UserProfiles")
                         </li>
                         <li style="padding-top:15px;">@Html.ActionLink("Log Off", "Index", "Logoff")</li>
                     }

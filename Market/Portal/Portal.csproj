@@ -154,6 +154,7 @@
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Encrytion\Encryption.cs" />
     <Compile Include="Filter\AuthorizationFilterAttribute.cs" />
+    <Compile Include="GetNickName.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

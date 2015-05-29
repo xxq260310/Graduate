@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("Feedbacks","Index","Feedbacks")</li>
                     <li>@Html.ActionLink("SiteFeedbacks","Index","SiteFeedbacks")</li>
                     <li>@Html.ActionLink("RequiredCommodities", "Index", "RequiredCommodities")</li>
-                    <li style="position:absolute;right:80px; padding-top:0px;padding-bottom:10px;font-size:14px;color:gray;"><a href="@Url.Action("Index", "Home")">Hello&nbsp;@User.Identity.Name</a> </li>
+                    <li style="position:absolute;right:80px; padding-top:0px;padding-bottom:10px;font-size:14px;color:gray;"><a href="@Url.Action("Index", "Home")">Hello&nbsp; @GetNickName.GetNickNameByUserName(User.Identity.Name)</a> </li>
                     <li style="position:absolute;right:0; font-size:larger;">@Html.ActionLink("Log Off", "Index", "Logoff")</li>
                 </ul>
             </div>

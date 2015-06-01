@@ -186,13 +186,6 @@
                     }
                 }
             });
-
-            @*if(@Model.Quantity == 0 || @Model.Quantity == null || @Model.Quantity == "" ||  $("#quantity").find("option").length == 0)
-            {
-                $("#submit").attr('disabled',true);
-                $("#submit").attr('readonly', true);
-                $("#submit").attr('value','亲，无货啦 ！');
-            }*@
         });
     });
 
@@ -244,15 +237,7 @@
                 }
             });
         })
-    })
-        @*$(".whish").on("click",".favorite",function(){
-        $.getJSON("/Favorites/GetJson", { id: @Model.CommodityId }, function(data) {
-            if(data == 1)
-            {
-                alert("您已经收藏过此商品啦！");
-            }
-        });
-    });*@
+    });
 
 </script>
 
@@ -484,7 +469,6 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 
-                                @*href="@Url.Action("AddCommodityInFavorite", "Favorites", new { id = Model.CommodityId })"*@
                                 <div class="wish-list">
                                     <ul>
                                         <li class="wish"><a class="favorite" id="favorite" style="cursor:pointer;">加入收藏夹</a></li>

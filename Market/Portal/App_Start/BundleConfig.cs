@@ -35,13 +35,11 @@
                       "~/Scripts/hover_pack.js",
                       "~/Scripts/jquery.etalage.min.js",
                       "~/Scripts/easyResponsiveTabs.js",
-                      "~/Scripts/responsiveslides.min.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Scripts/responsiveslides.min.js"));   
+       bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/themes/base/all.css",
                       "~/Content/Site.css",
-                       "~/Content/themes/base/all.css",
                        "~/Content/PagedList.css",
                         "~/Content/etalage.css",
                        "~/Content/style.css"));

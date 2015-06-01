@@ -67,34 +67,34 @@
          allFields = $([]).add(name).add(email).add(contact).add(address),
          tips = $(".validateTips");
 
-       function updateTips(t) {
-           tips
-            .text(t)
-            .addClass("ui-state-highlight");
-           setTimeout(function () {
-               tips.removeClass("ui-state-highlight", 1500);
-           }, 500);
+        function updateTips(t) {
+            tips
+             .text(t)
+             .addClass("ui-state-highlight");
+            setTimeout(function () {
+                tips.removeClass("ui-state-highlight", 1500);
+            }, 500);
         }
 
-       function checkLength(o, n, min, max) {
-           if (o.val().length > max || o.val().length < min) {
-             o.addClass("ui-state-error");
+        function checkLength(o, n, min, max) {
+            if (o.val().length > max || o.val().length < min) {
+                o.addClass("ui-state-error");
                 updateTips("Length of " + n + " must be between " +
                   min + " and " + max + ".");
-               return false;
-           } else {
-               return true;
+                return false;
+            } else {
+                return true;
             }
         }
 
         function checkRegexp(o, regexp, n) {
-           if (!(regexp.test(o.val()))) {
+            if (!(regexp.test(o.val()))) {
                 o.addClass("ui-state-error");
                 updateTips(n);
                 return false;
-           } else {
+            } else {
                 return true;
-           }
+            }
         }
 
         function addAddress() {
@@ -102,26 +102,26 @@
             allFields.removeClass("ui-state-error");
 
             valid = valid && checkLength(name, "ConsigneeName", 3, 16);
-           valid = valid && checkLength(contact, "Contact", 11, 11);
-           valid = valid && checkLength(email, "Email", 6, 80);
+            valid = valid && checkLength(contact, "Contact", 11, 11);
+            valid = valid && checkLength(email, "Email", 6, 80);
 
-           valid = valid && checkRegexp(email,
-              /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
-           valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+            valid = valid && checkRegexp(email,
+               /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
+            valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
             valid = valid && checkRegexp(contact, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
 
-           if (valid) {
-               $("#users tbody").append("<tr>" +
-                 "<td>" + name.val() + "</td>" +
-                 "<td>" + email.val() + "</td>" +
-                "<td>" + password.val() + "</td>" +
-                "</tr>");
-               dialog.dialog("close");
+            if (valid) {
+                $("#users tbody").append("<tr>" +
+                  "<td>" + name.val() + "</td>" +
+                  "<td>" + email.val() + "</td>" +
+                 "<td>" + password.val() + "</td>" +
+                 "</tr>");
+                dialog.dialog("close");
             }
-           return valid;
+            return valid;
         }
 
-       dialog = $("#dialog-form").dialog({
+        dialog = $("#dialog-form").dialog({
             autoOpen: false,
             height: 300,
             width: 350,
@@ -133,18 +133,35 @@
                 }
             },
             close: function () {
-               form[0].reset();
+                form[0].reset();
                 allFields.removeClass("ui-state-error");
-           }
-       });
+            }
+        });
 
         form = dialog.find("form").on("submit", function (event) {
-           event.preventDefault();
-           addAddress();
+            event.preventDefault();
+            addAddress();
         });
 
         $("#create-address").button().on("click", function () {
             dialog.dialog("open");
+        });
+    });
+
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+               menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
         });
     });
 </script>
@@ -155,24 +172,24 @@
             <ul class="shopping_grid">
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
+                <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")">
-                            <li>
-                                <span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount)
-                                <img src="~/images/bag.png" alt="" />
-                            </li>
-                        </a>
+                <a href="@Url.Action("Home","ShoppingTrolleys")">
+                    <li>
+                        <span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount)
+                        <img src="~/images/bag.png" alt="" />
+                    </li>
+                </a>
                     }
                     else
                     {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
                     }
                 }
             </ul>
@@ -197,10 +214,8 @@
     <div class="container">
         <div class="search">
             <div class="stay">搜索商品</div>
-            <div class="stay_right">
-                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}", id = "searchString" })
-                <input type="submit" value="" id="search" />
-            </div>
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
+            <input type="submit" value="" style="position:absolute;left:342px;top:0px;"/>
         </div>
     </div>
 </div>
@@ -212,9 +227,9 @@
             <label for="name">收货人:</label>
             <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
             <label for="region">所在地区:</label>
-                <select id="loc_province" style="width:120px;"></select>
-                <select id="loc_city" style="width:120px; margin-left: 10px"></select>
-                <select id="loc_town" style="width:120px;margin-left: 10px"></select>
+            <select id="loc_province" style="width:120px;"></select>
+            <select id="loc_city" style="width:120px; margin-left: 10px"></select>
+            <select id="loc_town" style="width:120px;margin-left: 10px"></select>
             <label for="address">详细地址:</label>
             <input type="text" name="address" id="address" class="text ui-widget-content ui-corner-all" />
             <label for="email">邮箱:</label>
@@ -260,7 +275,6 @@
                 <div class="clients">
                     <h3>友情提示</h3>
                     <h4>本网站是二手商品交易网，请有需要同志大力购买，保证低价，正品，物流快。</h4>
-                    <ul class="user"></ul>
                 </div>
             </div>
 
@@ -270,20 +284,19 @@
                     <h2 style="font-weight:bold;">填写并核对订单信息:</h2>
                     <div class="top_grid2">
                         <h3>收货人信息：</h3>
-                        <div class="navbar-left">
+                        <div>
                             @foreach (var p in ViewBag.ConsigneeInfoList)
                             {
-                                
-                                <p>@p.AddressDetail</p>  <span>&nbsp;&nbsp;</span><p>@p.Contact</p>
+                                <input type="checkbox" id="consigneeAddress" name="consigneeAddress" style="float:left;"/> @p.AddressDetail <br />
                             }
                         </div>
-                        <div class="contact_right">
-                            <button id="create-address" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">新增收货地址</button>
+                        <div class="navbar-right">
+                            <button id="create-address" style="" class="btn-primary">新增收货地址</button>
                         </div>
                     </div>
                     <div class="top_grid2">
                         <h3>支付方式：</h3>
-                        <input type="checkbox" /> 货到付款
+                        <input type="checkbox" style="float:left;"/> 货到付款 <br />
                     </div>
                     <div class="top_grid2">
                         <h3>送货清单：</h3>

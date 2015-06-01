@@ -59,8 +59,7 @@ namespace Portal.Controllers
                                     where orderItem.UserProfile.UserName == User.Identity.Name
                                     select new ConsigneeInfoViewModel
                                     {
-                                        AddressDetail = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
-                                        Contact = orderItem.Contact
+                                        AddressDetail = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact
                                     }).ToList();
             List<ConsigneeInfoViewModel> list = new List<ConsigneeInfoViewModel>();
             list.AddRange(consigneeInfoList);

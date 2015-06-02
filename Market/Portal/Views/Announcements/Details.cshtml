@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
 
-
-<br /><br />
 <h2>Details</h2>
 
 <div>
@@ -26,7 +24,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content)
+            <pre><code>@Html.DisplayFor(model => model.Content)</code></pre>
         </dd>
 
         <dt>

@@ -38,15 +38,14 @@ namespace Portal.Controllers
 
             ViewBag.CategoryList = categoryGroupList;
 
-            var userId = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(p => p.UserId).FirstOrDefault();
             var commodityInShoppingTrolley = (from commodity in this.db.CommodityInShoppingTrolleys
-                                              where commodity.UserId == userId
+                                              where commodity.UserId == GetInfo.GetUserIdByUserName(User.Identity.Name)
                                               select commodity).ToList();
             List<CommodityInShoppingTrolleyViewModel> model = new List<CommodityInShoppingTrolleyViewModel>();
             foreach (var p in commodityInShoppingTrolley)
             {
                 CommodityInShoppingTrolleyViewModel commodityInShoppingTrolleyViewModel = new CommodityInShoppingTrolleyViewModel();
-                commodityInShoppingTrolleyViewModel.UserId = userId;
+                commodityInShoppingTrolleyViewModel.UserId = GetInfo.GetUserIdByUserName(User.Identity.Name);
                 commodityInShoppingTrolleyViewModel.CommodityId = p.CommodityId;
                 commodityInShoppingTrolleyViewModel.CommodityName = p.Commodity.CommodityName;
                 commodityInShoppingTrolleyViewModel.Color = p.Color;
@@ -205,7 +204,7 @@ namespace Portal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var userId = this.db.UserProfiles.FirstOrDefault(e => e.UserName == User.Identity.Name).UserId;
+            var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             var commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.SingleOrDefault(e => e.CommodityId == id && e.UserId == userId);
             this.db.CommodityInShoppingTrolleys.Remove(commodityInShoppingTrolley);
             var restcommodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.SingleOrDefault(e => e.CommodityId != id && e.UserId == userId);

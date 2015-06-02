@@ -21,18 +21,17 @@
                 @Html.ActionLink("Market Portal", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li style="padding-top:15px;">
+                            @Html.ActionLink("Hello   " + GetInfo.GetNickNameByUserName(User.Identity.Name) + "", "CheckAdmin", "UserProfiles")
+                        </li>
+                        <li style="padding-top:15px;">@Html.ActionLink("Log Off", "Index", "Logoff")</li>
+                    }
                 </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li style="padding-top:15px;">
-                                @Html.ActionLink("Hello   " + GetNickName.GetNickNameByUserName(User.Identity.Name) + "", "CheckAdmin", "UserProfiles")
-                            </li>
-                            <li style="padding-top:15px;">@Html.ActionLink("Log Off", "Index", "Logoff")</li>
-                        }
-                    </ul>
-</div>
+            </div>
         </div>
     </div>
     <div class="container body-content">

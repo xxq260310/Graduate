@@ -54,7 +54,27 @@ namespace Portal.Controllers
         {
             var userProfiles = from userProfile in this.db.UserProfiles
                                    select userProfile;
-            return View(userProfiles.ToList());
+            List<UserProfileViewModel> model = new List<UserProfileViewModel>();
+            foreach (var p in userProfiles.Include("Role"))
+            {
+                UserProfileViewModel user = new UserProfileViewModel()
+                { 
+                    UserId = p.UserId,
+                    UserName = p.UserName,
+                    Address = p.Address,
+                    CreationDate = p.CreationDate,
+                    UpdateDate = p.UpdateDate,
+                    Contact = p.Contact,
+                    Password = Encryption.RSADecrypt(p.Password),
+                    Email = p.Email,
+                    Nickname = p.Nickname,
+                    RoleName = p.Role.RoleName,
+                    Sex = p.Sex
+                };
+                model.Add(user);
+            }
+
+            return View(model.ToList());
         }
 
          [Authorize(Roles = "Administrator")]
@@ -72,6 +92,7 @@ namespace Portal.Controllers
                 return HttpNotFound();
             }
 
+            userProfile.Password = Encryption.RSADecrypt(userProfile.Password);
             return View(userProfile);
         }
 
@@ -90,10 +111,17 @@ namespace Portal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,RoleId,NickName,Sex,Email,Password,Contact,Address")] UserProfile userProfile)
+        public ActionResult Create(UserProfile userProfile, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    userProfile.ImageType = image.ContentType;
+                    userProfile.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(userProfile.ImageData, 0, image.ContentLength);
+                }
+
                 db.UserProfiles.Add(userProfile);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -120,6 +148,7 @@ namespace Portal.Controllers
             ViewBag.UserId = new SelectList(db.Favorites, "UserId", "UserId", userProfile.UserId);
             ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", userProfile.RoleId);
             ViewBag.UserId = new SelectList(db.ShoppingTrolleys, "UserId", "UserId", userProfile.UserId);
+            userProfile.Password = Encryption.RSADecrypt(userProfile.Password);
             return View(userProfile);
         }
 
@@ -128,13 +157,37 @@ namespace Portal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,RoleId,NickName,Sex,Email,Password,Contact,Address")] UserProfile userProfile)
+        public ActionResult Edit(UserProfile userProfile, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    userProfile.ImageType = image.ContentType;
+                    userProfile.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(userProfile.ImageData, 0, image.ContentLength);
+                }
+
                 db.Entry(userProfile).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(userProfile);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Image(int? id)
+        {
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "Administrator")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            UserProfile userProfile = this.db.UserProfiles.Find(id);
+            if (userProfile == null)
+            {
+                return HttpNotFound();
             }
 
             return View(userProfile);
@@ -155,6 +208,7 @@ namespace Portal.Controllers
                 return HttpNotFound();
             }
 
+            userProfile.Password = Encryption.RSADecrypt(userProfile.Password);
             return View(userProfile);
         }
 
@@ -167,6 +221,25 @@ namespace Portal.Controllers
             db.UserProfiles.Remove(userProfile);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public FileContentResult GetImageByUserId(int id)
+        {
+            UserProfile model = this.db.UserProfiles.FirstOrDefault(p => p.UserId == id);
+            if (model != null)
+            {
+                if (model.ImageData != null)
+                {
+                    return File(model.ImageData, model.ImageType);
+                }
+
+                return null;
+            }
+
+            else
+            {
+                return null;
+            }
         }
 
         protected override void Dispose(bool disposing)

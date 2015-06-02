@@ -220,7 +220,7 @@ namespace Portal.Controllers
             var capacity = formcollection["CheckedCapacity"].ToString();
             var count = formcollection["Select"].ToString();
             var price = formcollection["actual"].ToString();
-            var userId = this.db.UserProfiles.SingleOrDefault(e => e.UserName == User.Identity.Name).UserId;
+            var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
 
             int quantity = int.Parse(count);
             var p = this.db.ShoppingTrolleys.SingleOrDefault(e => e.UserId == userId);

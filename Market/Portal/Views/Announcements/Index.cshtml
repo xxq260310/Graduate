@@ -4,11 +4,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
-<br /><br />
 <h2>Announcement</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLinkAuthorized("Create New", "Create", false)
 </p>
 <table class="table">
     <tr>
@@ -38,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Content)
+            @Html.ActionLinkAuthorized("Content", "Details", new { id = item.AnnouncementId}, false)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreationDate)

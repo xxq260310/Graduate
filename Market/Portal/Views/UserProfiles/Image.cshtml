@@ -1,0 +1,14 @@
+﻿@model Portal.Models.UserProfile
+@using Portal.Authentication;
+@{
+    ViewBag.Title = "Image";
+    Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
+}
+
+<h2>头像：</h2>
+
+<img width="200" height="200" src="@Url.Action("GetImageByUserId", "UserProfiles", new { id = Model.UserId })" />
+
+<br />
+<br />
+<p>@Html.ActionLinkAuthorized("Back to List", "Index", false)</p>

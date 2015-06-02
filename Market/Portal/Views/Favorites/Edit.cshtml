@@ -1,11 +1,11 @@
 ﻿@model Portal.Models.Favorite
-
+@using Portal.Authentication;
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
     var index = 0;
 }
-<br /><br />
+
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
@@ -57,7 +57,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLinkAuthorized("Back to List", "Index", false)
 </div>
 
 <script type="text/javascript">

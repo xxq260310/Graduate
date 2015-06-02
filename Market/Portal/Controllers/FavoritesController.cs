@@ -72,9 +72,7 @@ namespace Portal.Controllers
 
         public JsonResult AddCommodityInFavorite(int? id)
         {
-            var userId = (from userProfile in this.db.UserProfiles
-                          where userProfile.UserName == User.Identity.Name
-                          select userProfile.UserId).FirstOrDefault();
+            var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             Favorite model = this.db.Favorites.Find(userId);
             int state = 0;
             if (model == null)
@@ -120,20 +118,6 @@ namespace Portal.Controllers
             this.db.SaveChanges();
             return Json(state, JsonRequestBehavior.AllowGet);
         }
-
-        //public JsonResult GetJson(int id)
-        //{
-        //    var userId = (from userProfile in this.db.UserProfiles
-        //                  where userProfile.UserName == User.Identity.Name
-        //                  select userProfile.UserId).FirstOrDefault();
-        //    var commodityInFavoriteItem = this.db.CommodityInFavorites.SingleOrDefault(p => p.CommodityId == id && p.UserId == userId);
-        //    int count = 0;
-        //    if(commodityInFavoriteItem != null)
-        //    {
-        //        count++;
-        //    }
-        //    return Json(count,JsonRequestBehavior.AllowGet);
-        //}
 
         [Authorize(Roles = "Administrator")]
         // GET: Favorites

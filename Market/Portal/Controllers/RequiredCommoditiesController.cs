@@ -43,9 +43,7 @@ namespace Portal.Controllers
 
             if (User.Identity.Name != string.Empty)
             {
-                var id = (from userProfile in this.db.UserProfiles
-                          where userProfile.UserName == User.Identity.Name
-                          select userProfile.UserId).FirstOrDefault();
+                var id = GetInfo.GetUserIdByUserName(User.Identity.Name);
                 RequiredCommodity requiredCommodity = new RequiredCommodity() { 
                     UserId = id,
                     Content = content,

@@ -10,6 +10,7 @@ using Portal;
 using Portal.Models;
 using Portal.ViewModels;
 using WebGrease;
+using Portal.Authentication;
 
 namespace Portal.Controllers
 {
@@ -61,8 +62,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (role == "Administrator")
+            if (GetInfo.GetRoleNameByUserName(User.Identity.Name) == "Administrator")
             {
                 return View(db.Commodities.ToList());
             }
@@ -74,12 +74,10 @@ namespace Portal.Controllers
         [Authorize(Roles = "TemporaryAdmin")]
         public ActionResult TemporaryAdminIndex()
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (role == "TemporaryAdmin")
+            if (GetInfo.GetRoleNameByUserName(User.Identity.Name) == "TemporaryAdmin")
             {
-                var userId = this.db.UserProfiles.Where(s => s.UserName == User.Identity.Name).Select(p => p.UserId).FirstOrDefault();
                 var userProfileCommodity = (from commodity in this.db.UserProfileCommodities
-                                            where commodity.UserId == userId
+                                            where commodity.UserId == GetInfo.GetUserIdByUserName(User.Identity.Name)
                                             select commodity.Commodity).ToList();
                 var commodityViewModel = new List<CommodityViewModel>();
                 foreach (var p in userProfileCommodity)
@@ -122,8 +120,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "TemporaryAdmin")]
         public ActionResult TemporaryAdminDetails(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "TemporaryAdmin")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "TemporaryAdmin")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -141,8 +138,7 @@ namespace Portal.Controllers
         // GET: Commodities/Details/5
         public ActionResult Details(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "Administrator")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "Administrator")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -159,8 +155,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "TemporaryAdmin")]
         public ActionResult TemporaryAdminCreate()
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (role == "TemporaryAdmin")
+            if (GetInfo.GetRoleNameByUserName(User.Identity.Name) == "TemporaryAdmin")
             {
                 ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "ManufacturerId", "ManufacturerName");
                 ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "CategoryName");
@@ -253,9 +248,8 @@ namespace Portal.Controllers
                 }
 
                 db.CommodityInfoes.AddRange(p);
-                var userId = this.db.UserProfiles.Where(s => s.UserName == User.Identity.Name).Select(u => u.UserId).FirstOrDefault();
                 UserProfileCommodity userProfileCommodity = new UserProfileCommodity();
-                userProfileCommodity.UserId = userId;
+                userProfileCommodity.UserId = GetInfo.GetUserIdByUserName(User.Identity.Name);
                 userProfileCommodity.CommodityId = commodity.CommodityId;
                 this.db.UserProfileCommodities.Add(userProfileCommodity);
                 db.SaveChanges();
@@ -269,8 +263,7 @@ namespace Portal.Controllers
         // GET: Commodities/Create
         public ActionResult Create()
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (role == "Administrator")
+            if (GetInfo.GetRoleNameByUserName(User.Identity.Name) == "Administrator")
             {
                 ViewBag.ManufacturerId = new SelectList(db.Manufacturers, "ManufacturerId", "ManufacturerName");
                 ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "CategoryName");
@@ -370,8 +363,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Image(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "Administrator")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "Administrator")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -388,8 +380,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "TemporaryAdmin")]
         public ActionResult TemporaryAdminImage(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "TemporaryAdmin")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "TemporaryAdmin")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -465,8 +456,7 @@ namespace Portal.Controllers
         // GET: Commodities/Edit/5
         public ActionResult TemporaryAdminEdit(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "TemporaryAdmin")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "TemporaryAdmin")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -598,8 +588,7 @@ namespace Portal.Controllers
         // GET: Commodities/Edit/5
         public ActionResult Edit(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "Administrator")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "Administrator")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -661,7 +650,7 @@ namespace Portal.Controllers
                                        select commodityInfo).ToList();
                 this.db.CommodityInfoes.RemoveRange(commodityInfoes);
 
-                var p = new List<CommodityInfo>();
+                List<CommodityInfo> p = new List<CommodityInfo>();
                 List<ImageViewModel> imageViewModel = new List<ImageViewModel>();
                 ImageViewModel model = new ImageViewModel();
                 //read image 
@@ -712,8 +701,7 @@ namespace Portal.Controllers
                 //check quantity 
                 if (commodity.Quantity != count)
                 {
-
-                    this.TemporaryAdminEdit(commodity.CommodityId);
+                    this.Edit(commodity.CommodityId);
                     Response.Write("<script> alert('请确保商品总数大于各子类总数之和！')</script>");
                 }
                 else
@@ -730,8 +718,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "TemporaryAdmin")]
         public ActionResult TemporaryAdminDelete(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "TemporaryAdmin")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "TemporaryAdmin")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -764,8 +751,7 @@ namespace Portal.Controllers
         // GET: Commodities/Delete/5
         public ActionResult Delete(int? id)
         {
-            var role = this.db.UserProfiles.Where(x => x.UserName == User.Identity.Name).Select(s => s.Role.RoleName).FirstOrDefault();
-            if (id == null || role != "Administrator")
+            if (id == null || GetInfo.GetRoleNameByUserName(User.Identity.Name) != "Administrator")
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

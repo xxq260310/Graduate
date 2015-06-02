@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/LayoutForTemporaryAdmin.cshtml";
+    Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
 @{
     var index = 0;
@@ -14,7 +14,7 @@
 
 </script>
 
-<br /><br />
+
 <h2>Edit</h2>
 @using (Html.BeginForm("Edit", "Commodities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

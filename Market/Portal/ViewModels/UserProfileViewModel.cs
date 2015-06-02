@@ -18,7 +18,10 @@ namespace Portal.ViewModels
         public string Contact { get; set; }
         public string Address { get; set; }
         public byte[] ImageData { get; set; }
-
+        public DateTime? CreationDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public string RoleName { get; set; }
         public string ImageType { get; set; }
+        public string Sex { get; set; }
     }
 }

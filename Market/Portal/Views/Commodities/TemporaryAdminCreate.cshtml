@@ -2,9 +2,9 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/LayoutForTemporaryAdmin.cshtml";
+    Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
-<br /><br />
+
 <h2>Create</h2>
 @using (Html.BeginForm("Create", "Commodities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

@@ -154,7 +154,7 @@
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Encrytion\Encryption.cs" />
     <Compile Include="Filter\AuthorizationFilterAttribute.cs" />
-    <Compile Include="GetNickName.cs" />
+    <Compile Include="GetInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -321,23 +321,19 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\LayoutForLogin.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
-    <Content Include="Views\Shared\LayoutForRegister.cshtml" />
-    <Content Include="Views\Shared\LayoutForResetPassword.cshtml" />
+    <Content Include="Views\Shared\LayoutForNotLogin.cshtml" />
     <Content Include="Views\UserProfiles\Create.cshtml" />
     <Content Include="Views\UserProfiles\Delete.cshtml" />
     <Content Include="Views\UserProfiles\Details.cshtml" />
     <Content Include="Views\UserProfiles\Edit.cshtml" />
     <Content Include="Views\UserProfiles\Index.cshtml" />
-    <Content Include="Views\Shared\LayoutForHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SiteFeedbacks\Create.cshtml" />
     <Content Include="Views\SiteFeedbacks\Delete.cshtml" />
     <Content Include="Views\SiteFeedbacks\Details.cshtml" />
     <Content Include="Views\SiteFeedbacks\Edit.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
-    <Content Include="Views\Shared\LayoutForSiteFeedback.cshtml" />
     <Content Include="Views\SiteFeedbacks\Home.cshtml" />
     <Content Include="Views\Feedbacks\Create.cshtml" />
     <Content Include="Views\Feedbacks\Delete.cshtml" />
@@ -357,7 +353,6 @@
     <Content Include="Views\RequiredCommodities\Edit.cshtml" />
     <Content Include="Views\RequiredCommodities\Index.cshtml" />
     <Content Include="Views\RequiredCommodities\Home.cshtml" />
-    <Content Include="Views\Shared\LayoutForRequiredComodity.cshtml" />
     <Content Include="Views\Commodities\Create.cshtml" />
     <Content Include="Views\Commodities\Delete.cshtml" />
     <Content Include="Views\Commodities\Details.cshtml" />
@@ -365,9 +360,7 @@
     <Content Include="Views\Commodities\Index.cshtml" />
     <Content Include="Views\RequiredCommodities\SingleRequiredCommodity.cshtml" />
     <Content Include="Views\RequiredCommodities\SingleEdit.cshtml" />
-    <Content Include="Views\Shared\LayoutForAbout.cshtml" />
-    <Content Include="Views\Shared\LayoutForFeedback.cshtml" />
-    <Content Include="Views\Shared\LayoutForSingleCommodity.cshtml" />
+    <Content Include="Views\Shared\LayoutForUser.cshtml" />
     <Content Include="Views\SiteFeedbacks\SingleEdit.cshtml" />
     <Content Include="Views\SiteFeedbacks\SingleSiteFeedback.cshtml" />
     <Content Include="Views\Commodities\Image.cshtml" />
@@ -384,13 +377,11 @@
     <Content Include="Views\ShoppingTrolleys\Details.cshtml" />
     <Content Include="Views\ShoppingTrolleys\Edit.cshtml" />
     <Content Include="Views\ShoppingTrolleys\Index.cshtml" />
-    <Content Include="Views\Shared\LayoutForAnnouncement.cshtml" />
     <Content Include="Views\Shared\LayoutForAdmin.cshtml" />
     <Content Include="Views\SingleUserProfiles\SingleUserProfile.cshtml" />
     <Content Include="Views\SingleUserProfiles\SingleEdit.cshtml" />
     <Content Include="Views\ShoppingTrolleys\Home.cshtml" />
     <Content Include="Views\Commodities\TemporaryAdminIndex.cshtml" />
-    <Content Include="Views\Shared\LayoutForTemporaryAdmin.cshtml" />
     <Content Include="Views\SingleUserProfiles\TemAdminSingleEdit.cshtml" />
     <Content Include="Views\SingleUserProfiles\TemAdminSingleUserProfile.cshtml" />
     <Content Include="Views\Commodities\TemporaryAdminEdit.cshtml" />
@@ -411,6 +402,7 @@
     <Content Include="Views\Orders\Home.cshtml" />
     <Content Include="Views\Orders\SingleOrder.cshtml" />
     <Content Include="Views\Shared\LayoutForOrder.cshtml" />
+    <Content Include="Views\UserProfiles\Image.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

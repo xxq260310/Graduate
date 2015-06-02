@@ -4,10 +4,9 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
-<br /><br />
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "UserProfiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -81,6 +80,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageData, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <img width="150" height="150" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = Model.UserId })" />
+                @Html.HiddenFor(model => model.ImageData)
+                <div>Upload new image: <input type="file" name="image" /></div>
+                @Html.ValidationMessageFor(model => model.ImageData, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.ImageType)
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

@@ -1,5 +1,5 @@
 ﻿@model Portal.Models.Commodity
-
+@using Portal.Authentication;
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
@@ -14,7 +14,7 @@
     })
     
 </script>
-<br /><br />
+
 <h2>Edit</h2>
 @using (Html.BeginForm("Edit", "Commodities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -233,7 +233,7 @@
 }
 
 <div>
-    @Html.ActionLink("Cancel and return to List", "Index")
+    @Html.ActionLinkAuthorized("Cancel and return to List", "Index", false)
 </div>
 
 <script type="text/javascript">

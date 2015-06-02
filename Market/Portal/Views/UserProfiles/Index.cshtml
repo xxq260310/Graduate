@@ -1,16 +1,15 @@
-﻿@model IEnumerable<Portal.Models.UserProfile>
+﻿@model IEnumerable<Portal.ViewModels.UserProfileViewModel>
 @using Portal.Authentication;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
-<br /><br />
 <h2>User Profile</h2>
 
 <p>
     @Html.ActionLinkAuthorized("Create New", "Create", false)
 </p>
-<table class="table">
+<table class="table-layout-auto">
     <tr>
         <th>
         </th>
@@ -18,7 +17,7 @@
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Role.RoleName)
+            @Html.DisplayNameFor(model => model.RoleName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Nickname)
@@ -38,6 +37,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -51,7 +59,7 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Role.RoleName)
+            @Html.DisplayFor(modelItem => item.RoleName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Nickname)
@@ -70,6 +78,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.ActionLinkAuthorized("Image", "Image", new { id = item.UserId}, false)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
         </td>
     </tr>
 }

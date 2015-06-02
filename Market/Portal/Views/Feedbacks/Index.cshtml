@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Portal.Models.Feedback>
-
+@using Portal.Authentication;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Feedback";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
-<br /><br />
 <h2>Feedback</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLinkAuthorized("Create New", "Create", false)
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Commodity.CommodityName)
         </th>
@@ -30,11 +30,15 @@
         <th>
             @Html.DisplayNameFor(model => model.UpdateDate)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.FeedbackId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.FeedbackId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.FeedbackId }, false)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Commodity.CommodityName)
         </td>
@@ -52,11 +56,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FeedbackId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FeedbackId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FeedbackId })
         </td>
     </tr>
 }

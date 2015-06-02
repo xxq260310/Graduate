@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Portal.Models.ShoppingTrolley>
-
+@using Portal.Authentication;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Shopping Trolley";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
-<br /><br />
 <h2>Shopping Trolleys</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLinkAuthorized("Create New", "Create", false)
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.UserProfile.UserName)
         </th>
@@ -21,11 +21,15 @@
         <th>
             @Html.DisplayNameFor(model => model.UpdateDate)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.ActionLinkAuthorized("Edit", "Edit", new { id = item.UserId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Details", "Details", new { id = item.UserId }, false) &nbsp;
+            @Html.ActionLinkAuthorized("Delete", "Delete", new { id = item.UserId }, false)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserProfile.UserName)
         </td>
@@ -34,11 +38,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
         </td>
     </tr>
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Market Portal</title>
     @Styles.Render("~/Content/bootstrap.css")
-    @Styles.Render("~/Content/Content.css")
+    @Styles.Render("~/Content/Site.css")
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("Feedbacks","Index","Feedbacks")</li>
                     <li>@Html.ActionLink("SiteFeedbacks","Index","SiteFeedbacks")</li>
                     <li>@Html.ActionLink("RequiredCommodities", "Index", "RequiredCommodities")</li>
-                    <li style="position:absolute;right:80px; padding-top:0px;padding-bottom:10px;font-size:14px;color:gray;"><a href="@Url.Action("Index", "Home")">Hello&nbsp; @GetNickName.GetNickNameByUserName(User.Identity.Name)</a> </li>
+                    <li style="position:absolute;right:80px; padding-top:0px;padding-bottom:10px;font-size:14px;color:gray;"><a href="@Url.Action("Index", "Home")">Hello&nbsp; @GetInfo.GetNickNameByUserName(User.Identity.Name)</a> </li>
                     <li style="position:absolute;right:0; font-size:larger;">@Html.ActionLink("Log Off", "Index", "Logoff")</li>
                 </ul>
             </div>

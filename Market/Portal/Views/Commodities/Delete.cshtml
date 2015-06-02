@@ -1,11 +1,11 @@
 ﻿@model Portal.Models.Commodity
-
+@using Portal.Authentication;
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
 
-<br /><br />
+
 <h3>Are you sure you want to delete this?</h3>
 <div>
     
@@ -179,7 +179,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> &nbsp;
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLinkAuthorized("Back to List", "Index", false)
         </div>
     }
 </div>

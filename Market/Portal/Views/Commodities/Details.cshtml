@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
 
-<br /><br />
+
 <h2>Details</h2>
 <div>
     <h4>Commodity</h4>
@@ -175,5 +175,5 @@
 </div>
 <p>
     @Html.ActionLinkAuthorized("Edit", "Edit", new { id = Model.CommodityId }, false) &nbsp;
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLinkAuthorized("Back to List", "Index", false)
 </p>

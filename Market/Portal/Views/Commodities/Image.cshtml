@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/LayoutForAdmin.cshtml";
 }
 
-
-
 <h2>您选择的商品图片信息如下：</h2>
 
  <img width="200" height="200" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = Model.CommodityId })" />

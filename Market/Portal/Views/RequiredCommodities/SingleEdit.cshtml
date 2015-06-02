@@ -15,7 +15,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
+                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
                         <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>

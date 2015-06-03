@@ -1,0 +1,78 @@
+﻿
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+
+<style>
+    body {
+        font-size: 62.5%;
+    }
+
+    label, input {
+        display: block;
+    }
+
+        input.text {
+            margin-bottom: 12px;
+            width: 95%;
+            padding: .4em;
+        }
+
+    fieldset {
+        padding: 0;
+        border: 0;
+        margin-top: 25px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+        margin: .6em 0;
+    }
+
+    .ui-dialog .ui-state-error {
+        padding: .3em;
+    }
+</style>
+<script>
+        $(function () {
+            var dialog;
+            dialog = $("#dialog-confirm").dialog({
+                resizable: false,
+                height: 140,
+                modal: true,
+                buttons: {
+                    "Delete all items": function () {
+                        $.ajax({
+                            url: '@Url.Action("SingleDelete", "ShoppingTrolleys")',
+                            type: "POST",
+                            data: { id: deleteaction.next().val() },
+                            dataType: "json",
+                            success: function (req) {
+                                if (req == 1) {
+                                    $(this).dialog("close");
+                                    return true;
+                                }
+                                else {
+                                    $(this).dialog("close");
+                                    window.location.href = "/ShoppingTrolleys/Home";
+                                    return false;
+                                }
+                            }
+                        })
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                        return false;
+                    }
+                }
+            });
+        })
+</script>
+
+
+<div id="dialog-confirm" title="Empty the recycle bin?">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
+
+

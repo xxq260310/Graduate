@@ -1,10 +1,8 @@
 ﻿@model Portal.ViewModels.CommodityViewModel
-
 @{
     ViewBag.Title = "SingleDetails";
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
-
 <style type="text/css">
     .commodity input[type="submit"] {
         display: inline-block;
@@ -240,7 +238,6 @@
     });
 
 </script>
-
 <div class="header">
     <div class="header_top">
         <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
@@ -252,7 +249,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li><a href="@Url.Action("Home", "Favorites" )">收藏夹</a></li>
-    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
+                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
                         <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
@@ -265,7 +262,6 @@
             </ul>
         </div>
     </div>
-
     <div class="h_menu4">
         <div class="container">
             <a class="toggleMenu" href="#">Menu</a>
@@ -279,7 +275,6 @@
         </div>
     </div>
 </div>
-
 <div class="column_center">
     <div class="container">
         <div class="search">
@@ -294,7 +289,6 @@
         </div>
     </div>
 </div>
-
 <div class="main">
     <div class="content_top">
         <div class="container">
@@ -329,7 +323,6 @@
                     <h4>本网站是二手商品交易网，请有需要同志大力购买，保证低价，正品，物流快。</h4>
                 </div>
             </div>
-
             <div class="col-md-9 single_right">
                 <div class="single_top">
                     <div class="single_grid">
@@ -342,7 +335,6 @@
                                         <img class="etalage_source_image" src="@Url.Action("GetImageByCommodityId", "SingleCommodity", new { id = Model.CommodityId })" class="img-responsive" />
                                     </li>
                                 }
-
                                 @foreach (var p in Model.CommodityInfos)
                                 {
                                     <li>
@@ -356,7 +348,6 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-
                         @using (Html.BeginForm("SingleCommodity", "SingleCommodity", FormMethod.Post))
                         {
                             <input type="hidden" name="CheckedSize" id="CheckedSize" />
@@ -374,7 +365,6 @@
                                 {
                                     <p class="availability">库存:<em><span style="color:red;"> 无货</span></em></p>
                                 }
-
 
                                 @if (Model.Quantity > 0)
                                 {
@@ -412,7 +402,6 @@
                                         </div>
                                     }
                                 }
-
                                 <ul class="size" id="size">
                                     <h3>尺寸</h3>
                                     @if (ViewBag.SizeCount > 0)
@@ -426,9 +415,7 @@
 
                                         }
                                     }
-
                                 </ul>
-
                                 <ul class="size" id="color">
                                     <h3>颜色</h3>
                                     @if (ViewBag.ColorCount > 0)
@@ -442,9 +429,7 @@
 
                                         }
                                     }
-
                                 </ul>
-
                                 <ul class="size" id="capacity">
                                     <h3>容量</h3>
                                     @if (ViewBag.CapacityCount > 0)
@@ -458,9 +443,7 @@
 
                                         }
                                     }
-
                                 </ul>
-
                                 <div class="quantity_box">
                                     <ul class="product-qty">
                                         <span>数量:</span>
@@ -468,25 +451,21 @@
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
-                                
+
                                 <div class="wish-list">
                                     <ul>
                                         <li class="wish"><a class="favorite" id="favorite" style="cursor:pointer;">加入收藏夹</a></li>
                                     </ul>
                                 </div>
-
                                 <div class="commodity">
                                     <input type="submit" value="加入购物车" id="submit" name="submit" /> <a href="@Url.Action("SingleCommodity", "SingleCommodity" , new { id = Model.CommodityId })"></a>
                                 </div>
-
                             </div>
                         }
-
                         <div class="clearfix"> </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
-
                 <div class="sap_tabs">
                     <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
                         <ul class="resp-tabs-list">
@@ -527,7 +506,6 @@
                                                         付款后72小时内发货
                                                     </dd>
                                                 </dl>
-
                                                 <dl class="seven-days">
                                                     <dt class="icon"><img src="//img.alicdn.com/tps/i2/T1wMaGFLBfXXceU5Yh-48-48.png"></dt>
                                                     <dd class="name">7天无理由退货</dd>
@@ -536,7 +514,6 @@
                                                         <p>1、商品外包装未拆封，相关附（配）件齐全；</p><p>2、商品表面无划痕、无破损、无使用等痕迹；</p><p>3、（若有）防伪标识码未刮开或撕损；</p><p>可申请无理由退货，包邮商品需要买家承担退货邮费，非包邮商品需要买家承担发货和退货邮费。</p>
                                                     </dd>
                                                 </dl>
-
                                                 <dl>
                                                     <dt class="icon"><img src="//img.alicdn.com/tps/i2/T1in3MFMNcXXceU5Yh-48-48.png"></dt>
                                                     <dd class="name">消费者保障服务</dd>
@@ -545,7 +522,6 @@
                                                         <p>在确认收货15天内，如有商品质量问题、描述不符或未收到货等，您有权申请退款或退货，来回邮费由二手商品交易市场承担。</p>
                                                     </dd>
                                                 </dl>
-
                                             </div>
                                         </div>
                                     </ul>

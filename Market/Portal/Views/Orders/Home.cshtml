@@ -52,7 +52,7 @@
             $.ajax({
                 url: '@Url.Action("Index", "Home")',
                 type: "Get",
-                data: sreachstring
+                data: {sreachstring: searchstring}
             });
         });
     });

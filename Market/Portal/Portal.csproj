@@ -403,6 +403,7 @@
     <Content Include="Views\Orders\SingleOrder.cshtml" />
     <Content Include="Views\Shared\LayoutForOrder.cshtml" />
     <Content Include="Views\UserProfiles\Image.cshtml" />
+    <Content Include="Views\ShoppingTrolleys\ShowDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

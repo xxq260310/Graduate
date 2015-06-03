@@ -19,6 +19,11 @@ namespace Portal.Controllers
     {
         private MarketContext db = new MarketContext();
 
+        public ActionResult ShowDialog(int id)
+        {
+            return View();
+        }
+
         public ActionResult Home()
         {
             var parentCategory = (from p in this.db.ParentCategories
@@ -38,8 +43,9 @@ namespace Portal.Controllers
 
             ViewBag.CategoryList = categoryGroupList;
 
+            var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             var commodityInShoppingTrolley = (from commodity in this.db.CommodityInShoppingTrolleys
-                                              where commodity.UserId == GetInfo.GetUserIdByUserName(User.Identity.Name)
+                                              where commodity.UserId == userId
                                               select commodity).ToList();
             List<CommodityInShoppingTrolleyViewModel> model = new List<CommodityInShoppingTrolleyViewModel>();
             foreach (var p in commodityInShoppingTrolley)
@@ -197,6 +203,7 @@ namespace Portal.Controllers
             return this.Json(cost, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public ActionResult SingleDelete(int? id)
         {
             if (id == null)
@@ -214,8 +221,15 @@ namespace Portal.Controllers
                 this.db.ShoppingTrolleys.Remove(shoppingTrolley);
             }
 
-            this.db.SaveChanges();
-            return RedirectToAction("Home");
+            if (this.db.SaveChanges() == 1)
+            {
+                return this.Json("1");
+            }
+            else
+            {
+                return this.Json("0");
+            }
+            
         }
 
         // GET: ShoppingTrolleys

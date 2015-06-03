@@ -1,8 +1,38 @@
 ﻿@{
     ViewBag.Title = "我的购物车";
-    Layout = "~/Views/Shared/LayoutForUser.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+
+<style type="text/css">
+
+        input.text {
+            margin-bottom: 12px;
+            width: 95%;
+            padding: .4em;
+        }
+
+    fieldset {
+        padding: 0;
+        border: 0;
+        margin-top: 25px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+        margin: .6em 0;
+    }
+
+
+
+    .ui-dialog .ui-state-error {
+        padding: .3em;
+    }
+</style>
 <script type="text/javascript">
     $(function () {
         var menu_ul = $('.menu > li > ul'),
@@ -20,6 +50,45 @@
             }
         });
     });
+
+    @*function showdialog(a) {
+        var dialog, deleteaction;
+        deleteaction = $(a);
+        dialog = $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 140,
+            modal: true,
+            buttons: {
+                "Delete all items": function () {
+                    $.ajax({
+                        url: '@Url.Action("SingleDelete", "ShoppingTrolleys")',
+                        type: "POST",
+                        data: { id: deleteaction.next().val() },
+                        dataType: "json",
+                        success: function (req) {
+                            if (req == 1) {
+                                $(this).dialog("close");
+                                return true;
+                            }
+                            else {
+                                $(this).dialog("close");
+                                return false;
+                            }
+                        }
+                    })
+                    $(this).dialog("close");
+                    return true;
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }
+        });
+
+        dialog.dialog("open");
+    }*@
 
     $(function () {
         var length = $("table").find("tr").length - 1;
@@ -130,10 +199,8 @@
     });
 
 </script>
-
 <input type="hidden" name="TotalCost" id="TotalCost" />
 <input type="hidden" name="OrderCommodityId" id="OrderCommodityId" />
-
 <div class="header">
     <div class="header_top">
         <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
@@ -145,7 +212,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
+                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
                         <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
@@ -158,7 +225,6 @@
             </ul>
         </div>
     </div>
-
     <div class="h_menu4">
         <div class="container">
             <a class="toggleMenu" href="#">Menu</a>
@@ -172,7 +238,6 @@
         </div>
     </div>
 </div>
-
 <div class="column_center">
     <div class="container">
         <div class="search">
@@ -187,7 +252,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="main">
     <div class="content_top">
@@ -269,7 +333,7 @@
                                     @p.Price <input type="hidden" value="@p.Price" />
                                 </td>
                                 <td>
-                                    <a id="delete" href="@Url.Action("SingleDelete", "ShoppingTrolleys", new { id = p.CommodityId })">删除</a><br />
+                                    <a id="delete" class="delete" style="cursor:pointer;" href="@Url.Action("ShowDialog", new { id = p.CommodityId})">删除</a> <input type="hidden" value="@p.CommodityId" /><br />
                                     <a id="favorite" style="cursor:pointer;" class="favorite" name="favorite">加入收藏夹</a> <input type="hidden" id="CommodityId" name="CommodityId" value="@p.CommodityId" />
                                 </td>
                             </tr>
@@ -292,7 +356,5 @@
         </div>
     </div>
 </div>
-
 <div class="footer_bg"></div>
-
 

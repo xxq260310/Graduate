@@ -1,38 +1,8 @@
 ﻿@{
     ViewBag.Title = "我的购物车";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
 
-<link href="~/Content/jquery-ui.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
-<script src="~/Scripts/jquery-ui.js"></script>
-
-<style type="text/css">
-
-        input.text {
-            margin-bottom: 12px;
-            width: 95%;
-            padding: .4em;
-        }
-
-    fieldset {
-        padding: 0;
-        border: 0;
-        margin-top: 25px;
-    }
-
-    h1 {
-        font-size: 1.2em;
-        margin: .6em 0;
-    }
-
-
-
-    .ui-dialog .ui-state-error {
-        padding: .3em;
-    }
-</style>
 <script type="text/javascript">
     $(function () {
         var menu_ul = $('.menu > li > ul'),
@@ -50,45 +20,6 @@
             }
         });
     });
-
-    @*function showdialog(a) {
-        var dialog, deleteaction;
-        deleteaction = $(a);
-        dialog = $("#dialog-confirm").dialog({
-            autoOpen: false,
-            resizable: false,
-            height: 140,
-            modal: true,
-            buttons: {
-                "Delete all items": function () {
-                    $.ajax({
-                        url: '@Url.Action("SingleDelete", "ShoppingTrolleys")',
-                        type: "POST",
-                        data: { id: deleteaction.next().val() },
-                        dataType: "json",
-                        success: function (req) {
-                            if (req == 1) {
-                                $(this).dialog("close");
-                                return true;
-                            }
-                            else {
-                                $(this).dialog("close");
-                                return false;
-                            }
-                        }
-                    })
-                    $(this).dialog("close");
-                    return true;
-                },
-                Cancel: function () {
-                    $(this).dialog("close");
-                    return false;
-                }
-            }
-        });
-
-        dialog.dialog("open");
-    }*@
 
     $(function () {
         var length = $("table").find("tr").length - 1;
@@ -182,13 +113,17 @@
             var checked = $("input[type='checkbox'][name='singlecommodity']");
             $(checked).each(function () {
                 if ($(this).prop("checked") == true) {
-                    $("#OrderCommodityId")[0].value += $(this).parent().parent().children().eq(5).children().eq(3).val() + ",";
+                    $("#OrderCommodityId")[0].value += $(this).parent().parent().children().eq(5).children().eq(4).val() + ",";
+                }
+                else {
+                    $("#NotCheckedCommodityId")[0].value += $(this).parent().parent().children().eq(5).children().eq(4).val() + ",";
                 }
             })
 
             var data = {
                 Cost: $("#TotalCost")[0].value,
-                CommodityIdList: $("#OrderCommodityId")[0].value
+                CommodityIdList: $("#OrderCommodityId")[0].value,
+                NotCheckedCommodityIdList: $("#NotCheckedCommodityId")[0].value
             };
             $.ajax({
                 url: '@Url.Action("Home", "ShoppingTrolleys")',
@@ -201,6 +136,7 @@
 </script>
 <input type="hidden" name="TotalCost" id="TotalCost" />
 <input type="hidden" name="OrderCommodityId" id="OrderCommodityId" />
+<input type="hidden" name="NotCheckedCommodityId" id="NotCheckedCommodityId" />
 <div class="header">
     <div class="header_top">
         <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
@@ -321,7 +257,7 @@
                                 </td>
                                 <td width="300px;">
                                     <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
-                                    <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity</a>
+                                    <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.Degree @p.CommodityName @p.Size @p.Color @p.Capacity</a>
                                 </td>
                                 <td>
                                     @p.Quantity

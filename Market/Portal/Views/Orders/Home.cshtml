@@ -43,6 +43,59 @@
         border: 1px solid transparent;
         padding: 0.3em;
     }
+
+    .list {
+        height: 24px;
+        line-height: 24px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        zoom: 1;
+    }
+
+    .price {
+        color: #333;
+        float: left;
+        width: 100px;
+        text-align: right;
+        font-family: verdana;
+    }
+
+    .checkout-buttons .checkout-submit {
+        float: right;
+        position: relative;
+        width: 135px;
+        height: 36px;
+        line-height: 36px;
+        margin: 8px 10px 0 0;
+        padding: 0;
+        background-color: #e00;
+        overflow: hidden;
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .btn-1 {
+        font-family: arial,"microsoft yahei";
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        background-color: #e74649;
+        background-image: -moz-linear-gradient(top,#e74649,#df3134);
+        background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#e74649),color-stop(1,#df3134));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e74649', endColorstr='#df3134', GradientType='0');
+        background-image: linear-gradient(to top,#e74649 0,#df3134 100%);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 400;
+        padding: 0 15px;
+        cursor: pointer;
+        border: 0;
+        float: none;
+    }
 </style>
 
 <script type="text/javascript">
@@ -52,7 +105,7 @@
             $.ajax({
                 url: '@Url.Action("Index", "Home")',
                 type: "Get",
-                data: {sreachstring: searchstring}
+                data: { sreachstring: searchstring }
             });
         });
     });
@@ -63,9 +116,15 @@
           name = $("#name"),
           email = $("#email"),
           contact = $("#contact"),
+          province = $("#s2id_loc_province").children().children().eq(0),
+          city = $("#s2id_loc_city").children().children().eq(0),
+          town = $("#s2id_loc_town").children().children().eq(0),
+          loc_province = $("#loc_province"),
+          loc_city = $("#loc_city"),
+          loc_town = $("#loc_town"),
           address = $("#address"),
-         allFields = $([]).add(name).add(email).add(contact).add(address),
-         tips = $(".validateTips");
+          allFields = $([]).add(name).add(email).add(contact).add(address),
+          tips = $(".validateTips");
 
         function updateTips(t) {
             tips
@@ -105,17 +164,13 @@
             valid = valid && checkLength(contact, "Contact", 11, 11);
             valid = valid && checkLength(email, "Email", 6, 80);
 
-            valid = valid && checkRegexp(email,
-               /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
-            valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-            valid = valid && checkRegexp(contact, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+            ////valid = valid && checkRegexp(email,
+            ////   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
+            //valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "ConsigneeName may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+            valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
 
             if (valid) {
-                $("#users tbody").append("<tr>" +
-                  "<td>" + name.val() + "</td>" +
-                  "<td>" + email.val() + "</td>" +
-                 "<td>" + password.val() + "</td>" +
-                 "</tr>");
+                $("#Consignee").append("<option value='" + name.val() + " " + province.text() + "" + city.text() + "" + town.text() + "" + address.val() + "'>" + name.val() + "" + province.text() + " " + city.text() + " " + town.text() + " " + address.val() + "</option>");
                 dialog.dialog("close");
             }
             return valid;
@@ -164,6 +219,32 @@
             }
         });
     });
+
+    $(function () {
+        $("#cash").tooltip({
+            show: {
+                effect: "slideDown",
+                delay: 250
+            }
+        });
+        $("#delivery").tooltip({
+            show: null,
+            position: {
+                my: "left top",
+                at: "left bottom"
+            },
+            open: function (event, ui)
+            {
+                ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast");
+            }
+        });
+        $("#selfdelivery").tooltip({
+            hide: {
+                effect: "explode",
+                delay: 250
+            }
+        });
+    });
 </script>
 
 <div class="header">
@@ -172,24 +253,24 @@
             <ul class="shopping_grid">
                 @if (!User.Identity.IsAuthenticated)
                 {
-                <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
+                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
-                <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-                <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
+                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
+                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
                     if (ViewBag.ShoppingTrolleysCount > 0)
                     {
-                <a href="@Url.Action("Home","ShoppingTrolleys")">
-                    <li>
-                        <span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount)
-                        <img src="~/images/bag.png" alt="" />
-                    </li>
-                </a>
+                        <a href="@Url.Action("Home","ShoppingTrolleys")">
+                            <li>
+                                <span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount)
+                                <img src="~/images/bag.png" alt="" />
+                            </li>
+                        </a>
                     }
                     else
                     {
-                <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
+                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
                     }
                 }
             </ul>
@@ -215,7 +296,7 @@
         <div class="search">
             <div class="stay">搜索商品</div>
             @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
-            <input type="submit" value="" style="position:absolute;left:342px;top:0px;"/>
+            <input type="submit" value="" style="position:absolute;left:342px;top:0px;" />
         </div>
     </div>
 </div>
@@ -236,8 +317,6 @@
             <input type="text" name="email" id="email" class="text ui-widget-content ui-corner-all">
             <label for="contact">手机号码:</label>
             <input type="text" name="contact" id="contact" class="text ui-widget-content ui-corner-all">
-
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
             <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </fieldset>
     </form>
@@ -283,32 +362,91 @@
                 <div class="container">
                     <h2 style="font-weight:bold;">填写并核对订单信息:</h2>
                     <div class="top_grid2">
-                        <h3>收货人信息：</h3>
                         <div>
-                            @foreach (var p in ViewBag.ConsigneeInfoList)
-                            {
-                                <input type="checkbox" id="consigneeAddress" name="consigneeAddress" style="float:left;"/> @p.AddressDetail <br />
-                            }
-                        </div>
-                        <div class="navbar-right">
-                            <button id="create-address" style="" class="btn-primary">新增收货地址</button>
+                            <h3>收货人信息：</h3>
+                            <div>
+                                @Html.DropDownList("Consignee", null, htmlAttributes: new { Style = "width:auto;", @class = "form-control" })
+                            </div>
+                            <div style="float:right;">
+                                <button id="modify-address" class="btn-primary">修改收货地址</button>
+                                <button id="create-address" class="btn-primary">新增收货地址</button>
+                            </div>
                         </div>
                     </div>
+                    <hr />
                     <div class="top_grid2">
-                        <h3>支付方式：</h3>
-                        <input type="checkbox" style="float:left;"/> 货到付款 <br />
+                        <div>
+                            <h3>支付方式：</h3>
+                            <div class="payfor">
+                                <input type="checkbox" style="float:left;" /> <span id="cash" title="本网站暂时只支持货到付款，会逐步增加其他支付方式哦！">货到付款</span><br />
+                            </div>
+                        </div>
                     </div>
-                    <div class="top_grid2">
-                        <h3>送货清单：</h3>
-                        <div class="col-md-4">
+                    <hr />
 
-                        </div>
-                        <div class="col-md-4 right">
-                            <table class="table" id="commodityTable">
+                    <div class="top_grid2">
+                        <div>
+                                <h3>送货清单：</h3>
+                                <div style="float:right;">
+                                    <a href="@Url.Action("Home", "ShoppingTrolleys")" style="cursor:pointer;">返回修改购物车</a>
+                                </div>
+                            <div class="col-md-4">
+                                <h4>配送方式</h4>
+                                <div style="margin: 10px 0 20px;">
+                                    <div>
+                                        <div>
+                                            <input type="checkbox" name="generaldelivery" id="generaldelivery" /> <span style="position:absolute;top: 25px;left: 35px;" id="delivery" title="二手快递是本商城独自经营的配送方式，满50元包邮哦，保证速度快，服务态度好！">二手快递</span>
+                                        </div>
+                                        <br />
+                                        <div>
+                                            <input type="checkbox" name="self" id="self" /> <span style="position:absolute;top:60px;left:35px;" title="如果你不方便快递寄往，请选择上门自提吧，货物为你保存7天哦！" id="selfdelivery">上门自提</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4 right">
                                 <h3>商品详情：</h3>
-
-                            </table>
+                                <table class="table" style="border:none;width:540px;" id="orderCommodityTable">
+                                    @foreach (var p in ViewBag.CommodityInOrderList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img width="50" height="50" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = p.CommodityId})" />
+                                                <a href="@Url.Action("SingleCommodity", "SingleCommodity", new { id = p.CommodityId})"> @p.CommodityName @p.Size @p.Color @p.Capacity @p.Degree </a>
+                                            </td>
+                                            <td style="padding-top:20px;">
+                                                @p.UnitPrice
+                                            </td>
+                                            <td style="padding-top:20px;">
+                                                <span>x<span>@p.Quantity</span></span>
+                                            </td>
+                                            <td style="padding-top:20px;">
+                                                <span>有货</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
                         </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <hr />
+                    <div class="top_grid2">
+                        <div class="list" style="float:right;">
+                            <span><em style="color:red;">@ViewBag.CommodityCount </em>件商品，总商品金额 &nbsp;&nbsp;&nbsp;￥@ViewBag.Cost.00</span>
+                        </div>
+                        <br /><br />
+                        <div class="list" style="float:right;">
+                            <span style="left:715px;position:absolute;">运费 &nbsp;&nbsp;&nbsp;￥@ViewBag.Shipment.00
+                            </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <hr />
+                    <div style="float:right;">
+                        <h3>应付总额：<em style="font-size:larger; color:red;">￥@ViewBag.Cost</em></h3>
+                        <input type="submit" class="checkout-submit btn-1" id="order-submit" style="float: right;" />
                     </div>
                 </div>
             </div>

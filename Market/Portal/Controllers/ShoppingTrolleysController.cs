@@ -81,7 +81,8 @@ namespace Portal.Controllers
         public ActionResult Home(OrderDTO orderDto)
         {
             double cost = Convert.ToDouble(orderDto.Cost.ToString());
-            string [] commodityIdList = orderDto.CommodityIdList.ToString().Split(',');
+            string [] OrderCommodityIdList = orderDto.CommodityIdList.ToString().Split(',');
+            string [] notCheckedCommodityIdList = orderDto.NotCheckedCommodityIdList.ToString().Split(',');
             var userId = this.db.UserProfiles.SingleOrDefault(x => x.UserName == User.Identity.Name).UserId;
             Order order = new Order() { 
                 UserId = userId,
@@ -90,7 +91,19 @@ namespace Portal.Controllers
             };
             this.db.Orders.Add(order);
 
-            foreach (var id in commodityIdList)
+            foreach (var notCheckedId in notCheckedCommodityIdList)
+            {
+                if (string.IsNullOrWhiteSpace(notCheckedId))
+                {
+                    continue;
+                }
+
+                var id = int.Parse(notCheckedId);
+                var commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.SingleOrDefault(x => x.UserId == userId && x.CommodityId == id);
+                this.db.CommodityInShoppingTrolleys.Remove(commodityInShoppingTrolley);
+            }
+
+            foreach (var id in OrderCommodityIdList)
             {
                 if (string.IsNullOrWhiteSpace(id))
                 {

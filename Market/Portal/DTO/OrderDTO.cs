@@ -10,5 +10,7 @@ namespace Portal.DTO
         public string CommodityIdList { get; set; }
 
         public string Cost { get; set; }
+
+        public string NotCheckedCommodityIdList { get; set; }
     }
 }

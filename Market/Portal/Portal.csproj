@@ -183,6 +183,7 @@
     <Compile Include="ViewModels\CommodityInFavoriteViewModel.cs" />
     <Compile Include="ViewModels\CommodityInfoCollectionViewModel.cs" />
     <Compile Include="ViewModels\CommodityInfoViewModel.cs" />
+    <Compile Include="ViewModels\CommodityInOrderViewModel.cs" />
     <Compile Include="ViewModels\CommodityInShoppingTrolleyViewModel.cs" />
     <Compile Include="ViewModels\CommodityPropertyViewModel.cs" />
     <Compile Include="ViewModels\CommodityViewModel.cs" />

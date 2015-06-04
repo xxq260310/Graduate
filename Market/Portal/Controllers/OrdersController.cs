@@ -55,20 +55,36 @@ namespace Portal.Controllers
                                                   select commodityInShoppingTrolleyItem).ToList();
             ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
 
-            var consigneeInfoList = (from orderItem in this.db.Orders
+            var consigneeInfo = from orderItem in this.db.Orders
                                     where orderItem.UserProfile.UserName == User.Identity.Name
-                                    select new ConsigneeInfoViewModel
+                                    select new SelectListItem
                                     {
-                                        AddressDetail = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact
-                                    }).ToList();
-            List<ConsigneeInfoViewModel> list = new List<ConsigneeInfoViewModel>();
-            list.AddRange(consigneeInfoList);
-            ViewBag.ConsigneeInfoList = list;
+                                        Value = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
+                                        Text = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact
+                                    };
 
+            ViewBag.Consignee = consigneeInfo;
+            var commodityInOrder = (from c in this.db.CommodityInOrders
+                                    where c.OrderId == id
+                                    select c).ToList();
+            List<CommodityInOrderViewModel> orderList = new List<CommodityInOrderViewModel>();
+            foreach (var p in commodityInOrder)
+            {
+                orderList.Add(new CommodityInOrderViewModel() { OrderId = p.OrderId, CommodityId = p.CommodityId, SellerId = p.SellerId.HasValue ? p.SellerId.Value : 0, UnitPrice = p.UnitPrice.HasValue ? p.UnitPrice.Value : 0, Quantity = p.Quantity.HasValue ? p.Quantity.Value : 0, Color = p.Color, Size = p.Size, Capacity = p.Capacity, Degree = p.Commodity.Degree, CommodityName = p.Commodity.CommodityName});
+            }
 
+            var cost = this.db.Orders.SingleOrDefault(x => x.UserProfile.UserName == User.Identity.Name && x.OrderId == id).TotalCost;
+            ViewBag.Cost = cost;
+            ViewBag.Shipment = cost >= 50 ? 0.00 : 15;
+            ViewBag.CommodityCount = orderList.Count;
+            ViewBag.CommodityInOrderList = orderList;
             return this.View();
         }
 
+        [HttpPost]
+        public ActionResult Home(FormCollection formCollection) {
+            return View();
+        }
         public ActionResult SingleOrder()
         {
             return View();

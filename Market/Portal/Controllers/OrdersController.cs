@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Portal;
 using Portal.Models;
 using Portal.ViewModels;
+using Portal.DTO;
 
 namespace Portal.Controllers
 {
@@ -55,13 +56,14 @@ namespace Portal.Controllers
                                                   select commodityInShoppingTrolleyItem).ToList();
             ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
 
+            var index = 0;
             var consigneeInfo = from orderItem in this.db.Orders
-                                    where orderItem.UserProfile.UserName == User.Identity.Name
-                                    select new SelectListItem
-                                    {
-                                        Value = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact,
-                                        Text = orderItem.ConsigneeName + " " + orderItem.Address + " " + orderItem.Contact
-                                    };
+                                where orderItem.UserProfile.UserName == User.Identity.Name
+                                select new SelectListItem
+                                {
+                                    Value = orderItem.ConsigneeName + "," + orderItem.Province + "," + orderItem.City + "," + orderItem.Town + "," + orderItem.Address + "," + orderItem.Contact + "," + orderItem.Email,
+                                    Text = orderItem.ConsigneeName + " " + orderItem.Province + orderItem.City + orderItem.Town + orderItem.Address + " " + orderItem.Contact
+                                };
 
             ViewBag.Consignee = consigneeInfo;
             var commodityInOrder = (from c in this.db.CommodityInOrders
@@ -70,7 +72,7 @@ namespace Portal.Controllers
             List<CommodityInOrderViewModel> orderList = new List<CommodityInOrderViewModel>();
             foreach (var p in commodityInOrder)
             {
-                orderList.Add(new CommodityInOrderViewModel() { OrderId = p.OrderId, CommodityId = p.CommodityId, SellerId = p.SellerId.HasValue ? p.SellerId.Value : 0, UnitPrice = p.UnitPrice.HasValue ? p.UnitPrice.Value : 0, Quantity = p.Quantity.HasValue ? p.Quantity.Value : 0, Color = p.Color, Size = p.Size, Capacity = p.Capacity, Degree = p.Commodity.Degree, CommodityName = p.Commodity.CommodityName});
+                orderList.Add(new CommodityInOrderViewModel() { OrderId = p.OrderId, CommodityId = p.CommodityId, SellerId = p.SellerId.HasValue ? p.SellerId.Value : 0, UnitPrice = p.UnitPrice.HasValue ? p.UnitPrice.Value : 0, Quantity = p.Quantity.HasValue ? p.Quantity.Value : 0, Color = p.Color, Size = p.Size, Capacity = p.Capacity, Degree = p.Commodity.Degree, CommodityName = p.Commodity.CommodityName });
             }
 
             var cost = this.db.Orders.SingleOrDefault(x => x.UserProfile.UserName == User.Identity.Name && x.OrderId == id).TotalCost;
@@ -78,11 +80,64 @@ namespace Portal.Controllers
             ViewBag.Shipment = cost >= 50 ? 0.00 : 15;
             ViewBag.CommodityCount = orderList.Count;
             ViewBag.CommodityInOrderList = orderList;
-            return this.View();
+            return this.View(order);
         }
 
         [HttpPost]
-        public ActionResult Home(FormCollection formCollection) {
+        public JsonResult ParseAddress(string value, string index)
+        {
+            ConsigneeDTO consigneeDto = new ConsigneeDTO();
+            if (value != null)
+            {
+                string[] consignee = value.Split(',');
+                consigneeDto.Index = Convert.ToInt32(index);
+                consigneeDto.ConsigneeName = consignee[0];
+                consigneeDto.Province = consignee[1];
+                consigneeDto.City = consignee[2];
+                consigneeDto.Town = consignee[3];
+                consigneeDto.Address = consignee[4];
+                consigneeDto.Contact = consignee[5];
+                consigneeDto.Email = consignee[6];
+            }
+
+            return this.Json(consigneeDto);
+        }
+
+        [HttpPost]
+        public ActionResult Home(FormCollection formCollection, Order order)
+        {
+            string address = formCollection["addressDetail"].ToString();
+            string delivery = formCollection["delivery"].ToString();
+            string selfDelivery = formCollection["selfDelivery"].ToString();
+            string payFor = formCollection["pay"].ToString();
+            string[] consigneeInfo = formCollection["consigneeName"].ToString().Split(',');
+            if (address != null && (delivery != null || selfDelivery != null) && payFor != null && consigneeInfo != null)
+            {
+                order.Address = address;
+                order.Payfor = payFor;
+                order.CreationDate = DateTime.Now;
+                if (delivery != null)
+                {
+                    order.Delivery = delivery;
+                }
+
+                if (selfDelivery != null)
+                {
+                    order.Delivery = selfDelivery;
+                }
+
+                if (consigneeInfo != null)
+                {
+                    order.ConsigneeName = consigneeInfo[0];
+                    order.Contact = consigneeInfo[1];
+                    order.Email = consigneeInfo[2];
+                }
+
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+
             return View();
         }
         public ActionResult SingleOrder()

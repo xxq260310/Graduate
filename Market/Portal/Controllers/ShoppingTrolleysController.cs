@@ -80,28 +80,31 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Home(OrderDTO orderDto)
         {
+            var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             double cost = Convert.ToDouble(orderDto.Cost.ToString());
             string [] OrderCommodityIdList = orderDto.CommodityIdList.ToString().Split(',');
-            string [] notCheckedCommodityIdList = orderDto.NotCheckedCommodityIdList.ToString().Split(',');
-            var userId = this.db.UserProfiles.SingleOrDefault(x => x.UserName == User.Identity.Name).UserId;
+            string [] notCheckedCommodityIdList;
+            if (orderDto.NotCheckedCommodityIdList != null)
+            {
+                notCheckedCommodityIdList = orderDto.NotCheckedCommodityIdList.ToString().Split(',');
+                foreach (var notCheckedId in notCheckedCommodityIdList)
+                {
+                    if (string.IsNullOrWhiteSpace(notCheckedId))
+                    {
+                        continue;
+                    }
+
+                    var id = int.Parse(notCheckedId);
+                    var commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.SingleOrDefault(x => x.UserId == userId && x.CommodityId == id);
+                    this.db.CommodityInShoppingTrolleys.Remove(commodityInShoppingTrolley);
+                }
+            }
+
             Order order = new Order() { 
                 UserId = userId,
-                TotalCost = cost,
-                CreationDate = DateTime.Now
+                TotalCost = cost
             };
             this.db.Orders.Add(order);
-
-            foreach (var notCheckedId in notCheckedCommodityIdList)
-            {
-                if (string.IsNullOrWhiteSpace(notCheckedId))
-                {
-                    continue;
-                }
-
-                var id = int.Parse(notCheckedId);
-                var commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.SingleOrDefault(x => x.UserId == userId && x.CommodityId == id);
-                this.db.CommodityInShoppingTrolleys.Remove(commodityInShoppingTrolley);
-            }
 
             foreach (var id in OrderCommodityIdList)
             {

@@ -178,6 +178,10 @@
     <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Payfor" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Province" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="City" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Town" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
   </EntityType>
@@ -750,10 +754,14 @@
           <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Delivery" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="ConsigneeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="CreationDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileOrder" FromRole="Order" ToRole="UserProfile" />
           <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.OrderCommodityInOrder" FromRole="Order" ToRole="CommodityInOrder" />
+          <Property Name="Payfor" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+          <Property Name="Province" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+          <Property Name="City" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+          <Property Name="Town" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ShoppingTrolley">
           <Key>
@@ -1231,6 +1239,10 @@
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="Delivery" ColumnName="Delivery" />
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
+          <ScalarProperty Name="Payfor" ColumnName="Payfor" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
         </MappingFragment>

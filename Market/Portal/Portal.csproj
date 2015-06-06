@@ -150,6 +150,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RequiredCommoditiesController.cs" />
     <Compile Include="Controllers\SiteFeedbacksController.cs" />
+    <Compile Include="DTO\ConsigneeDTO.cs" />
     <Compile Include="DTO\CostDTO.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Encrytion\Encryption.cs" />

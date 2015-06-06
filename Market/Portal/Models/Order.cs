@@ -19,12 +19,16 @@ namespace Portal.Models
         public string Contact { get; set; }
         public Nullable<double> TotalCost { get; set; }
         public string Address { get; set; }
+        public string Email { get; set; }
         public string State { get; set; }
         public string Delivery { get; set; }
         public string ConsigneeName { get; set; }
+        public string Payfor { get; set; }
+        public string Province { get; set; }
+        public string City { get; set; }
+        public string Town { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-        public string Email { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<CommodityInOrder> CommodityInOrders { get; set; }

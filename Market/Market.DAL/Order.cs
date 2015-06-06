@@ -28,6 +28,10 @@ namespace Market.DAL
         public string State { get; set; }
         public string Delivery { get; set; }
         public string ConsigneeName { get; set; }
+        public string Payfor { get; set; }
+        public string Province { get; set; }
+        public string City { get; set; }
+        public string Town { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     

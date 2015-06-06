@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Portal.Models.Order
+
+@{
     ViewBag.Title = "订单结算";
     Layout = "~/Views/Shared/LayoutForOrder.cshtml";
 }
@@ -100,6 +102,15 @@
 
 <script type="text/javascript">
     $(function () {
+        var index = 1;
+        var a = $("#Consignee").find("option");
+        $(a).each(function () {
+            a.attr('title', index);
+            index++;
+        });
+    });
+
+    $(function () {
         $("#search").click(function () {
             var sreachstring = $("#searchString").val();
             $.ajax({
@@ -110,20 +121,84 @@
         });
     });
 
+    $(function () {
+        var generaldelivery = $("input[type='checkbox'][name='generaldelivery']");
+        var selfdelivery = $("input[type='checkbox'][name='self']");
+        $(generaldelivery).click(function () {
+            if ($(generaldelivery).prop("checked") == true) {
+                $(generaldelivery).parent().nextAll().eq(1).children().eq(0).attr('disabled', true);
+            }
+            else {
+                $(generaldelivery).parent().nextAll().eq(1).children().eq(0).attr('disabled', false);
+            }
+        });
+
+        $(selfdelivery).click(function () {
+            if ($(selfdelivery).prop("checked") == true) {
+                $(selfdelivery).parent().parent().children().eq(0).find("input").attr('disabled', true);
+            }
+            else {
+                $(selfdelivery).parent().parent().children().eq(0).find("input").attr('disabled', false);
+            }
+        });
+    });
 
     $(function () {
-        var dialog, form,
+        $("#order-submit").click(function () {
+
+            var consignee = $("#Consignee").text();
+            if (consignee == "" || consignee == null) {
+                alert("请先填写收货地址！");
+                return false;
+            }
+
+            var cash = $("input[type='checkbox'][name='cash']");
+            if ($(cash).prop("checked") == false) {
+                alert("请先选择支付方式！");
+                return false;
+            }
+            else {
+                $("#pay")[0].value = $(cash).next().html();
+            }
+
+            var generaldelivery = $("input[type='checkbox'][name='generaldelivery']");
+            var selfdelivery = $("input[type='checkbox'][name='self']");
+            if ($(generaldelivery).prop("checked") == false && $(selfdelivery).prop("checked") == false) {
+                alert("请选择配送方式！");
+                return false;
+            }
+
+            if ($(generaldelivery).prop("checked") == true) {
+                $("#secondDelivery")[0].value = $(generaldelivery).next().html();
+            }
+
+
+            if ($(selfdelivery).prop("checked") == true) {
+                $("#selfDelivery")[0].value = $(selfdelivery).next().html();
+            }
+
+            $("#addressDetail")[0].value = $("#Consignee").text();
+
+            $("#consigneName")[0].value = $("#Consignee").val();
+
+            $.ajax({
+                url: '@Url.Action("Home", "Orders")',
+                type: "POST"
+            })
+        })
+    });
+
+    $(function () {
+        var dialog, form, modifyDialog, 
+          modifyDiv = $("#dialog-form"),
           name = $("#name"),
           email = $("#email"),
           contact = $("#contact"),
           province = $("#s2id_loc_province").children().children().eq(0),
           city = $("#s2id_loc_city").children().children().eq(0),
           town = $("#s2id_loc_town").children().children().eq(0),
-          loc_province = $("#loc_province"),
-          loc_city = $("#loc_city"),
-          loc_town = $("#loc_town"),
           address = $("#address"),
-          allFields = $([]).add(name).add(email).add(contact).add(address),
+          allFields = $([]).add(name).add(email).add(contact).add(address).add(province).add(city).add(town),
           tips = $(".validateTips");
 
         function updateTips(t) {
@@ -158,6 +233,7 @@
 
         function addAddress() {
             var valid = true;
+            var index = $("#Consignee").find("option").length + 1;
             allFields.removeClass("ui-state-error");
 
             valid = valid && checkLength(name, "ConsigneeName", 3, 16);
@@ -170,7 +246,28 @@
             valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
 
             if (valid) {
-                $("#Consignee").append("<option value='" + name.val() + " " + province.text() + "" + city.text() + "" + town.text() + "" + address.val() + "'>" + name.val() + "" + province.text() + " " + city.text() + " " + town.text() + " " + address.val() + "</option>");
+                $("#Consignee").append("<option value='" + index + "," + name.val() + "," + province.text() + "," + city.text() + "," + town.text() + "," + address.val() + "," + contact.val() + "," + email.val() + " title='"+ index +"''>" + name.val() + " " + province.text() + "" + city.text() + "" + town.text() + "" + address.val() + " " + contact.val() + "</option>");
+                dialog.dialog("close");
+            }
+            return valid;
+        }
+
+        function modifyAddress()
+        {
+            var valid = true;
+            allFields.removeClass("ui-state-error");
+
+            valid = valid && checkLength(name, "ConsigneeName", 3, 16);
+            valid = valid && checkLength(contact, "Contact", 11, 11);
+            valid = valid && checkLength(email, "Email", 6, 80);
+
+            ////valid = valid && checkRegexp(email,
+            ////   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
+            //valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "ConsigneeName may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+            valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
+
+            if (valid) {
+                $("#Consignee").
                 dialog.dialog("close");
             }
             return valid;
@@ -193,6 +290,24 @@
             }
         });
 
+        //modifyDiv.parent().children().eq(0).children().eq(0).html("Modify address");
+        modifyDialog = modifyDiv.dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Create an address": addAddress,
+                Cancel: function () {
+                    dialog.dialog("close");
+                }
+            },
+            close: function () {
+                form[0].reset();
+                allFields.removeClass("ui-state-error");
+            }
+        });
+               
         form = dialog.find("form").on("submit", function (event) {
             event.preventDefault();
             addAddress();
@@ -201,7 +316,33 @@
         $("#create-address").button().on("click", function () {
             dialog.dialog("open");
         });
+
+        $("#modify-address").button().on("click", function () {
+            Parse(modifyDialog, modifyDiv);
+        });
     });
+
+    function Parse(modifyDialog, modifyDiv) {
+        var value = $("#Consignee").val();
+        $.ajax({
+            url: '@Url.Action("ParseAddress", "Orders")',
+            dataType: "json",
+            type: "POST",
+            data: { value: value },
+            success: function (eq) {
+                $("#Id")[0].value = eq.Index;
+                modifyDiv.children().eq(1).children().children().eq(1).attr('value', eq.ConsigneeName);
+                modifyDiv.children().eq(1).children().children().eq(3).children().eq(0).children().eq(0).html(eq.Province);
+                modifyDiv.children().eq(1).children().children().eq(5).children().eq(0).children().eq(0).html(eq.City);
+                modifyDiv.children().eq(1).children().children().eq(7).children().eq(0).children().eq(0).html(eq.Town);
+                modifyDiv.children().eq(1).children().children().eq(10).attr('value', eq.Address);
+                modifyDiv.children().eq(1).children().children().eq(12).attr('value', eq.Email);
+                modifyDiv.children().eq(1).children().children().eq(14).attr('value', eq.Contact);
+                modifyDialog.dialog("open");
+            }
+        })
+    }
+
 
     $(function () {
         var menu_ul = $('.menu > li > ul'),
@@ -233,8 +374,7 @@
                 my: "left top",
                 at: "left bottom"
             },
-            open: function (event, ui)
-            {
+            open: function (event, ui) {
                 ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast");
             }
         });
@@ -246,6 +386,13 @@
         });
     });
 </script>
+
+<input type="hidden" name="pay" id="pay" />
+<input type="hidden" name="secondDelivery" id="secondDelivery" />
+<input type="hidden" name="selfDelivery" id="selfDelivery" />
+<input type="hidden" name="addressDetail" id="addressDetail" />
+<input type="hidden" name="consigneeName" id="consigneName" />
+<input type="hidden" name="Id" id="Id"/>
 
 <div class="header">
     <div class="header_top">
@@ -378,7 +525,7 @@
                         <div>
                             <h3>支付方式：</h3>
                             <div class="payfor">
-                                <input type="checkbox" style="float:left;" /> <span id="cash" title="本网站暂时只支持货到付款，会逐步增加其他支付方式哦！">货到付款</span><br />
+                                <input type="checkbox" style="float:left;" name="cash" /> <span id="cash" title="本网站暂时只支持货到付款，会逐步增加其他支付方式哦！">货到付款</span><br />
                             </div>
                         </div>
                     </div>
@@ -386,10 +533,10 @@
 
                     <div class="top_grid2">
                         <div>
-                                <h3>送货清单：</h3>
-                                <div style="float:right;">
-                                    <a href="@Url.Action("Home", "ShoppingTrolleys")" style="cursor:pointer;">返回修改购物车</a>
-                                </div>
+                            <h3>送货清单：</h3>
+                            <div style="float:right;">
+                                <a href="@Url.Action("Home", "ShoppingTrolleys")" style="cursor:pointer;">返回修改购物车</a>
+                            </div>
                             <div class="col-md-4">
                                 <h4>配送方式</h4>
                                 <div style="margin: 10px 0 20px;">
@@ -438,18 +585,21 @@
                         </div>
                         <br /><br />
                         <div class="list" style="float:right;">
-                            <span style="left:715px;position:absolute;">运费 &nbsp;&nbsp;&nbsp;￥@ViewBag.Shipment.00
+                            <span style="left:715px;position:absolute;">
+                                运费 &nbsp;&nbsp;&nbsp;￥@ViewBag.Shipment.00
                             </span>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <hr />
                     <div style="float:right;">
-                        <h3>应付总额：<em style="font-size:larger; color:red;">￥@ViewBag.Cost</em></h3>
+                        <h3>应付总额：<em style="font-size:larger; color:red;">￥@ViewBag.Cost.00</em></h3>
                         <input type="submit" class="checkout-submit btn-1" id="order-submit" style="float: right;" />
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>

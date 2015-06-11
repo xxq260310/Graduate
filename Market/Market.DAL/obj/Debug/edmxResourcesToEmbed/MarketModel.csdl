@@ -191,10 +191,14 @@
     <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Delivery" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="ConsigneeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="CreationDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="UserProfile" Relationship="MarketModel.UserProfileOrder" FromRole="Order" ToRole="UserProfile" />
     <NavigationProperty Name="CommodityInOrders" Relationship="MarketModel.OrderCommodityInOrder" FromRole="Order" ToRole="CommodityInOrder" />
+    <Property Name="Payfor" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+    <Property Name="Province" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+    <Property Name="City" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+    <Property Name="Town" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="ShoppingTrolley">
     <Key>
@@ -392,8 +396,8 @@
     <Property Name="UnitPrice" Type="Double" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Color" Type="String" FixedLength="false" Unicode="false" MaxLength="10" />
-    <Property Name="Size" Type="String" Nullable="false" FixedLength="false" Unicode="false" MaxLength="10" />
-    <Property Name="Capacity" Type="String" Nullable="false" FixedLength="false" Unicode="false" MaxLength="10" />
+    <Property Name="Size" Type="String" FixedLength="false" Unicode="false" MaxLength="10" />
+    <Property Name="Capacity" Type="String" FixedLength="false" Unicode="false" MaxLength="10" />
     <NavigationProperty Name="Commodity" Relationship="MarketModel.CommodityInOrderCommodity" FromRole="CommodityInOrder" ToRole="Commodity" />
     <NavigationProperty Name="Order" Relationship="MarketModel.OrderCommodityInOrder" FromRole="CommodityInOrder" ToRole="Order" />
   </EntityType>

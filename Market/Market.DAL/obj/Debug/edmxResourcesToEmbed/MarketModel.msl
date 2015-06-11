@@ -77,6 +77,10 @@
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="Delivery" ColumnName="Delivery" />
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
+          <ScalarProperty Name="Payfor" ColumnName="Payfor" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
         </MappingFragment>

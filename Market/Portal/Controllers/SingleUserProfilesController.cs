@@ -40,12 +40,7 @@ namespace Portal.Controllers
                 Address = userProfileItem.Address
             };
 
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View(userProfileViewModel);
         }
 
@@ -74,12 +69,7 @@ namespace Portal.Controllers
                 Email = userProfile.Email
             };
 
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View(model);
         }
 
@@ -125,12 +115,7 @@ namespace Portal.Controllers
                 Address = userProfileItem.Address
             };
 
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View(userProfileViewModel);
         }
 
@@ -158,12 +143,7 @@ namespace Portal.Controllers
                 Address = userProfile.Address,
                 Email = userProfile.Email
             };
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
 
             return View(model);
         }

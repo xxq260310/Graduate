@@ -78,16 +78,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="column_center">
-            <div class="container">
-                <div class="search">
-                    <div class="stay">搜索商品</div>
-                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
-                    <input type="submit" value="" style="position:absolute;left:342px;top:0px;" />
-                </div>
-            </div>
-        </div>
         @RenderBody()
         <hr />
         <footer>

@@ -65,22 +65,7 @@ namespace Portal.Controllers
 
         public ActionResult SingleCommodity(int? id)
         {
-            var parentCategory = (from p in this.db.ParentCategories
-                                  select p).ToList();
-            List<CategoryGroup> categoryGroupList = new List<CategoryGroup>();
-            foreach (var p in parentCategory)
-            {
-                CategoryGroup categoryGroup = new CategoryGroup();
-                var categories = (from subCategory in this.db.SubCategories
-                                  where subCategory.ParentCategoryId == p.ParentCategoryId
-                                  select subCategory.CategoryName).ToList();
-                categoryGroup.ParentCategory = p.CategoryName;
-                categoryGroup.SubCategory = categories;
-
-                categoryGroupList.Add(categoryGroup);
-            }
-
-            ViewBag.CategoryList = categoryGroupList;
+            ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();
 
             if (id == null)
             {
@@ -193,12 +178,7 @@ namespace Portal.Controllers
             ViewBag.Feedbacks = feedbackModel;
 
 
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View(commodityInfo);
         }
 

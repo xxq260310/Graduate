@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/06/2015 12:10:03
+-- Date Created: 06/09/2015 14:04:19
 -- Generated from EDMX file: F:\Graduate\Market\Market.DAL\MarketModel.edmx
 -- --------------------------------------------------
 
@@ -307,8 +307,8 @@ CREATE TABLE [dbo].[CommodityInOrders] (
     [UnitPrice] float  NULL,
     [Quantity] int  NULL,
     [Color] varchar(10)  NULL,
-    [Size] varchar(10)  NOT NULL,
-    [Capacity] varchar(10)  NOT NULL
+    [Size] varchar(10)  NULL,
+    [Capacity] varchar(10)  NULL
 );
 GO
 

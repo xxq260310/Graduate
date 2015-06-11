@@ -2,19 +2,17 @@
 namespace Portal.Authentication
 {
     using Portal.Models;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Linq;
+    using System.Web;
 
     /// <summary>
     /// This class is to manage admin or member log in.
     /// </summary>
     public class AdminManager
     {
-        private MarketContext db = new MarketContext();
-
         private List<User> users = new List<User>();
 
         /// <summary>
@@ -28,31 +26,34 @@ using System.Web;
         /// </returns>
         public AdminManager()
         {
-            var item = (from userProfile in this.db.UserProfiles
-                        select userProfile).ToList();
-            foreach (var user in item)
+            using (MarketContext db = new MarketContext())
             {
-                if (user.Role.RoleName == null || user.Role.RoleName == "Member")
+                var item = (from userProfile in db.UserProfiles
+                            select userProfile).ToList();
+                foreach (var user in item)
                 {
-                    users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "Member" });
-                }
+                    if (user.Role.RoleName == null || user.Role.RoleName == "Member")
+                    {
+                        users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "Member" });
+                    }
 
-                else if (user.Role.RoleName == "Administrator")
-                {
-                    users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "Administrator" });
-                }
+                    else if (user.Role.RoleName == "Administrator")
+                    {
+                        users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "Administrator" });
+                    }
 
-                else if(user.Role.RoleName == "TemporaryAdmin")
-                {
-                    users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "TemporaryAdmin" });
+                    else if (user.Role.RoleName == "TemporaryAdmin")
+                    {
+                        users.Add(new User() { Username = user.UserName, Password = Encryption.RSADecrypt(user.Password), Role = "TemporaryAdmin" });
+                    }
+
                 }
-                
             }
         }
 
         public bool Validate(string userName, string password)
         {
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 if (user.Username == userName && user.Password == password)
                 {

@@ -3,7 +3,58 @@
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
 
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+
 <script type="text/javascript">
+    $(function () {
+        if ($("table > tbody > tr").length == 2)
+        {
+            $("table").find("tr").eq(1).hide();
+        }
+    });
+
+    $(function () {
+        var dialog;
+        dialog = $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 250,
+            width: 400,
+            modal: true,
+            buttons: {
+                "Delete all items": deleteconfirmed,
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#delete").click(function () {
+            dialog.dialog("open");
+        });
+
+        function deleteconfirmed() {
+            var commodityId = $("#delete").next().val();
+            $.ajax({
+                url: '@Url.Action("SingleDelete", "ShoppingTrolleys")',
+                data: { id: commodityId },
+                type: "POST",
+                success: function (req) {
+                    if (req == 1) {
+                        dialog.dialog("close");
+                        location.reload();
+                    }
+                    else {
+                        alert("删除失败啦！");
+                    }
+                }
+            });
+        }
+    });
+
     $(function () {
         var menu_ul = $('.menu > li > ul'),
                menu_a = $('.menu > li > a');
@@ -132,62 +183,16 @@
             });
         });
     });
-
 </script>
+
 <input type="hidden" name="TotalCost" id="TotalCost" />
 <input type="hidden" name="OrderCommodityId" id="OrderCommodityId" />
 <input type="hidden" name="NotCheckedCommodityId" id="NotCheckedCommodityId" />
-<div class="header">
-    <div class="header_top">
-        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
-            <ul class="shopping_grid">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
-                    if (ViewBag.ShoppingTrolleysCount > 0)
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="h_menu4">
-        <div class="container">
-            <a class="toggleMenu" href="#">Menu</a>
-            <ul class="nav">
-                <li>@Html.ActionLink("Home", "Index", "Home") </li>
-                <li>@Html.ActionLink("About", "Index", "About") </li>
-                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
-                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
-                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
-            </ul>
-        </div>
-    </div>
+
+<div id="dialog-confirm" title="Are you sure delete?">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>
-<div class="column_center">
-    <div class="container">
-        <div class="search">
-            <div class="stay">搜索商品</div>
-            <div class="stay_right">
-                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-                {
-                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
-                    <input type="submit" value="" />
-                }
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="main">
     <div class="content_top">
@@ -269,7 +274,7 @@
                                     @p.Price <input type="hidden" value="@p.Price" />
                                 </td>
                                 <td>
-                                    <a id="delete" class="delete" style="cursor:pointer;" href="@Url.Action("ShowDialog", new { id = p.CommodityId})">删除</a> <input type="hidden" value="@p.CommodityId" /><br />
+                                    <a id="delete" class="delete" style="cursor:pointer;">删除</a> <input type="hidden" value="@p.CommodityId" /><br />
                                     <a id="favorite" style="cursor:pointer;" class="favorite" name="favorite">加入收藏夹</a> <input type="hidden" id="CommodityId" name="CommodityId" value="@p.CommodityId" />
                                 </td>
                             </tr>

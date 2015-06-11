@@ -71,12 +71,32 @@ textarea {
         border-bottom: 1px solid #dddddd;
     }
 
-.flowxml {
-      width: 960px;       
-      height: 540px;
-}
 
 .dd, dt {
     line-height:2;
 }
 
+.commodity input[type="submit"] {
+        display: inline-block;
+        padding: 13px 25px;
+        background: #df1f26;
+        color: #FFF;
+        font-size: 1em;
+        line-height: 18px;
+        text-transform: uppercase;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        -webkit-transition: 0.2s;
+        -moz-transition: 0.2s;
+        -o-transition: 0.2s;
+    }
+
+        .commodity input[type="submit"]:hover {
+            -webkit-transform: rotateY(15deg);
+            -moz-transform: rotateY(15deg);
+            -ms-transform: rotateY(15deg);
+            transform: rotateY(15deg);
+            text-decoration: none;
+            background: #000;
+        }

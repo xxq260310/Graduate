@@ -50,3 +50,13 @@ G:\Graduate\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.dll
 G:\Graduate\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
 G:\Graduate\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.xml
 G:\Graduate\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Graduate\Market\Market.DAL\obj\Debug\Market.DAL.dll
+F:\Graduate\Market\Market.DAL\obj\Debug\Market.DAL.pdb
+F:\Graduate\Market\Market.DAL\bin\Debug\Market.DAL.dll.config
+F:\Graduate\Market\Market.DAL\bin\Debug\Market.DAL.dll
+F:\Graduate\Market\Market.DAL\bin\Debug\Market.DAL.pdb
+F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.dll
+F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
+F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.xml
+F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Graduate\Market\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache

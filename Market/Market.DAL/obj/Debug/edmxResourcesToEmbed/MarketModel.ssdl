@@ -173,6 +173,10 @@
     <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Payfor" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Province" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="City" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Town" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
   </EntityType>
@@ -265,8 +269,8 @@
     <Property Name="UnitPrice" Type="float" Nullable="true" />
     <Property Name="Quantity" Type="int" Nullable="true" />
     <Property Name="Color" Type="varchar" Nullable="true" MaxLength="10" />
-    <Property Name="Size" Type="varchar" Nullable="false" MaxLength="10" />
-    <Property Name="Capacity" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="Size" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Capacity" Type="varchar" Nullable="true" MaxLength="10" />
   </EntityType>
   <EntityType Name="UserProfileCommodities">
     <Key>

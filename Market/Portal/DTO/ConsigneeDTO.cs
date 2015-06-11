@@ -6,9 +6,7 @@ using System.Web;
 namespace Portal.DTO
 {
     public class ConsigneeDTO
-    {
-        public int Index { get; set; } 
-            
+    { 
         public string ConsigneeName { get; set; }
 
         public string Contact { get; set; }

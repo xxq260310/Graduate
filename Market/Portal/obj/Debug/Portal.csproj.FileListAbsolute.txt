@@ -399,6 +399,5 @@ F:\Graduate\Market\Portal\bin\System.Web.WebPages.Deployment.xml
 F:\Graduate\Market\Portal\bin\System.Web.WebPages.Razor.xml
 F:\Graduate\Market\Portal\bin\Antlr3.Runtime.pdb
 F:\Graduate\Market\Portal\bin\Newtonsoft.Json.xml
-F:\Graduate\Market\Portal\obj\Debug\Portal.csprojResolveAssemblyReference.cache
 F:\Graduate\Market\Portal\obj\Debug\Portal.dll
 F:\Graduate\Market\Portal\obj\Debug\Portal.pdb

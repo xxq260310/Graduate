@@ -17,6 +17,16 @@ namespace Portal
 
         }
 
+        public static string GetNickNameByUserId(string userId)
+        {
+            int id = Convert.ToInt32(userId);
+            using (MarketContext db = new MarketContext())
+            {
+                var nickName = db.UserProfiles.Where(x => x.UserId == id).Select(x => x.Nickname).FirstOrDefault();
+                return nickName;
+            }
+        }
+
         public static string GetRoleNameByUserName(string userName)
         {
             using (MarketContext db = new MarketContext())

@@ -1,2 +1,164 @@
-﻿
+﻿@{
+    ViewBag.Title = "Single Order";
+    Layout = "~/Views/Shared/LayoutForOrder.cshtml";
+}
 
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var dialog;
+        dialog = $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 250,
+            width: 400,
+            modal: true,
+            buttons: {
+                "Delete all items":  deleteconfirmed,
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#deleteorder").click(function () {
+            dialog.dialog("open");
+        });
+
+        function deleteconfirmed() {
+            var orderId = $("#deleteorder").next().val();
+            $.ajax({
+                url: '@Url.Action("SingleDelete", "Orders")',
+                data: { id: orderId },
+                type: "POST"
+            });
+            dialog.dialog("close");
+            location.reload();
+        }
+    });
+
+    $(function () {
+        var menu_ul = $('.menu > li > ul'),
+               menu_a = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+    });
+</script>
+
+<div id="dialog-confirm" title="Are you sure delete the order?">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
+
+
+<div class="main">
+    <div class="content_top">
+        <div class="container">
+            <div class="col-md-3 sidebar_box">
+                <div class="sidebar">
+                    <div class="menu_box">
+                        <h3 class="menu_head">Menu</h3>
+                        <ul class="menu">
+                            @foreach (var p in ViewBag.CategoryList)
+                            {
+                                <li>
+                                    <a style="cursor:pointer;"> <img src="~/images/f_menu.png" alt="" />@p.ParentCategory</a>
+                                    <ul>
+                                        @foreach (var t in p.SubCategory)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Home", new { subCategory = t })">@t</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="twitter">
+                    <h3>联系方式</h3>
+                    <ul class="twt1">联系人<li><input type="text" readonly value="Xu xiaoqin" style="border:none;" /></li></ul>
+                    <ul class="twt1">电话<li><input type="text" readonly style="border:none;" value="18652936326" /></li></ul>
+                    <ul class="twt1">邮箱<li><input type="text" readonly style="border:none;" value="xxq260310x@163.com" /></li></ul>
+                </div>
+                <div class="clients">
+                    <h3>友情提示</h3>
+                    <h4>本网站是二手商品交易网，请有需要同志大力购买，保证低价，正品，物流快。</h4>
+                </div>
+            </div>
+
+            <div class="col-md-9 content_right">
+                <div class="container">
+                    <table class="table" width="800">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">订单信息</th>
+                                <th>收货人</th>
+                                <th>配送方式</th>
+                                <th>生成时间</th>
+                                <th>订单状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        @foreach (var p in ViewBag.OrderList)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span>订单编号：@p.OrderId</span>
+                                    </td>
+                                    <td>
+                                        <span>订单金额：￥@p.Cost.00</span>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a id="detail" style="cursor:pointer;">查看</a>|<a id="deleteorder" style="cursor:pointer;">删除</a> <input type="hidden" name="OrderId" id="OrderId" value="@p.OrderId" />
+                                    </td>
+                                </tr>
+                            @foreach (var q in p.CommodityInfoes)
+                            {
+                                    <tr>
+                                        <td>
+                                            <img src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = q.CommodityId })" alt="" width="60" height="60" />
+                                        </td>
+                                        <td>
+                                            @p.ConsigneeName
+                                        </td>
+                                        <td>
+                                            @p.Payfor
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @p.CreationDate
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @p.State
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                            }</tbody>
+
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

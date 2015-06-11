@@ -18,6 +18,7 @@ namespace Portal.Controllers
     {
         private MarketContext db = new MarketContext();
 
+        [HttpPost]
         public ActionResult SingleDelete(int? id)
         {
             if (id == null)
@@ -33,8 +34,8 @@ namespace Portal.Controllers
                                        && item.CommodityId == id.Value
                                        select item).FirstOrDefault();
             this.db.CommodityInFavorites.Remove(commodityInFavorite);
-            this.db.SaveChanges();
-            return RedirectToAction("Home");
+            
+            return this.Json(this.db.SaveChanges());
         }
 
         public ActionResult Home()
@@ -61,12 +62,7 @@ namespace Portal.Controllers
 
             ViewBag.CommoditiesInFavorite = model;
 
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View();
         }
 

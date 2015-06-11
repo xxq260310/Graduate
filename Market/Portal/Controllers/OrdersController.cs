@@ -32,31 +32,10 @@ namespace Portal.Controllers
                 return HttpNotFound();
             }
 
-            var parentCategory = (from p in this.db.ParentCategories
-                                  select p).ToList();
-            List<CategoryGroup> categoryGroupList = new List<CategoryGroup>();
-            foreach (var p in parentCategory)
-            {
-                CategoryGroup categoryGroup = new CategoryGroup();
-                var categories = (from item in this.db.SubCategories
-                                  where item.ParentCategoryId == p.ParentCategoryId
-                                  select item.CategoryName).ToList();
-                categoryGroup.ParentCategory = p.CategoryName;
-                categoryGroup.SubCategory = categories;
+            ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();
 
-                categoryGroupList.Add(categoryGroup);
-            }
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
 
-            ViewBag.CategoryList = categoryGroupList;
-
-            var commodityInShoppingTrolleyList = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                                  from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                                  where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                                  && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                                  select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
-
-            var index = 0;
             var consigneeInfo = from orderItem in this.db.Orders
                                 where orderItem.UserProfile.UserName == User.Identity.Name
                                 select new SelectListItem
@@ -84,13 +63,12 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public JsonResult ParseAddress(string value, string index)
+        public JsonResult ParseAddress(string value)
         {
             ConsigneeDTO consigneeDto = new ConsigneeDTO();
             if (value != null)
             {
                 string[] consignee = value.Split(',');
-                consigneeDto.Index = Convert.ToInt32(index);
                 consigneeDto.ConsigneeName = consignee[0];
                 consigneeDto.Province = consignee[1];
                 consigneeDto.City = consignee[2];
@@ -104,45 +82,75 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Home(FormCollection formCollection, Order order)
+        public ActionResult Home(OrderInfoDTO orderInfoDto)
         {
-            string address = formCollection["addressDetail"].ToString();
-            string delivery = formCollection["delivery"].ToString();
-            string selfDelivery = formCollection["selfDelivery"].ToString();
-            string payFor = formCollection["pay"].ToString();
-            string[] consigneeInfo = formCollection["consigneeName"].ToString().Split(',');
-            if (address != null && (delivery != null || selfDelivery != null) && payFor != null && consigneeInfo != null)
+            Order order = this.db.Orders.Find(Convert.ToInt32(orderInfoDto.OrderId));
+            if (orderInfoDto != null)
             {
-                order.Address = address;
-                order.Payfor = payFor;
+                string[] address = orderInfoDto.Address.Split(',');
+                order.Address = address[4];
+                order.Province = address[1];
+                order.City = address[2];
+                order.Town = address[3];
+                order.ConsigneeName = address[0];
+                order.Contact = address[5];
+                order.Email = address[6];
+                order.Payfor = orderInfoDto.Payfor;
+                order.Delivery = orderInfoDto.Delivery;
                 order.CreationDate = DateTime.Now;
-                if (delivery != null)
-                {
-                    order.Delivery = delivery;
-                }
-
-                if (selfDelivery != null)
-                {
-                    order.Delivery = selfDelivery;
-                }
-
-                if (consigneeInfo != null)
-                {
-                    order.ConsigneeName = consigneeInfo[0];
-                    order.Contact = consigneeInfo[1];
-                    order.Email = consigneeInfo[2];
-                }
-
                 db.Entry(order).State = EntityState.Modified;
+                
+                var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
+                List<CommodityInShoppingTrolley> commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.Where(x => x.UserId == userId).ToList();
+                this.db.CommodityInShoppingTrolleys.RemoveRange(commodityInShoppingTrolley);
                 db.SaveChanges();
+                return this.Redirect("/Orders/SingleOrder");
             }
 
-
-            return View();
+            return this.View();
         }
+
         public ActionResult SingleOrder()
         {
+            ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();
+
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
+            
+            var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
+            var orderList = (from order in this.db.Orders
+                             where order.UserId == userId
+                             select order).ToList();
+            List<OrderViewModel> orderViewModelList = new List<OrderViewModel>();
+            foreach (var u in orderList)
+            {
+                OrderViewModel order = new OrderViewModel()
+                {
+                    OrderId = u.OrderId,
+                    Cost = u.TotalCost.Value,
+                    ConsigneeName = u.ConsigneeName,
+                    Payfor = u.Payfor,
+                    State = u.State,
+                    CreationDate = u.CreationDate.Value,
+                    CommodityInfoes = u.CommodityInOrders.Select(x => new CommodityInOrderViewModel() { 
+                        CommodityId = x.CommodityId
+                    })
+                };
+                orderViewModelList.Add(order);
+            }
+
+            ViewBag.OrderList = orderViewModelList;
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult SingleDelete(int? id)
+        {
+            Order order = this.db.Orders.Where(x => x.OrderId == id).FirstOrDefault();
+            List<CommodityInOrder> model = this.db.CommodityInOrders.Where(x => x.OrderId == id).ToList();
+
+            this.db.CommodityInOrders.RemoveRange(model);
+            this.db.Orders.Remove(order);
+            return this.Json(this.db.SaveChanges());
         }
 
         // GET: Orders

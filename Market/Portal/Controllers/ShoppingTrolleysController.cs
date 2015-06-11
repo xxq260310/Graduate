@@ -26,22 +26,7 @@ namespace Portal.Controllers
 
         public ActionResult Home()
         {
-            var parentCategory = (from p in this.db.ParentCategories
-                                  select p).ToList();
-            List<CategoryGroup> categoryGroupList = new List<CategoryGroup>();
-            foreach (var p in parentCategory)
-            {
-                CategoryGroup categoryGroup = new CategoryGroup();
-                var categories = (from item in this.db.SubCategories
-                                  where item.ParentCategoryId == p.ParentCategoryId
-                                  select item.CategoryName).ToList();
-                categoryGroup.ParentCategory = p.CategoryName;
-                categoryGroup.SubCategory = categories;
-
-                categoryGroupList.Add(categoryGroup);
-            }
-
-            ViewBag.CategoryList = categoryGroupList;
+            ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();
 
             var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             var commodityInShoppingTrolley = (from commodity in this.db.CommodityInShoppingTrolleys
@@ -68,12 +53,7 @@ namespace Portal.Controllers
             ViewBag.CommodityInShoppingTrolleys = model;
             ViewBag.Count = model.Count;
 
-            var commodityInShoppingTrolleyList = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                                  from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                                  where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                                  && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                                  select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolleyList.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View();
         }
 
@@ -125,7 +105,7 @@ namespace Portal.Controllers
                     model.Capacity = commodityInShoppingTrolley.Capacity;
                 }
 
-                var userProfileCommodity = this.db.UserProfileCommodities.SingleOrDefault(x => x.UserProfile.UserName == User.Identity.Name);
+                var userProfileCommodity = this.db.UserProfileCommodities.SingleOrDefault(x => x.UserProfile.UserName == User.Identity.Name && x.CommodityId == commodityId);
                 if (userProfileCommodity != null)
                 {
                     CommodityInOrder commodityInOrder = new CommodityInOrder()
@@ -155,12 +135,10 @@ namespace Portal.Controllers
                     };
                     this.db.CommodityInOrders.Add(commodityInOrder);
                 }
-
-
             }
 
             this.db.SaveChanges();
-            return RedirectToAction("Home", "Orders", new { id = order.OrderId});
+            return this.Redirect("Orders/Home/id= "+ order.OrderId +"");
         }
 
         [HttpPost]
@@ -237,15 +215,8 @@ namespace Portal.Controllers
                 this.db.ShoppingTrolleys.Remove(shoppingTrolley);
             }
 
-            if (this.db.SaveChanges() == 1)
-            {
-                return this.Json("1");
-            }
-            else
-            {
-                return this.Json("0");
-            }
-            
+            var json = (this.db.SaveChanges() == 1 || this.db.SaveChanges() == 2) ? 1 : 0;
+            return this.Json(json);
         }
 
         // GET: ShoppingTrolleys

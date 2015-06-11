@@ -104,10 +104,15 @@
     $(function () {
         var index = 1;
         var a = $("#Consignee").find("option");
-        $(a).each(function () {
-            a.attr('title', index);
+        a.first().attr("title", index);
+        var next = a.next();
+        for (var i = 0; i < a.length - 1; i++)
+        {
             index++;
-        });
+            next = next.first();
+            next.attr("title", index);
+            next = next.next();
+        }
     });
 
     $(function () {
@@ -145,8 +150,7 @@
 
     $(function () {
         $("#order-submit").click(function () {
-
-            var consignee = $("#Consignee").text();
+            var consignee = $("#Consignee").find("option[value='" + $("#Consignee").val() + "']").text();
             if (consignee == "" || consignee == null) {
                 alert("请先填写收货地址！");
                 return false;
@@ -168,28 +172,133 @@
                 return false;
             }
 
+            var secondDelivery;
             if ($(generaldelivery).prop("checked") == true) {
                 $("#secondDelivery")[0].value = $(generaldelivery).next().html();
+                secondDelivery = $("#secondDelivery")[0].value;
             }
 
 
             if ($(selfdelivery).prop("checked") == true) {
                 $("#selfDelivery")[0].value = $(selfdelivery).next().html();
+                secondDelivery = $("#selfDelivery")[0].value;
             }
 
-            $("#addressDetail")[0].value = $("#Consignee").text();
+            $("#addressDetail")[0].value = $("#Consignee").val();
 
-            $("#consigneName")[0].value = $("#Consignee").val();
-
+            var info = { Address: $("#addressDetail")[0].value, Delivery: secondDelivery, Payfor: $("#pay")[0].value, OrderId: @Model.OrderId };
             $.ajax({
                 url: '@Url.Action("Home", "Orders")',
-                type: "POST"
+                type: "POST",
+                data: info
             })
         })
     });
 
+    
+    function updateTips(t) {
+        var tips = $(".validateTips");
+        tips
+         .text(t)
+         .addClass("ui-state-highlight");
+        setTimeout(function () {
+            tips.removeClass("ui-state-highlight", 1500);
+        }, 500);
+    }
+
+    function checkLength(o, n, min, max) {
+        if (o.val().length > max || o.val().length < min) {
+            o.addClass("ui-state-error");
+            updateTips("Length of " + n + " must be between " +
+              min + " and " + max + ".");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkRegexp(o, regexp, n) {
+        if (!(regexp.test(o.val()))) {
+            o.addClass("ui-state-error");
+            updateTips(n);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     $(function () {
-        var dialog, form, modifyDialog, 
+        var dialog, form,
+          div = $("#dialog-form"),
+          name = $("#name"),
+          email = $("#email"),
+          contact = $("#contact"),
+          province = $("#s2id_loc_province").children().children().eq(0),
+          city = $("#s2id_loc_city").children().children().eq(0),
+          town = $("#s2id_loc_town").children().children().eq(0),
+          address = $("#address"),
+          allFields = $([]).add(name).add(email).add(contact).add(address).add(province).add(city).add(town);
+
+        dialog = div.dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Create an address": addAddress,
+                Cancel: function () {
+                    dialog.dialog("close");
+                }
+            },
+            close: function () {
+                form[0].reset();
+                allFields.removeClass("ui-state-error");
+            }
+        });
+
+        function addAddress() {
+            var valid = true;
+            allFields.removeClass("ui-state-error");
+
+            valid = valid && checkLength(name, "ConsigneeName", 3, 16);
+            valid = valid && checkLength(contact, "Contact", 11, 11);
+            valid = valid && checkLength(email, "Email", 6, 80);
+
+            valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
+
+            if (valid) {
+                
+                dialog.dialog("close");
+            }
+            return valid;
+        }
+
+        form = dialog.find("form").on("submit", function (event) {
+            event.preventDefault();
+            addAddress();
+        });
+
+        $("#create-address").button().on("click", function () {
+            dialog.dialog("open");
+            Empty(dialog, div);
+        });
+
+        function Empty(dialog, div) {
+            div.children().eq(1).children().children().eq(1).attr('value', "");
+            div.children().eq(1).children().children().eq(3).children().eq(0).children().eq(0).html("省份");
+            div.children().eq(1).children().children().eq(5).children().eq(0).children().eq(0).html("地级市");
+            div.children().eq(1).children().children().eq(7).children().eq(0).children().eq(0).html("市、县、区");
+            div.children().eq(1).children().children().eq(10).attr('value', "");
+            div.children().eq(1).children().children().eq(12).attr('value', "");
+            div.children().eq(1).children().children().eq(14).attr('value', "");
+            div.parent().children().eq(0).children().eq(0).html("Create new address");
+            $("div[role='dialog']").children().eq(10).children().children().eq(0).html("Create an address");
+        }
+    });
+
+
+    $(function () {
+        var modifyDialog, modifyForm,
           modifyDiv = $("#dialog-form"),
           name = $("#name"),
           email = $("#email"),
@@ -201,147 +310,107 @@
           allFields = $([]).add(name).add(email).add(contact).add(address).add(province).add(city).add(town),
           tips = $(".validateTips");
 
-        function updateTips(t) {
-            tips
-             .text(t)
-             .addClass("ui-state-highlight");
-            setTimeout(function () {
-                tips.removeClass("ui-state-highlight", 1500);
-            }, 500);
-        }
-
-        function checkLength(o, n, min, max) {
-            if (o.val().length > max || o.val().length < min) {
-                o.addClass("ui-state-error");
-                updateTips("Length of " + n + " must be between " +
-                  min + " and " + max + ".");
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        function checkRegexp(o, regexp, n) {
-            if (!(regexp.test(o.val()))) {
-                o.addClass("ui-state-error");
-                updateTips(n);
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        function addAddress() {
-            var valid = true;
-            var index = $("#Consignee").find("option").length + 1;
-            allFields.removeClass("ui-state-error");
-
-            valid = valid && checkLength(name, "ConsigneeName", 3, 16);
-            valid = valid && checkLength(contact, "Contact", 11, 11);
-            valid = valid && checkLength(email, "Email", 6, 80);
-
-            ////valid = valid && checkRegexp(email,
-            ////   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
-            //valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "ConsigneeName may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-            valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
-
-            if (valid) {
-                $("#Consignee").append("<option value='" + index + "," + name.val() + "," + province.text() + "," + city.text() + "," + town.text() + "," + address.val() + "," + contact.val() + "," + email.val() + " title='"+ index +"''>" + name.val() + " " + province.text() + "" + city.text() + "" + town.text() + "" + address.val() + " " + contact.val() + "</option>");
-                dialog.dialog("close");
-            }
-            return valid;
-        }
-
-        function modifyAddress()
-        {
-            var valid = true;
-            allFields.removeClass("ui-state-error");
-
-            valid = valid && checkLength(name, "ConsigneeName", 3, 16);
-            valid = valid && checkLength(contact, "Contact", 11, 11);
-            valid = valid && checkLength(email, "Email", 6, 80);
-
-            ////valid = valid && checkRegexp(email,
-            ////   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+ [a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, "eg.ui@jquery.com");
-            //valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "ConsigneeName may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-            valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
-
-            if (valid) {
-                $("#Consignee").
-                dialog.dialog("close");
-            }
-            return valid;
-        }
-
-        dialog = $("#dialog-form").dialog({
-            autoOpen: false,
-            height: 300,
-            width: 350,
-            modal: true,
-            buttons: {
-                "Create an address": addAddress,
-                Cancel: function () {
-                    dialog.dialog("close");
-                }
-            },
-            close: function () {
-                form[0].reset();
-                allFields.removeClass("ui-state-error");
-            }
-        });
-
-        //modifyDiv.parent().children().eq(0).children().eq(0).html("Modify address");
         modifyDialog = modifyDiv.dialog({
             autoOpen: false,
             height: 300,
             width: 350,
             modal: true,
             buttons: {
-                "Create an address": addAddress,
+                "Modify an address": modifyAddress,
                 Cancel: function () {
-                    dialog.dialog("close");
+                    modifyDialog.dialog("close");
                 }
             },
             close: function () {
-                form[0].reset();
+                modifyForm[0].reset();
                 allFields.removeClass("ui-state-error");
             }
         });
-               
-        form = dialog.find("form").on("submit", function (event) {
+
+        function modifyAddress() {
+            var valid = true;
+            allFields.removeClass("ui-state-error");
+
+            valid = valid && checkLength(name, "ConsigneeName", 3, 16);
+            valid = valid && checkLength(contact, "Contact", 11, 11);
+            valid = valid && checkLength(email, "Email", 6, 80);
+
+            valid = valid && checkRegexp(contact, /^([0-9])+$/, "Contact field only allow : 0-9");
+
+            if ($("#dialog-form").parent().children().eq(0).children().eq(0).html() == "Modify address") {
+                if (valid) {
+                    var option = $("#Consignee").find("option[title='" + $("#Id")[0].value + "']");
+                    option.val("");
+                    option.text("");
+                    option.text(name.val() + " "+ province.text() + city.text() + town.text() + address.val() + " "+ contact.val() );
+                    option.val(name.val() + ',' + province.text() + ',' + city.text() + ',' + town.text() + ',' + address.val() + ',' + contact.val() + ',' + email.val());
+                    modifyDialog.dialog("close");
+                }
+            }
+            else {
+                if (valid)
+                {
+                    var length = $("#Consignee").find("option").length + 1;
+                    $("#Consignee").append("<option value='" + name.val() + "," + province.text() + "," + city.text() + "," + town.text() + "," + address.val() + "," + contact.val() + "," + email.val() + "' title='"+ length +"'>" + name.val() + " " + province.text() + "" + city.text() + "" + town.text() + "" + address.val() + " " + contact.val() + "</option>");
+                    modifyDialog.dialog("close");
+                }
+            }
+
+            return valid;
+        }
+
+
+        modifyForm = modifyDialog.find("form").on("submit", function (event) {
             event.preventDefault();
-            addAddress();
+            modifyAddress();
         });
 
-        $("#create-address").button().on("click", function () {
-            dialog.dialog("open");
-        });
 
         $("#modify-address").button().on("click", function () {
-            Parse(modifyDialog, modifyDiv);
-        });
-    });
-
-    function Parse(modifyDialog, modifyDiv) {
-        var value = $("#Consignee").val();
-        $.ajax({
-            url: '@Url.Action("ParseAddress", "Orders")',
-            dataType: "json",
-            type: "POST",
-            data: { value: value },
-            success: function (eq) {
-                $("#Id")[0].value = eq.Index;
-                modifyDiv.children().eq(1).children().children().eq(1).attr('value', eq.ConsigneeName);
-                modifyDiv.children().eq(1).children().children().eq(3).children().eq(0).children().eq(0).html(eq.Province);
-                modifyDiv.children().eq(1).children().children().eq(5).children().eq(0).children().eq(0).html(eq.City);
-                modifyDiv.children().eq(1).children().children().eq(7).children().eq(0).children().eq(0).html(eq.Town);
-                modifyDiv.children().eq(1).children().children().eq(10).attr('value', eq.Address);
-                modifyDiv.children().eq(1).children().children().eq(12).attr('value', eq.Email);
-                modifyDiv.children().eq(1).children().children().eq(14).attr('value', eq.Contact);
-                modifyDialog.dialog("open");
+            if($("#Consignee").val() == ",,,,,,")
+            {
+                alert("请先新增收货地址！");
+                return false;
             }
-        })
-    }
+            else
+            {
+                modifyDialog.dialog("open");
+                Parse(modifyDialog, modifyDiv);
+            }
+
+        });
+
+        function Parse(modifyDialog, modifyDiv) {
+            var value = $("#Consignee").val();
+            var option = $("#Consignee").find("option");
+            $(option).each(function () {
+                if ($(this).val() == value)
+                {
+                    $("#Id")[0].value = $(this).attr('title');
+                }
+            })
+
+            $.ajax({
+                url: '@Url.Action("ParseAddress", "Orders")',
+                dataType: "json",
+                type: "POST",
+                data: { value: value },
+                success: function (eq) {
+                    modifyDiv.children().eq(1).children().children().eq(1).attr('value', eq.ConsigneeName);
+                    modifyDiv.children().eq(1).children().children().eq(3).children().eq(0).children().eq(0).html(eq.Province);
+                    modifyDiv.children().eq(1).children().children().eq(5).children().eq(0).children().eq(0).html(eq.City);
+                    modifyDiv.children().eq(1).children().children().eq(7).children().eq(0).children().eq(0).html(eq.Town);
+                    modifyDiv.children().eq(1).children().children().eq(10).attr('value', eq.Address);
+                    modifyDiv.children().eq(1).children().children().eq(12).attr('value', eq.Email);
+                    modifyDiv.children().eq(1).children().children().eq(14).attr('value', eq.Contact);
+                    modifyDiv.parent().children().eq(0).children().eq(0).html("Modify address");
+                    modifyDiv.children().eq(0).html("All form fields are required.");
+                    $("div[role='dialog']").children().eq(10).children().children().eq(0).html("Modify an address");
+                }
+            });
+        }
+
+    });
 
 
     $(function () {
@@ -387,68 +456,15 @@
     });
 </script>
 
+@Html.HiddenFor(model => model.OrderId)
 <input type="hidden" name="pay" id="pay" />
 <input type="hidden" name="secondDelivery" id="secondDelivery" />
 <input type="hidden" name="selfDelivery" id="selfDelivery" />
 <input type="hidden" name="addressDetail" id="addressDetail" />
-<input type="hidden" name="consigneeName" id="consigneName" />
-<input type="hidden" name="Id" id="Id"/>
+<input type="hidden" name="Id" id="Id" />
 
-<div class="header">
-    <div class="header_top">
-        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
-            <ul class="shopping_grid">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
-                    if (ViewBag.ShoppingTrolleysCount > 0)
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")">
-                            <li>
-                                <span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount)
-                                <img src="~/images/bag.png" alt="" />
-                            </li>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                }
-            </ul>
-        </div>
-    </div>
 
-    <div class="h_menu4">
-        <div class="container">
-            <a class="toggleMenu" href="#">Menu</a>
-            <ul class="nav">
-                <li>@Html.ActionLink("Home", "Index", "Home") </li>
-                <li>@Html.ActionLink("About", "Index", "About") </li>
-                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
-                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
-                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div class="column_center">
-    <div class="container">
-        <div class="search">
-            <div class="stay">搜索商品</div>
-            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
-            <input type="submit" value="" style="position:absolute;left:342px;top:0px;" />
-        </div>
-    </div>
-</div>
-
-<div id="dialog-form" title="Create new address">
+<div id="dialog-form" title="Create new address" style="display:none;">
     <p class="validateTips">All form fields are required.</p>
     <form>
         <fieldset>

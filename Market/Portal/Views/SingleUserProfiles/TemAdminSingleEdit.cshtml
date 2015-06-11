@@ -2,49 +2,10 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/LayoutForUser.cshtml";
+    Layout = "~/Views/Shared/LayoutForAbout.cshtml";
 }
 
-<div class="header">
-    <div class="header_top">
-        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
-            <ul class="shopping_grid">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a href="@Url.Action("Home", "Favorites")">收藏夹</a></li>
-    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
-                    if (ViewBag.ShoppingTrolleysCount > 0)
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                }
-            </ul>
-        </div>
-    </div>
 
-    <div class="h_menu4">
-        <div class="container">
-            <a class="toggleMenu" href="#">Menu</a>
-            <ul class="nav">
-                <li>@Html.ActionLink("Home", "Index", "Home") </li>
-                <li>@Html.ActionLink("About", "Index", "About") </li>
-                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
-                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
-                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
-                <li>@Html.ActionLink("UserProfiles", "TemAdminSingleUserProfile", "SingleUserProfiles")</li>
-                <li>@Html.ActionLink("Commodities", "TemporaryAdminIndex", "Commodities")</li>
-            </ul>
-        </div>
-    </div>
-</div>
 <br />
 <h2>Edit</h2>
 

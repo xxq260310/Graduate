@@ -3,32 +3,8 @@
     ViewBag.Title = "SingleDetails";
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
-<style type="text/css">
-    .commodity input[type="submit"] {
-        display: inline-block;
-        padding: 13px 25px;
-        background: #df1f26;
-        color: #FFF;
-        font-size: 1em;
-        line-height: 18px;
-        text-transform: uppercase;
-        border: none;
-        outline: none;
-        transition: 0.2s;
-        -webkit-transition: 0.2s;
-        -moz-transition: 0.2s;
-        -o-transition: 0.2s;
-    }
 
-        .commodity input[type="submit"]:hover {
-            -webkit-transform: rotateY(15deg);
-            -moz-transform: rotateY(15deg);
-            -ms-transform: rotateY(15deg);
-            transform: rotateY(15deg);
-            text-decoration: none;
-            background: #000;
-        }
-</style>
+
 <script src="~/Scripts/jquery.etalage.min.js"></script>
 <script type="text/javascript">
     $(function () {
@@ -238,57 +214,7 @@
     });
 
 </script>
-<div class="header">
-    <div class="header_top">
-        <div class="container" style=" margin-right:auto; margin-left: auto;padding-left:0px;padding-right:0px;height:60px;">
-            <ul class="shopping_grid">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Sign In", "Index", "Login")</li>
-                }
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a href="@Url.Action("Home", "Favorites" )">收藏夹</a></li>
-                    <li><a href="@Url.Action("SingleOrder","Orders")">订单</a></li>
-                    if (ViewBag.ShoppingTrolleysCount > 0)
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(@ViewBag.ShoppingTrolleysCount) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Home","ShoppingTrolleys")"><li><span class="m_1">购物车</span>(0) <img src="~/images/bag.png" alt="" /></li></a>
-                    }
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="h_menu4">
-        <div class="container">
-            <a class="toggleMenu" href="#">Menu</a>
-            <ul class="nav">
-                <li>@Html.ActionLink("Home", "Index", "Home") </li>
-                <li>@Html.ActionLink("About", "Index", "About") </li>
-                <li>@Html.ActionLink("SiteFeedback", "Home", "SiteFeedbacks")</li>
-                <li>@Html.ActionLink("Announcement", "Home", "AnnouncementsHome") </li>
-                <li>@Html.ActionLink("Wish List", "Home", "RequiredCommodities")</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="column_center">
-    <div class="container">
-        <div class="search">
-            <div class="stay">搜索商品</div>
-            <div class="stay_right">
-                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
-                {
-                    @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { onfocus = "this.value = '';", onblur = "if (this.value == '') {this.value = '';}" })
-                    <input type="submit" value="" />
-                }
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="main">
     <div class="content_top">
         <div class="container">

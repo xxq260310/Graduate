@@ -33,12 +33,7 @@ namespace Portal.Controllers
             int pageSize = 3;
             int pageNumber = page ?? 1;
 
-            var commodityInShoppingTrolley = (from shoppingTrolleyItem in this.db.ShoppingTrolleys
-                                              from commodityInShoppingTrolleyItem in this.db.CommodityInShoppingTrolleys
-                                              where shoppingTrolleyItem.UserId == commodityInShoppingTrolleyItem.UserId
-                                              && shoppingTrolleyItem.UserProfile.UserName == User.Identity.Name
-                                              select commodityInShoppingTrolleyItem).ToList();
-            ViewBag.ShoppingTrolleysCount = commodityInShoppingTrolley.Count;
+            ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return this.View(announcement.ToPagedList(pageNumber, pageSize));
         }
 

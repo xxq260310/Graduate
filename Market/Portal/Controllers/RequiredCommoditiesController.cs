@@ -42,7 +42,7 @@ namespace Portal.Controllers
                 RequiredCommodity requiredCommodity = new RequiredCommodity() { 
                     UserId = id,
                     Content = content,
-                    CreationDate = System.DateTime.Now,
+                    CreationDate = DateTime.Now,
                     Price = unitPrice
                 };
                 this.db.RequiredCommodities.Add(requiredCommodity);
@@ -95,7 +95,7 @@ namespace Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SingleEdit(RequiredCommodity requiredCommodity)
         {
-            requiredCommodity.UpdateDate = System.DateTime.Now;
+            requiredCommodity.UpdateDate = DateTime.Now;
             this.db.Entry(requiredCommodity).State = EntityState.Modified;
             this.db.SaveChanges();
             return RedirectToAction("SingleRequiredCommodity");

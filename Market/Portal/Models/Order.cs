@@ -27,6 +27,7 @@ namespace Portal.Models
         public string Province { get; set; }
         public string City { get; set; }
         public string Town { get; set; }
+        public Nullable<double> Postage { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
 

@@ -39,7 +39,7 @@ namespace Portal.Controllers
                     UserId = id,
                     Title = formcollection["Title"].ToString(),
                     Content = formcollection["SiteFeedback"].ToString(),
-                    CreationDate = System.DateTime.Now
+                    CreationDate = DateTime.Now
                 };
                 this.db.SiteFeedbacks.Add(siteFeedback);
                 this.db.SaveChanges();
@@ -109,7 +109,7 @@ namespace Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SingleEdit(SiteFeedback siteFeedback)
         {
-            siteFeedback.UpdateDate = System.DateTime.Now;
+            siteFeedback.UpdateDate = DateTime.Now;
             this.db.Entry(siteFeedback).State = EntityState.Modified;
             this.db.SaveChanges();
             return RedirectToAction("SingleSiteFeedback");

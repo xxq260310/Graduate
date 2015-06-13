@@ -64,6 +64,7 @@ namespace Portal.Controllers
             double cost = Convert.ToDouble(orderDto.Cost.ToString());
             string [] OrderCommodityIdList = orderDto.CommodityIdList.ToString().Split(',');
             string [] notCheckedCommodityIdList;
+            double postage = Convert.ToDouble(orderDto.Postage.ToString());
             if (orderDto.NotCheckedCommodityIdList != null)
             {
                 notCheckedCommodityIdList = orderDto.NotCheckedCommodityIdList.ToString().Split(',');
@@ -82,7 +83,8 @@ namespace Portal.Controllers
 
             Order order = new Order() { 
                 UserId = userId,
-                TotalCost = cost
+                TotalCost = cost,
+                Postage = postage
             };
             this.db.Orders.Add(order);
 
@@ -112,8 +114,8 @@ namespace Portal.Controllers
                     {
                         OrderId = order.OrderId,
                         CommodityId = int.Parse(id),
-                        SellerId = userProfileCommodity.UserId,
                         UnitPrice = model.UnitPrice,
+                        SellerId = userProfileCommodity.UserId,
                         Quantity = model.Quantity,
                         Color = model.Color,
                         Size = model.Size,
@@ -138,7 +140,15 @@ namespace Portal.Controllers
             }
 
             this.db.SaveChanges();
-            return this.Redirect("Orders/Home/id= "+ order.OrderId +"");
+            return RedirectToAction("Home", "Orders", new { id = order.OrderId});
+        }
+
+        
+        public JsonResult GetPostageByTotalCost(string cost)
+        {
+            double totalCost = Convert.ToDouble(cost);
+            double postage = totalCost >= 50.00 ? 0.00 : 15.00;
+            return this.Json(postage,JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

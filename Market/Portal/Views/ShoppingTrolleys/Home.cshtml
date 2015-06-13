@@ -143,7 +143,7 @@
 
     $(function () {
         $("#commodityTable").on("click", ".favorite", function () {
-            $.getJSON("/Favorites/AddCommodityInFavorite", { id: $("#favorite").parent().children().eq(3).val() }, function (data) {
+            $.getJSON("/Favorites/AddCommodityInFavorite", { id: $("#favorite").next().val() }, function (data) {
                 if (data == 0) {
                     alert("您已经收藏过此商品啦！");
                 }
@@ -171,20 +171,26 @@
                 }
             })
 
-            var data = {
-                Cost: $("#TotalCost")[0].value,
-                CommodityIdList: $("#OrderCommodityId")[0].value,
-                NotCheckedCommodityIdList: $("#NotCheckedCommodityId")[0].value
-            };
-            $.ajax({
-                url: '@Url.Action("Home", "ShoppingTrolleys")',
-                type: "POST",
-                data: data
+            $.getJSON("/ShoppingTrolleys/GetPostageByTotalCost", { cost: $("#TotalCost")[0].value }, function (result) {
+                $("#Postage")[0].value = (result == 0.00 ? "0.00" : "15.00");
+                $.ajax({
+                    url: '@Url.Action("Home", "ShoppingTrolleys")',
+                    type: "POST",
+                    data: {
+                        Cost: $("#TotalCost")[0].value,
+                        CommodityIdList: $("#OrderCommodityId")[0].value,
+                        NotCheckedCommodityIdList: $("#NotCheckedCommodityId")[0].value,
+                        Postage: $("#Postage")[0].value
+                    }
+                });
             });
+            
+            
         });
     });
 </script>
 
+<input type="hidden" name="Postage" id="Postage"/>
 <input type="hidden" name="TotalCost" id="TotalCost" />
 <input type="hidden" name="OrderCommodityId" id="OrderCommodityId" />
 <input type="hidden" name="NotCheckedCommodityId" id="NotCheckedCommodityId" />
@@ -192,7 +198,6 @@
 <div id="dialog-confirm" title="Are you sure delete?">
     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>
-
 
 <div class="main">
     <div class="content_top">

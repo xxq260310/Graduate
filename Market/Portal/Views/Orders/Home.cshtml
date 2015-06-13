@@ -152,13 +152,13 @@
         $("#order-submit").click(function () {
             var consignee = $("#Consignee").find("option[value='" + $("#Consignee").val() + "']").text();
             if (consignee == "" || consignee == null) {
-                alert("请先填写收货地址！");
+                alert("请填写收货地址！");
                 return false;
             }
 
             var cash = $("input[type='checkbox'][name='cash']");
             if ($(cash).prop("checked") == false) {
-                alert("请先选择支付方式！");
+                alert("请选择支付方式！");
                 return false;
             }
             else {

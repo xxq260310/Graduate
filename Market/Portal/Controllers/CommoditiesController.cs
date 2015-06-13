@@ -568,7 +568,7 @@ namespace Portal.Controllers
                 }
 
                 //check quantity 
-                if (commodity.Quantity != count)
+                if (commodity.Quantity < count)
                 {
                     this.TemporaryAdminEdit(commodity.CommodityId);
                     Response.Write("<script> alert('请确保商品总数大于各子类总数之和！')</script>");
@@ -699,7 +699,7 @@ namespace Portal.Controllers
                 }
 
                 //check quantity 
-                if (commodity.Quantity != count)
+                if (commodity.Quantity < count)
                 {
                     this.Edit(commodity.CommodityId);
                     Response.Write("<script> alert('请确保商品总数大于各子类总数之和！')</script>");

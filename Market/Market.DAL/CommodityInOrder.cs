@@ -16,12 +16,12 @@ namespace Market.DAL
     {
         public int OrderId { get; set; }
         public int CommodityId { get; set; }
-        public Nullable<int> SellerId { get; set; }
         public Nullable<double> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Color { get; set; }
         public string Size { get; set; }
         public string Capacity { get; set; }
+        public Nullable<int> SellerId { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual Order Order { get; set; }

@@ -59,4 +59,3 @@ F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.dll
 F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.dll
 F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.xml
 F:\Graduate\Market\Market.DAL\bin\Debug\EntityFramework.SqlServer.xml
-F:\Graduate\Market\Market.DAL\obj\Debug\Market.DAL.csprojResolveAssemblyReference.cache

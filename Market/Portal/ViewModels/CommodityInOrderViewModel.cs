@@ -11,7 +11,7 @@ namespace Portal.ViewModels
 
         public int CommodityId { get; set; }
 
-        public int SellerId { get; set; }
+        public string SellerName { get; set; }
 
         public double UnitPrice { get; set; }
 

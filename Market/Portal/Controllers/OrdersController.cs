@@ -51,15 +51,15 @@ namespace Portal.Controllers
             List<CommodityInOrderViewModel> orderList = new List<CommodityInOrderViewModel>();
             foreach (var p in commodityInOrder)
             {
-                orderList.Add(new CommodityInOrderViewModel() { OrderId = p.OrderId, CommodityId = p.CommodityId, SellerId = p.SellerId.HasValue ? p.SellerId.Value : 0, UnitPrice = p.UnitPrice.HasValue ? p.UnitPrice.Value : 0, Quantity = p.Quantity.HasValue ? p.Quantity.Value : 0, Color = p.Color, Size = p.Size, Capacity = p.Capacity, Degree = p.Commodity.Degree, CommodityName = p.Commodity.CommodityName });
+                orderList.Add(new CommodityInOrderViewModel() { OrderId = p.OrderId, CommodityId = p.CommodityId, SellerName = p.Commodity.UserProfileCommoditys.Select(x => x.UserProfile.UserName).FirstOrDefault(), UnitPrice = p.UnitPrice.HasValue ? p.UnitPrice.Value : 0, Quantity = p.Quantity.HasValue ? p.Quantity.Value : 0, Color = p.Color, Size = p.Size, Capacity = p.Capacity, Degree = p.Commodity.Degree, CommodityName = p.Commodity.CommodityName });
             }
 
             var cost = this.db.Orders.SingleOrDefault(x => x.UserProfile.UserName == User.Identity.Name && x.OrderId == id).TotalCost;
             ViewBag.Cost = cost;
-            ViewBag.Shipment = cost >= 50 ? 0.00 : 15;
+            ViewBag.Shipment = order.Postage;
             ViewBag.CommodityCount = orderList.Count;
             ViewBag.CommodityInOrderList = orderList;
-            return this.View(order);
+            return View(order);
         }
 
         [HttpPost]
@@ -99,7 +99,7 @@ namespace Portal.Controllers
                 order.Delivery = orderInfoDto.Delivery;
                 order.CreationDate = DateTime.Now;
                 db.Entry(order).State = EntityState.Modified;
-                
+
                 var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
                 List<CommodityInShoppingTrolley> commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.Where(x => x.UserId == userId).ToList();
                 this.db.CommodityInShoppingTrolleys.RemoveRange(commodityInShoppingTrolley);
@@ -115,7 +115,7 @@ namespace Portal.Controllers
             ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();
 
             ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
-            
+
             var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             var orderList = (from order in this.db.Orders
                              where order.UserId == userId
@@ -123,19 +123,20 @@ namespace Portal.Controllers
             List<OrderViewModel> orderViewModelList = new List<OrderViewModel>();
             foreach (var u in orderList)
             {
-                OrderViewModel order = new OrderViewModel()
+                OrderViewModel orderViewModel = new OrderViewModel();
+                orderViewModel.OrderId = u.OrderId;
+                orderViewModel.Cost = u.TotalCost.Value;
+                orderViewModel.ConsigneeName = u.ConsigneeName;
+                orderViewModel.Payfor = u.Payfor;
+                orderViewModel.State = u.State;
+                orderViewModel.CreationDate = u.CreationDate.Value;
+                orderViewModel.CommodityInfoes = u.CommodityInOrders.Select(x => new CommodityInOrderViewModel()
                 {
-                    OrderId = u.OrderId,
-                    Cost = u.TotalCost.Value,
-                    ConsigneeName = u.ConsigneeName,
-                    Payfor = u.Payfor,
-                    State = u.State,
-                    CreationDate = u.CreationDate.Value,
-                    CommodityInfoes = u.CommodityInOrders.Select(x => new CommodityInOrderViewModel() { 
-                        CommodityId = x.CommodityId
-                    })
-                };
-                orderViewModelList.Add(order);
+                    CommodityId = x.CommodityId,
+                    SellerName = x.Commodity.UserProfileCommoditys.Select(p => p.UserProfile.UserName).FirstOrDefault()
+                });
+
+                orderViewModelList.Add(orderViewModel);
             }
 
             ViewBag.OrderList = orderViewModelList;

@@ -29,6 +29,7 @@ namespace Market.DAL
         public string Delivery { get; set; }
         public string ConsigneeName { get; set; }
         public string Payfor { get; set; }
+        public Nullable<double> Postage { get; set; }
         public string Province { get; set; }
         public string City { get; set; }
         public string Town { get; set; }

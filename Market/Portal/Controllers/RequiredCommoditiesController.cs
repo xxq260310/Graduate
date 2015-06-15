@@ -30,11 +30,6 @@ namespace Portal.Controllers
             var content = formcollection["Content"].ToString();
             var commodityName = formcollection["CommodityName"].ToString();
             var price = formcollection["Price"].ToString();
-            var unitPrice = 0;
-            if (string.IsNullOrEmpty(price))
-            {
-                unitPrice = Convert.ToInt32(price);
-            }
 
             if (User.Identity.Name != string.Empty)
             {
@@ -43,7 +38,8 @@ namespace Portal.Controllers
                     UserId = id,
                     Content = content,
                     CreationDate = DateTime.Now,
-                    Price = unitPrice
+                    Price = price,
+                    CommodityName = commodityName
                 };
                 this.db.RequiredCommodities.Add(requiredCommodity);
                 this.db.SaveChanges();
@@ -63,7 +59,7 @@ namespace Portal.Controllers
                 RequiredCommodityViewModel item = new RequiredCommodityViewModel();
                 item.Content = p.Content;
                 item.CommodityName = p.CommodityName;
-                item.Price = p.Price.Value;
+                item.Price = p.Price;
                 item.Id = p.RequiredCommodityId;
 
                 requiredCommodityViewModel.Add(item);

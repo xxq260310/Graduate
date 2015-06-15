@@ -12,6 +12,6 @@ namespace Portal.ViewModels
 
         public string Content { get; set; }
 
-        public double Price { get; set; }
+        public string Price { get; set; }
     }
 }

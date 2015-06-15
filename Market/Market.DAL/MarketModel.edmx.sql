@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/13/2015 14:55:09
+-- Date Created: 06/15/2015 17:04:09
 -- Generated from EDMX file: F:\Graduate\Market\Market.DAL\MarketModel.edmx
 -- --------------------------------------------------
 
@@ -208,17 +208,17 @@ CREATE TABLE [dbo].[Orders] (
     [Contact] char(11)  NULL,
     [TotalCost] float  NULL,
     [Address] varchar(50)  NULL,
-    [Email] nvarchar(max)  NULL,
+    [Email] varchar(20)  NULL,
     [State] varchar(20)  NULL,
     [Delivery] varchar(20)  NULL,
     [ConsigneeName] varchar(10)  NULL,
     [Payfor] varchar(20)  NULL,
+    [Postage] float  NULL,
     [Province] varchar(20)  NULL,
     [City] varchar(20)  NULL,
     [Town] varchar(20)  NULL,
     [CreationDate] datetime  NULL,
-    [UpdateDate] datetime  NULL,
-    [Postage] float  NULL
+    [UpdateDate] datetime  NULL
 );
 GO
 
@@ -264,7 +264,7 @@ CREATE TABLE [dbo].[RequiredCommodities] (
     [CreationDate] datetime  NULL,
     [UpdateDate] datetime  NULL,
     [CommodityName] varchar(30)  NULL,
-    [Price] float  NULL
+    [Price] varchar(20)  NULL
 );
 GO
 

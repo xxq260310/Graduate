@@ -58,7 +58,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Home(OrderDTO orderDto)
+        public JsonResult Home(OrderDTO orderDto)
         {
             var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             double cost = Convert.ToDouble(orderDto.Cost.ToString());
@@ -140,7 +140,7 @@ namespace Portal.Controllers
             }
 
             this.db.SaveChanges();
-            return RedirectToAction("Home", "Orders", new { id = order.OrderId});
+            return this.Json(order.OrderId);
         }
 
         
@@ -192,11 +192,13 @@ namespace Portal.Controllers
         public JsonResult GetAllShoppingTrolleysCost(int? id) 
         {
             double cost = 0;
+            int userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
             if(id == 1)
             {
                 var commodityInShoppingTrolley = (from commodity in this.db.CommodityInShoppingTrolleys
                                                   from shoppingTrolley in this.db.ShoppingTrolleys
                                                where commodity.UserId == shoppingTrolley.UserId
+                                               && commodity.UserId == userId
                                                select commodity).ToList();
             foreach (var p in commodityInShoppingTrolley)
             {
@@ -225,7 +227,7 @@ namespace Portal.Controllers
                 this.db.ShoppingTrolleys.Remove(shoppingTrolley);
             }
 
-            var json = (this.db.SaveChanges() == 1 || this.db.SaveChanges() == 2) ? 1 : 0;
+            var json = this.db.SaveChanges();
             return this.Json(json);
         }
 

@@ -10,8 +10,7 @@
 
 <script type="text/javascript">
     $(function () {
-        if ($("table > tbody > tr").length == 2)
-        {
+        if ($("table > tbody > tr").length == 2) {
             $("table").find("tr").eq(1).hide();
         }
     });
@@ -32,7 +31,7 @@
             }
         });
 
-        $("#delete").click(function () {
+        $("table").on("click", "#delete", function () {
             dialog.dialog("open");
         });
 
@@ -43,12 +42,13 @@
                 data: { id: commodityId },
                 type: "POST",
                 success: function (req) {
-                    if (req == 1) {
+                    if (req != null) {
                         dialog.dialog("close");
-                        location.reload();
-                    }
-                    else {
-                        alert("删除失败啦！");
+                        //location.reload();
+                        $("#delete").parent().parent().remove();
+                        if ($("table > tbody > tr").length == 2) {
+                            $("table").find("tr").eq(1).hide();
+                        }
                     }
                 }
             });
@@ -181,16 +181,21 @@
                         CommodityIdList: $("#OrderCommodityId")[0].value,
                         NotCheckedCommodityIdList: $("#NotCheckedCommodityId")[0].value,
                         Postage: $("#Postage")[0].value
+                    },
+                    success: function (result) {
+                        if (result != null) {
+                            window.location.href = "../Orders/Home?orderId=" + result;
+                        }
                     }
                 });
             });
-            
-            
+
+
         });
     });
 </script>
 
-<input type="hidden" name="Postage" id="Postage"/>
+<input type="hidden" name="Postage" id="Postage" />
 <input type="hidden" name="TotalCost" id="TotalCost" />
 <input type="hidden" name="OrderCommodityId" id="OrderCommodityId" />
 <input type="hidden" name="NotCheckedCommodityId" id="NotCheckedCommodityId" />

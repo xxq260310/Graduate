@@ -20,6 +20,8 @@ namespace Portal.ViewModels
 
         public double Cost { get; set; }
 
+        public string Delivery { get; set; }
+
         public IEnumerable<CommodityInOrderViewModel> CommodityInfoes { get; set; }
     }
 }

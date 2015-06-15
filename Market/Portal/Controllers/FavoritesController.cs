@@ -62,6 +62,7 @@ namespace Portal.Controllers
 
             ViewBag.CommoditiesInFavorite = model;
 
+            ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();
             ViewBag.ShoppingTrolleysCount = GetViewBag.GetShoppingTrolleyViewBag(User.Identity.Name);
             return View();
         }

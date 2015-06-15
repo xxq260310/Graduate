@@ -79,12 +79,18 @@
                     <div class="menu_box">
                         <h3 class="menu_head">Menu</h3>
                         <ul class="menu">
-                            <li>
-                                <a style="cursor:pointer;" href="@Url.Action("SingleUserProfile", "UserProfiles")"> <img src="~/images/f_menu.png" alt="" />查看基本信息</a>
-                            </li>
-                            <li>
-                                <a style="cursor:pointer;" href="@Url.Action("", "")"> <img src="~/images/f_menu.png" alt="" />查看已买到宝贝</a>
-                            </li>
+                            @foreach (var p in ViewBag.CategoryList)
+                            {
+                                <li>
+                                    <a style="cursor:pointer;"> <img src="~/images/f_menu.png" alt="" />@p.ParentCategory</a>
+                                    <ul>
+                                        @foreach (var t in p.SubCategory)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Home", new { subCategory = t })">@t</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>

@@ -190,7 +190,13 @@
             $.ajax({
                 url: '@Url.Action("Home", "Orders")',
                 type: "POST",
-                data: info
+                data: info,
+                success: function(result){
+                    if(result != null)
+                    {
+                        window.location.href = "../Orders/SingleOrder";
+                    }
+                }
             })
         })
     });

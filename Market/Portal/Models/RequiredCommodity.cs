@@ -15,7 +15,7 @@ namespace Portal.Models
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public string CommodityName { get; set; }
-        public Nullable<double> Price { get; set; }
+        public string Price { get; set; }
 
         public virtual UserProfile UserProfile { get; set; }
     }

@@ -174,17 +174,17 @@
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="TotalCost" Type="float" Nullable="true" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="Payfor" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Postage" Type="float" Nullable="true" />
     <Property Name="Province" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="City" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Town" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
-    <Property Name="Postage" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="ShoppingTrolleys">
     <Key>
@@ -230,7 +230,7 @@
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
     <Property Name="CommodityName" Type="varchar" Nullable="true" MaxLength="30" />
-    <Property Name="Price" Type="float" Nullable="true" />
+    <Property Name="Price" Type="varchar" Nullable="true" MaxLength="20" />
   </EntityType>
   <EntityType Name="Manufacturers">
     <Key>
@@ -751,7 +751,7 @@
           <Property Name="Contact" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
           <Property Name="TotalCost" Type="Double" />
           <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" />
+          <Property Name="Email" Type="String" FixedLength="false" Unicode="false" MaxLength="20" />
           <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Delivery" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="ConsigneeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -816,7 +816,7 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="UserProfile" Relationship="MarketModel.RequiredCommodityUserProfile" FromRole="RequiredCommodity" ToRole="UserProfile" />
           <Property Name="CommodityName" Type="String" FixedLength="false" MaxLength="30" Unicode="false" />
-          <Property Name="Price" Type="Double" />
+          <Property Name="Price" Type="String" Unicode="false" FixedLength="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -1242,12 +1242,12 @@
           <ScalarProperty Name="Delivery" ColumnName="Delivery" />
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
           <ScalarProperty Name="Payfor" ColumnName="Payfor" />
+          <ScalarProperty Name="Postage" ColumnName="Postage" />
           <ScalarProperty Name="Province" ColumnName="Province" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Town" ColumnName="Town" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="Postage" ColumnName="Postage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

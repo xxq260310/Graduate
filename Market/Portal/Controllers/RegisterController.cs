@@ -34,69 +34,33 @@ namespace Portal.Controllers
 
             if (ModelState.IsValid)
             {
+                UserProfile userProfile = new UserProfile();
                 if (Image != null)
                 {
                     model.ImageType = Image.ContentType;
                     model.ImageData = new byte[Image.ContentLength];
                     Image.InputStream.Read(model.ImageData, 0, Image.ContentLength);
-
-                    string Gender = string.Empty;
-                    if (model.Sex == 1)
-                    {
-                        Gender = "Male";
-                    }
-
-                    else if (model.Sex == 2)
-                    {
-                        Gender = "Female";
-                    }
-                    UserProfile userProfile = new UserProfile();
-                    userProfile.UserName = model.UserName;
-                    userProfile.Nickname = model.NickName;
-                    userProfile.Sex = Gender;
-                    userProfile.Email = model.Email;
-                    userProfile.Address = model.Address;
-                    userProfile.Contact = model.Contact;
-                    userProfile.Password = SetPassword(model.Password);
-                    userProfile.CreationDate = System.DateTime.Now;
-                    userProfile.RoleId = 2;
-                    this.db.UserProfiles.Add(userProfile);
-                    this.db.SaveChanges();
-
-                    return RedirectToAction("AlertLogin", "Login");
+                    userProfile.ImageData = model.ImageData;
+                    userProfile.ImageType = model.ImageType;
                 }
-                else
-                {
-                    string Gender = string.Empty;
-                    if (model.Sex == 1)
-                    {
-                        Gender = "Male";
-                    }
 
-                    else if (model.Sex == 2)
-                    {
-                        Gender = "Female";
-                    }
+                string Gender = model.Sex == 1 ? "Male" : "Female";
+                userProfile.UserName = model.UserName;
+                userProfile.Nickname = model.NickName;
+                userProfile.Sex = Gender;
+                userProfile.Email = model.Email;
+                userProfile.Address = model.Address;
+                userProfile.Contact = model.Contact;
+                userProfile.Password = SetPassword(model.Password);
+                userProfile.CreationDate = System.DateTime.Now;
+                userProfile.RoleId = 2;
+                this.db.UserProfiles.Add(userProfile);
+                this.db.SaveChanges();
 
-                    UserProfile userProfile = new UserProfile();
-                    userProfile.UserName = model.UserName;
-                    userProfile.Nickname = model.NickName;
-                    userProfile.Sex = Gender;
-                    userProfile.Email = model.Email;
-                    userProfile.Address = model.Address;
-                    userProfile.Contact = model.Contact;
-                    userProfile.Password = SetPassword(model.Password);
-                    userProfile.RoleId = 2;
-                    userProfile.CreationDate = System.DateTime.Now;
-                    this.db.UserProfiles.Add(userProfile);
-                    this.db.SaveChanges();
-
-                    return RedirectToAction("AlertLogin", "Login");
-                }
+                return RedirectToAction("AlertLogin", "Login");
             }
 
-            return this.View(model);
-
+            return View();
         }
 
         public static string SetPassword(string password)

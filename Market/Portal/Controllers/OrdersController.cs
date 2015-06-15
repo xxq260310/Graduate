@@ -19,12 +19,9 @@ namespace Portal.Controllers
     {
         private MarketContext db = new MarketContext();
 
-        public ActionResult Home(int? id)
+        public ActionResult Home(string orderId)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            int id = Convert.ToInt32(orderId);
 
             Order order = this.db.Orders.Find(id);
             if (order == null)
@@ -82,7 +79,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Home(OrderInfoDTO orderInfoDto)
+        public JsonResult Home(OrderInfoDTO orderInfoDto)
         {
             Order order = this.db.Orders.Find(Convert.ToInt32(orderInfoDto.OrderId));
             if (orderInfoDto != null)
@@ -103,11 +100,10 @@ namespace Portal.Controllers
                 var userId = GetInfo.GetUserIdByUserName(User.Identity.Name);
                 List<CommodityInShoppingTrolley> commodityInShoppingTrolley = this.db.CommodityInShoppingTrolleys.Where(x => x.UserId == userId).ToList();
                 this.db.CommodityInShoppingTrolleys.RemoveRange(commodityInShoppingTrolley);
-                db.SaveChanges();
-                return this.Redirect("/Orders/SingleOrder");
             }
 
-            return this.View();
+            var change = db.SaveChanges();
+            return this.Json(change);
         }
 
         public ActionResult SingleOrder()
@@ -129,6 +125,7 @@ namespace Portal.Controllers
                 orderViewModel.ConsigneeName = u.ConsigneeName;
                 orderViewModel.Payfor = u.Payfor;
                 orderViewModel.State = u.State;
+                orderViewModel.Delivery = u.Delivery;
                 orderViewModel.CreationDate = u.CreationDate.Value;
                 orderViewModel.CommodityInfoes = u.CommodityInOrders.Select(x => new CommodityInOrderViewModel()
                 {

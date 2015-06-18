@@ -25,6 +25,13 @@
     });
 
     $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+
+    $(function () {
         $("#slider").responsiveSlides({
             auto: true,
             nav: true,
@@ -76,12 +83,13 @@
                         <li class="grid_2-left">
                             @Html.ActionLink("上架时间", "Index", new { sortOrder = ViewBag.CreationDate, currentFilter = ViewBag.CurrentFilter })
                         </li>
-                        <li>
+                        @*<li>
                             @Html.ActionLink("销量", "Index", new { sortOrder = ViewBag.SellCount, currentFilter = ViewBag.CurrentFilter })
-                        </li>
+                        </li>*@
                     </ul>
 
                 </div>
+                <br />
                 <div class="top_grid2">
                     @foreach (var item in Model)
                     {

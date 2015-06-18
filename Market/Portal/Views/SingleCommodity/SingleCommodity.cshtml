@@ -213,6 +213,13 @@
         })
     });
 
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+
 </script>
 
 <div class="main">
@@ -397,7 +404,7 @@
                         <ul class="resp-tabs-list">
                             <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>商品描述</span></li>
                             <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>其他信息</span></li>
-                            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>商品反馈</span></li>
+                            @*<li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>商品反馈</span></li>*@
                             <div class="clear"></div>
                         </ul>
                         <div class="resp-tabs-container">
@@ -426,14 +433,14 @@
                                             <h3><em>承诺以下服务</em></h3>
                                             <div class="content">
                                                 <dl>
-                                                    <dt class="icon"><img src="http://gtms04.alicdn.com/tps/i4/T1K2EBFIhXXXceU5Yh-48-48.png"></dt>
+                                                    <dt class="icon"><img src="~/images/T1K2EBFIhXXXceU5Yh-48-48.png"></dt>
                                                     <dd class="name">72小时发货</dd>
                                                     <dd class="detail">
                                                         付款后72小时内发货
                                                     </dd>
                                                 </dl>
                                                 <dl class="seven-days">
-                                                    <dt class="icon"><img src="//img.alicdn.com/tps/i2/T1wMaGFLBfXXceU5Yh-48-48.png"></dt>
+                                                    <dt class="icon"><img src="~/images/T1wMaGFLBfXXceU5Yh-48-48.png"></dt>
                                                     <dd class="name">7天无理由退货</dd>
                                                     <dd class="detail">
                                                         <p>该商品支持7天无理由退货，自商品签收之日起7天内:</p>
@@ -441,7 +448,7 @@
                                                     </dd>
                                                 </dl>
                                                 <dl>
-                                                    <dt class="icon"><img src="//img.alicdn.com/tps/i2/T1in3MFMNcXXceU5Yh-48-48.png"></dt>
+                                                    <dt class="icon"><img src="~/images/T1in3MFMNcXXceU5Yh-48-48.png"></dt>
                                                     <dd class="name">消费者保障服务</dd>
                                                     <dd class="detail">
                                                         <p>该卖家已缴纳50000.0元保证金。</p>
@@ -453,7 +460,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                            @*<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
                                 <ul class="tab_list">
                                     <table class="table" style="border:none; outline:none;">
                                         @foreach (var p in ViewBag.Feedbacks)
@@ -466,7 +473,7 @@
                                         }
                                     </table>
                                 </ul>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>

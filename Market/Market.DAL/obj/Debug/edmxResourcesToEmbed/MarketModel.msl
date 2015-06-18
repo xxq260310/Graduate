@@ -78,12 +78,12 @@
           <ScalarProperty Name="Delivery" ColumnName="Delivery" />
           <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
           <ScalarProperty Name="Payfor" ColumnName="Payfor" />
+          <ScalarProperty Name="Postage" ColumnName="Postage" />
           <ScalarProperty Name="Province" ColumnName="Province" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Town" ColumnName="Town" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="Postage" ColumnName="Postage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -183,6 +183,7 @@
           <ScalarProperty Name="Color" ColumnName="Color" />
           <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="SellerId" ColumnName="SellerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

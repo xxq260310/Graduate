@@ -11,6 +11,13 @@
 
 <script type="text/javascript">
     $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+
+    $(function () {
         var dialog;
         dialog = $("#dialog-confirm").dialog({
             autoOpen: false,

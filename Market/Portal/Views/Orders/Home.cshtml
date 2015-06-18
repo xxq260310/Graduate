@@ -116,13 +116,9 @@
     });
 
     $(function () {
-        $("#search").click(function () {
-            var sreachstring = $("#searchString").val();
-            $.ajax({
-                url: '@Url.Action("Index", "Home")',
-                type: "Get",
-                data: { sreachstring: searchstring }
-            });
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
         });
     });
 

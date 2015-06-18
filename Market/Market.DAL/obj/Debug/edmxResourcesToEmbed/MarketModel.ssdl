@@ -169,17 +169,17 @@
     <Property Name="Contact" Type="char" Nullable="true" MaxLength="11" />
     <Property Name="TotalCost" Type="float" Nullable="true" />
     <Property Name="Address" Type="varchar" Nullable="true" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="State" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Delivery" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="ConsigneeName" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="Payfor" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Postage" Type="float" Nullable="true" />
     <Property Name="Province" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="City" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Town" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
-    <Property Name="Postage" Type="float" Nullable="true" />
   </EntityType>
   <EntityType Name="ShoppingTrolleys">
     <Key>
@@ -225,7 +225,7 @@
     <Property Name="CreationDate" Type="datetime" Nullable="true" />
     <Property Name="UpdateDate" Type="datetime" Nullable="true" />
     <Property Name="CommodityName" Type="varchar" Nullable="true" MaxLength="30" />
-    <Property Name="Price" Type="float" Nullable="true" />
+    <Property Name="Price" Type="varchar" Nullable="true" MaxLength="20" />
   </EntityType>
   <EntityType Name="Manufacturers">
     <Key>
@@ -271,6 +271,7 @@
     <Property Name="Color" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="Size" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="Capacity" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="SellerId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="UserProfileCommodities">
     <Key>

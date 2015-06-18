@@ -282,6 +282,9 @@
     <Content Include="images\select2-spinner.gif" />
     <Content Include="images\select2.png" />
     <Content Include="images\select2x2.png" />
+    <Content Include="images\T1in3MFMNcXXceU5Yh-48-48.png" />
+    <Content Include="images\T1K2EBFIhXXXceU5Yh-48-48.png" />
+    <Content Include="images\T1wMaGFLBfXXceU5Yh-48-48.png" />
     <Content Include="images\tick1.png" />
     <Content Include="images\wishlist.png" />
     <Content Include="Scripts\area.js" />

@@ -4,7 +4,14 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
-
+<script type="text/javascript">
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+</script>
 
 <h2>Details</h2>
 <div>

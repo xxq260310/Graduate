@@ -10,6 +10,13 @@
 
 <script type="text/javascript">
     $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+
+    $(function () {
         var dialog;
         dialog = $("#dialog-confirm").dialog({
             autoOpen: false,
@@ -128,7 +135,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <a id="detail" style="cursor:pointer;">查看</a>|<a id="deleteorder" style="cursor:pointer;">删除</a> <input type="hidden" name="OrderId" id="OrderId" value="@p.OrderId" />
+                                        <a id="deleteorder" style="cursor:pointer;">删除</a> <input type="hidden" name="OrderId" id="OrderId" value="@p.OrderId" />
                                     </td>
                                 </tr>
                             @foreach (var q in p.CommodityInfoes)
@@ -159,7 +166,6 @@
                                         </td>
                                     </tr>
                             }</tbody>
-
                         }
                     </table>
                 </div>

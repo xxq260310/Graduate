@@ -19,11 +19,6 @@ namespace Portal.Controllers
     {
         private MarketContext db = new MarketContext();
 
-        public ActionResult ShowDialog(int id)
-        {
-            return View();
-        }
-
         public ActionResult Home()
         {
             ViewBag.CategoryList = GetViewBag.GetCategoryViewBag();

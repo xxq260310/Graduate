@@ -5,7 +5,14 @@
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
 
-
+<script type="text/javascript">
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+</script>
 <h3>Are you sure you want to delete this?</h3>
 <div>
 

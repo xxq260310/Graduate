@@ -4,7 +4,14 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
-
+<script type="text/javascript">
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+</script>
 <h2>Create</h2>
 @using (Html.BeginForm("Create", "Commodities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

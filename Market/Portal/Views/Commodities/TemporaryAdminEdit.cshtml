@@ -12,6 +12,12 @@
         $("#hiddenHtml").children().children().eq(1).attr("value", "");
     })
 
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
 </script>
 
 

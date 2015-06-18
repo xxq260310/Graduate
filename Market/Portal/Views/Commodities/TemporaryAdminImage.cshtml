@@ -4,7 +4,14 @@
     Layout = "~/Views/Shared/LayoutForUser.cshtml";
 }
 
-
+<script type="text/javascript">
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
+</script>
 <h2>您选择的商品图片信息如下：</h2>
 
 <img width="200" height="200" src="@Url.Action("GetImageByCommodityId", "Commodities", new { id = Model.CommodityId })" />

@@ -15,3 +15,4 @@ F:\Graduate\Market\Market.Common\bin\Debug\Market.Common.dll
 F:\Graduate\Market\Market.Common\bin\Debug\Market.Common.pdb
 F:\Graduate\Market\Market.Common\obj\Debug\Market.Common.dll
 F:\Graduate\Market\Market.Common\obj\Debug\Market.Common.pdb
+F:\Graduate\Market\Market.Common\obj\Debug\Market.Common.csprojResolveAssemblyReference.cache

@@ -193,6 +193,13 @@
 
         });
     });
+
+    $(function () {
+        $("#searchTextBox").click(function () {
+            var searchstring = $("#searchString").val();
+            window.location.href = "../Home/Index?searchString=" + searchstring;
+        });
+    });
 </script>
 
 <input type="hidden" name="Postage" id="Postage" />
